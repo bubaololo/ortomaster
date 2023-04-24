@@ -17,4 +17,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('webcam', \App\Http\Livewire\Webcam::class);

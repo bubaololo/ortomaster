@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
 use App\Http\Livewire\PhotoInput;
-use App\Http\Livewire\Webcam;
+use App\Forms\Components\Webcam;
 use App\Models\Patient;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -32,8 +32,9 @@ class PatientResource extends Resource
                 TextInput::make('diagnosis'),
 //                Webcam::make('photo'),
 //                ViewField::make('notifications')->view('vendor.filament.pages.create-with-photo'),
-//                Forms\Components\FileUpload::make('file')->view('vendor.filament.pages.create-with-photo'),
-                Forms\Components\FileUpload::make('photo')
+                Forms\Components\FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo'),
+//                Forms\Components\FileUpload::make('photo'),
+//                Webcam::make('photo')
             ]);
     }
 
