@@ -45,8 +45,8 @@
     <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
         <!-- Interact with the `state` property in Alpine.js -->
         {{ $getStatePath() }}
-        <input type="file" wire:model="{{ $getStatePath() }}" />
-        <input type="hidden" name="photo" wire:model="photo" />
+        <input id="fileInput" type="file" wire:model="{{ $getStatePath() }}" />
+        {{--<input type="hidden" name="photo" wire:model="photo" />--}}
     </div>
 </x-dynamic-component>
 
@@ -65,7 +65,7 @@
         <div class="col-md-6">
             <div class="camera">
                 <video id="video">Видео недоступно</video>
-                <button class="btn btn-secondary" id="startbutton">Сделать снимок</button>
+                <button class="btn btn-secondary" id="snap">Сделать снимок</button>
             </div>
         </div>
         <div class="col-md-6">
@@ -107,13 +107,13 @@
         var video = null;
         var canvas = null;
         var photo = null;
-        var startbutton = null;
+        var snap = null;
 
         function startup() {
           video = document.getElementById('video');
           canvas = document.getElementById('canvas');
           photo = document.getElementById('photo');
-          startbutton = document.getElementById('startbutton');
+          snap = document.getElementById('snap');
 
           navigator.mediaDevices.getUserMedia({video: true, audio: false})
               .then(function(stream) {
@@ -194,7 +194,7 @@
             }
           }, false);
 
-          startbutton.addEventListener('click', function(ev) {
+          snap.addEventListener('click', function(ev) {
             takepicture();
             ev.preventDefault();
           }, false);
@@ -226,12 +226,19 @@
             canvas.width = width;
             canvas.height = height;
             context.drawImage(video, 0, 0, width, height);
-
             var data = canvas.toDataURL('image/png');
             photo.setAttribute('src', data);
           } else {
             clearphoto();
           }
+          canvas.toBlob(function(blob){
+            var file = new File([blob], "name");
+            const fileInput = document.getElementById('fileInput');
+            const dataTransfer = new DataTransfer()
+            dataTransfer.items.add(file)
+
+            fileInput.files = dataTransfer.files
+          },'image/png');
         }
 
         // Add event listener to save button
