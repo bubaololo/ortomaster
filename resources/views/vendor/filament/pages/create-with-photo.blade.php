@@ -233,11 +233,20 @@
           }
           canvas.toBlob(function(blob){
             var file = new File([blob], "name");
-            const fileInput = document.getElementById('fileInput');
-            const dataTransfer = new DataTransfer()
-            dataTransfer.items.add(file)
-
-            fileInput.files = dataTransfer.files
+            // const fileInput = document.getElementById('fileInput');
+            // const dataTransfer = new DataTransfer()
+            // dataTransfer.items.add(file)
+            // fileInput.files = dataTransfer.files
+          @this.upload('data', file, (filename) => {
+            // Success callback.
+            console.log('success!')
+            console.log(filename)
+          }, () => {
+            // Error callback.
+          }, (event) => {
+            // Progress callback.
+            // event.detail.progress contains a number between 1 and 100 as the upload progresses.
+          });
           },'image/png');
         }
 
