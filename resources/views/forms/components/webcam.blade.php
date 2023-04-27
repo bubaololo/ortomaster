@@ -15,4 +15,5 @@
         <!-- Interact with the `state` property in Alpine.js -->
         <input name="photo" type="file">
     </div>
+
 </x-dynamic-component>

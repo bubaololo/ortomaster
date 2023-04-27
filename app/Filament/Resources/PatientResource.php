@@ -30,9 +30,11 @@ class PatientResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 TextInput::make('diagnosis'),
-//                Webcam::make('photo'),
+                Webcam::make('photo'),
 //                ViewField::make('notifications')->view('vendor.filament.pages.create-with-photo'),
-                Forms\Components\FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo'),
+//                Forms\Components\FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->afterStateHydrated(function (Forms\Components\FileUpload $component, $state) {
+//                    $component->state(info($state));
+//                }),
 //                Forms\Components\FileUpload::make('photo'),
 //                Webcam::make('photo')
             ]);
