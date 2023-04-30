@@ -29,27 +29,80 @@
 
 </style>
 
-<x-dynamic-component
-        :component="$getFieldWrapperView()"
-        :id="$getId()"
-        :label="$getLabel()"
-        :label-sr-only="$isLabelHidden()"
-        :helper-text="$getHelperText()"
-        :hint="$getHint()"
-        :hint-action="$getHintAction()"
-        :hint-color="$getHintColor()"
-        :hint-icon="$getHintIcon()"
-        :required="$isRequired()"
-        :state-path="$getStatePath()"
->
-    <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
-        <!-- Interact with the `state` property in Alpine.js -->
-        {{ $getStatePath() }}
-        <input id="fileInput" type="file" wire:model="{{ $getStatePath() }}" />
-        {{--<input type="hidden" name="photo" wire:model="photo" />--}}
-    </div>
-</x-dynamic-component>
+{{--<x-dynamic-component--}}
+{{--        :component="$getFieldWrapperView()"--}}
+{{--        :id="$getId()"--}}
+{{--        :label="$getLabel()"--}}
+{{--        :label-sr-only="$isLabelHidden()"--}}
+{{--        :helper-text="$getHelperText()"--}}
+{{--        :hint="$getHint()"--}}
+{{--        :hint-action="$getHintAction()"--}}
+{{--        :hint-color="$getHintColor()"--}}
+{{--        :hint-icon="$getHintIcon()"--}}
+{{--        :required="$isRequired()"--}}
+{{--        :state-path="$getStatePath()"--}}
+{{-->--}}
+{{--    <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">--}}
+{{--        <!-- Interact with the `state` property in Alpine.js -->--}}
+{{--        {{ $getStatePath() }}--}}
+{{--        <input id="data.photo" name="photo"  type="text" wire:model="{{ $getStatePath() }}" />--}}
+{{--        --}}{{--<input type="hidden" name="photo" wire:model="photo" />--}}
+{{--    </div>--}}
+{{--</x-dynamic-component>--}}
 
+<div x-data="fileUploadFormComponent({
+            acceptedFileTypes: null,
+            canDownload: false,
+            canOpen: false,
+            canPreview: true,
+            canReorder: false,
+            deleteUploadedFileUsing: async (fileKey) => {
+                return await $wire.deleteUploadedFile('data.photo', fileKey)
+            },
+            getUploadedFileUrlsUsing: async () => {
+                return await $wire.getUploadedFileUrls('data.photo')
+            },
+            imageCropAspectRatio: null,
+            imagePreviewHeight: null,
+            imageResizeMode: null,
+            imageResizeTargetHeight: null,
+            imageResizeTargetWidth: null,
+            imageResizeUpscale: true,
+            isAvatar: false,
+            loadingIndicatorPosition: 'right',
+            locale: 'ru',
+            panelAspectRatio: null,
+            panelLayout: 'compact',
+            placeholder: null,
+            maxSize: null,
+            minSize: null,
+            removeUploadedFileUsing: async (fileKey) => {
+                return await $wire.removeUploadedFile('data.photo', fileKey)
+            },
+            removeUploadedFileButtonPosition: 'left',
+            reorderUploadedFilesUsing: async (files) => {
+                return await $wire.reorderUploadedFiles('data.photo', files)
+            },
+            shouldAppendFiles: false,
+            shouldOrientImageFromExif: true,
+            shouldTransformImage: false,
+            state: $wire.entangle('data.photo').defer,
+            uploadButtonPosition: 'right',
+            uploadProgressIndicatorPosition: 'right',
+            uploadUsing: (fileKey, file, success, error, progress) => {
+                $wire.upload(`data.photo.${fileKey}`, file, () => {
+                    success(fileKey)
+                }, error, progress)
+            },
+        })" wire:ignore="" id="data.photo"  class="filament-forms-file-upload-component">
+    <div class="filepond--root filepond--hopper" data-style-panel-layout="compact" data-style-button-remove-item-position="left" data-style-button-process-item-position="right" data-style-load-indicator-position="right" data-style-progress-indicator-position="right" data-style-button-remove-item-align="false" style="height: 250px;">
+        <input class="filepond--browser" type="file" id="filepond--browser-0ulzrured" aria-controls="filepond--assistant-0ulzrured" aria-labelledby="filepond--drop-label-0ulzrured" accept="">
+        </div>
+
+        <fieldset class="filepond--data"><input type="hidden" name="filepond" value="c37f52f5-8b15-4281-b468-dc0cbc0e54f2"></fieldset>
+
+    </div>
+</div>
 
 <div class="container-md row py-5 mx-auto">
 
@@ -231,14 +284,17 @@
           } else {
             clearphoto();
           }
-          canvas.toBlob(function(blob){
+          canvas.toBlob(function(blob) {
             var file = new File([blob], "name");
-            const fileInput = document.getElementById('fileInput');
-            const dataTransfer = new DataTransfer()
-            dataTransfer.items.add(file)
-            fileInput.files = dataTransfer.files
+            // const fileInput = document.getElementById('fileInput');
+            // const dataTransfer = new DataTransfer()
+            // dataTransfer.items.add(file)
+            // fileInput.files = dataTransfer.files
           @this.upload('data', file, (filename) => {
             // Success callback.
+            const fileInput = document.getElementById('data.photo');
+            fileInput.value = filename;
+            // setDirtyState(fileInput, filename);
             console.log('success!')
             console.log(filename)
           }, () => {
@@ -248,7 +304,9 @@
             // Progress callback.
             // event.detail.progress contains a number between 1 and 100 as the upload progresses.
           });
-          },'image/png');
+          }, 'image/png');
+          // console.log($wire.__instance)
+          // $wire.set('photo', 'filename')
         }
 
         // Add event listener to save button

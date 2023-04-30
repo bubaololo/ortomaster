@@ -18,4 +18,5 @@ class CreatePatient extends CreateRecord
 //
 //        return view('vendor.filament.models.your-model.create-with-photo', compact('record', 'schema'));
 //    }
+
 }

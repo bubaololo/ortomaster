@@ -8,6 +8,7 @@ use App\Http\Livewire\PhotoInput;
 use App\Forms\Components\Webcam;
 use App\Models\Patient;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -30,11 +31,12 @@ class PatientResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 TextInput::make('diagnosis'),
-                Webcam::make('photo'),
-//                ViewField::make('notifications')->view('vendor.filament.pages.create-with-photo'),
-//                Forms\Components\FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->afterStateHydrated(function (Forms\Components\FileUpload $component, $state) {
-//                    $component->state(info($state));
-//                }),
+                TextInput::make('photo')->hidden(),
+//                Webcam::make('photo'),
+//                ViewField::make('photo')->view('vendor.filament.pages.create-with-photo'),
+                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
+                    info($state);
+                }),
 //                Forms\Components\FileUpload::make('photo'),
 //                Webcam::make('photo')
             ]);
@@ -75,5 +77,9 @@ class PatientResource extends Resource
             'view' => Pages\ViewPatient::route('/{record}'),
             'edit' => Pages\EditPatient::route('/{record}/edit'),
         ];
-    }    
+    }
+    public function submit()
+    {
+        dd($this->form->getState());
+    }
 }

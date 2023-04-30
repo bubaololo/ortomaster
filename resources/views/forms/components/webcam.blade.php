@@ -11,9 +11,10 @@
     :required="$isRequired()"
     :state-path="$getStatePath()"
 >
-    <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
+    <div >
         <!-- Interact with the `state` property in Alpine.js -->
-        <input name="photo" type="file">
+        {{--<input name="photo" type="file">--}}
+        <input id="fileInput" type="text" x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }" />
     </div>
 
 </x-dynamic-component>
