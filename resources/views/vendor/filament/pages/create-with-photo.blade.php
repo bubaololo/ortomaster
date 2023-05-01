@@ -45,8 +45,8 @@
 >
     <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
         <!-- Interact with the `state` property in Alpine.js -->
-        {{ $getStatePath() }}
-        <input id="data.photo" name="photo"  type="file" wire:model.defer="{{ $getStatePath() }}" />
+        {{ $photo }}
+        <input id="data.photo" name="photo" hidden  type="file" wire:model.defer="{{ $getStatePath() }}" />
         {{--<input type="hidden" name="photo" wire:model="photo" />--}}
     </div>
 </x-dynamic-component>
@@ -126,7 +126,7 @@
             <canvas id="canvas">
             </canvas>
             <div class="output">
-                <img id="photo" alt="The screen capture will appear in this box.">
+                <img id="photo" src="" alt="The screen capture will appear in this box.">
             </div>
         </div>
     </div>
@@ -161,6 +161,7 @@
 
         var video = null;
         var canvas = null;
+        var canvasContext = null;
         var photo = null;
         var snap = null;
 
@@ -255,9 +256,6 @@
               takepicture();
             }, false);
 
-
-
-
           clearphoto();
         }
 
@@ -265,9 +263,9 @@
         // captured.
 
         function clearphoto() {
-          var context = canvas.getContext('2d');
-          context.fillStyle = "#AAA";
-          context.fillRect(0, 0, canvas.width, canvas.height);
+          canvasContext = canvas.getContext('2d');
+          canvasContext.fillStyle = "#AAA";
+          canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
           var data = canvas.toDataURL('image/png');
           photo.setAttribute('src', data);
@@ -280,16 +278,6 @@
         // other changes before drawing it.
 
         function takepicture() {
-          var context = canvas.getContext('2d');
-          if (width && height) {
-            canvas.width = width;
-            canvas.height = height;
-            context.drawImage(video, 0, 0, width, height);
-            var data = canvas.toDataURL('image/png');
-            photo.setAttribute('src', data);
-          } else {
-            clearphoto();
-          }
           canvas.toBlob(function(blob) {
             var file = new File([blob], "name");
             // const fileInput = document.getElementById('fileInput');
@@ -315,11 +303,26 @@
             // Progress callback.
             // event.detail.progress contains a number between 1 and 100 as the upload progresses.
           });
-          }, 'image/png');
+          }, 'image/jpeg');
           // console.log($wire.__instance)
           // $wire.set('photo', 'filename')
+          setTimeout(drawCapturedPhoto,3000)
+          // drawCapturedPhoto()
         }
 
+        function drawCapturedPhoto() {
+          var context = canvas.getContext('2d');
+          if (width && height) {
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+            var data = canvas.toDataURL('image/jpeg');
+            photo.setAttribute('src', data);
+          } else {
+            clearphoto();
+          }
+          return context
+        }
         // Add event listener to save button
         // document.getElementById('save').addEventListener('click', function() {
         //    var dataURL = canvas.toDataURL('image/png');

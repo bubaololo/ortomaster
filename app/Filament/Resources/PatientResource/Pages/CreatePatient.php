@@ -7,15 +7,18 @@ use App\Models\Patient;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Exceptions\Halt;
-
+use Illuminate\Support\Facades\Storage;
 class CreatePatient extends CreateRecord
 {
     protected static string $resource = PatientResource::class;
     
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        info($data);
-        
+       
+        $file = $data['photo'];
+        $oldPath = 'livewire-tmp/'.$file;
+        $newPath = 'public/'.$file;
+        Storage::move($oldPath, $newPath);
         return $data;
     }
     
