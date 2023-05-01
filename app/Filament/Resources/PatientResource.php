@@ -31,12 +31,12 @@ class PatientResource extends Resource
             ->schema([
                 TextInput::make('name'),
                 TextInput::make('diagnosis'),
-                TextInput::make('photo')->hidden(),
-//                Webcam::make('photo'),
+//                TextInput::make('photo'),
+                Webcam::make('photo'),
 //                ViewField::make('photo')->view('vendor.filament.pages.create-with-photo'),
-                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
-                    info($state);
-                }),
+//                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
+//                    info($state);
+//                }),
 //                Forms\Components\FileUpload::make('photo'),
 //                Webcam::make('photo')
             ]);

@@ -1,3 +1,4 @@
+<div>
 <style>
     #video {
         border: 1px solid black;
@@ -29,80 +30,79 @@
 
 </style>
 
-{{--<x-dynamic-component--}}
-{{--        :component="$getFieldWrapperView()"--}}
-{{--        :id="$getId()"--}}
-{{--        :label="$getLabel()"--}}
-{{--        :label-sr-only="$isLabelHidden()"--}}
-{{--        :helper-text="$getHelperText()"--}}
-{{--        :hint="$getHint()"--}}
-{{--        :hint-action="$getHintAction()"--}}
-{{--        :hint-color="$getHintColor()"--}}
-{{--        :hint-icon="$getHintIcon()"--}}
-{{--        :required="$isRequired()"--}}
-{{--        :state-path="$getStatePath()"--}}
-{{-->--}}
-{{--    <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">--}}
-{{--        <!-- Interact with the `state` property in Alpine.js -->--}}
-{{--        {{ $getStatePath() }}--}}
-{{--        <input id="data.photo" name="photo"  type="text" wire:model="{{ $getStatePath() }}" />--}}
-{{--        --}}{{--<input type="hidden" name="photo" wire:model="photo" />--}}
-{{--    </div>--}}
-{{--</x-dynamic-component>--}}
-
-<div x-data="fileUploadFormComponent({
-            acceptedFileTypes: null,
-            canDownload: false,
-            canOpen: false,
-            canPreview: true,
-            canReorder: false,
-            deleteUploadedFileUsing: async (fileKey) => {
-                return await $wire.deleteUploadedFile('data.photo', fileKey)
-            },
-            getUploadedFileUrlsUsing: async () => {
-                return await $wire.getUploadedFileUrls('data.photo')
-            },
-            imageCropAspectRatio: null,
-            imagePreviewHeight: null,
-            imageResizeMode: null,
-            imageResizeTargetHeight: null,
-            imageResizeTargetWidth: null,
-            imageResizeUpscale: true,
-            isAvatar: false,
-            loadingIndicatorPosition: 'right',
-            locale: 'ru',
-            panelAspectRatio: null,
-            panelLayout: 'compact',
-            placeholder: null,
-            maxSize: null,
-            minSize: null,
-            removeUploadedFileUsing: async (fileKey) => {
-                return await $wire.removeUploadedFile('data.photo', fileKey)
-            },
-            removeUploadedFileButtonPosition: 'left',
-            reorderUploadedFilesUsing: async (files) => {
-                return await $wire.reorderUploadedFiles('data.photo', files)
-            },
-            shouldAppendFiles: false,
-            shouldOrientImageFromExif: true,
-            shouldTransformImage: false,
-            state: $wire.entangle('data.photo').defer,
-            uploadButtonPosition: 'right',
-            uploadProgressIndicatorPosition: 'right',
-            uploadUsing: (fileKey, file, success, error, progress) => {
-                $wire.upload(`data.photo.${fileKey}`, file, () => {
-                    success(fileKey)
-                }, error, progress)
-            },
-        })" wire:ignore="" id="data.photo"  class="filament-forms-file-upload-component">
-    <div class="filepond--root filepond--hopper" data-style-panel-layout="compact" data-style-button-remove-item-position="left" data-style-button-process-item-position="right" data-style-load-indicator-position="right" data-style-progress-indicator-position="right" data-style-button-remove-item-align="false" style="height: 250px;">
-        <input class="filepond--browser" type="file" id="filepond--browser-0ulzrured" aria-controls="filepond--assistant-0ulzrured" aria-labelledby="filepond--drop-label-0ulzrured" accept="">
-        </div>
-
-        <fieldset class="filepond--data"><input type="hidden" name="filepond" value="c37f52f5-8b15-4281-b468-dc0cbc0e54f2"></fieldset>
-
+<x-dynamic-component
+        :component="$getFieldWrapperView()"
+        :id="$getId()"
+        :label="$getLabel()"
+        :label-sr-only="$isLabelHidden()"
+        :helper-text="$getHelperText()"
+        :hint="$getHint()"
+        :hint-action="$getHintAction()"
+        :hint-color="$getHintColor()"
+        :hint-icon="$getHintIcon()"
+        :required="$isRequired()"
+        :state-path="$getStatePath()"
+>
+    <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
+        <!-- Interact with the `state` property in Alpine.js -->
+        {{ $getStatePath() }}
+        <input id="data.photo" name="photo"  type="file" wire:model.defer="{{ $getStatePath() }}" />
+        {{--<input type="hidden" name="photo" wire:model="photo" />--}}
     </div>
-</div>
+</x-dynamic-component>
+
+{{--<div x-data="fileUploadFormComponent({--}}
+{{--            acceptedFileTypes: null,--}}
+{{--            canDownload: false,--}}
+{{--            canOpen: false,--}}
+{{--            canPreview: true,--}}
+{{--            canReorder: false,--}}
+{{--            deleteUploadedFileUsing: async (fileKey) => {--}}
+{{--                return await $wire.deleteUploadedFile('data.photo', fileKey)--}}
+{{--            },--}}
+{{--            getUploadedFileUrlsUsing: async () => {--}}
+{{--                return await $wire.getUploadedFileUrls('data.photo')--}}
+{{--            },--}}
+{{--            imageCropAspectRatio: null,--}}
+{{--            imagePreviewHeight: null,--}}
+{{--            imageResizeMode: null,--}}
+{{--            imageResizeTargetHeight: null,--}}
+{{--            imageResizeTargetWidth: null,--}}
+{{--            imageResizeUpscale: true,--}}
+{{--            isAvatar: false,--}}
+{{--            loadingIndicatorPosition: 'right',--}}
+{{--            locale: 'ru',--}}
+{{--            panelAspectRatio: null,--}}
+{{--            panelLayout: 'compact',--}}
+{{--            placeholder: null,--}}
+{{--            maxSize: null,--}}
+{{--            minSize: null,--}}
+{{--            removeUploadedFileUsing: async (fileKey) => {--}}
+{{--                return await $wire.removeUploadedFile('data.photo', fileKey)--}}
+{{--            },--}}
+{{--            removeUploadedFileButtonPosition: 'left',--}}
+{{--            reorderUploadedFilesUsing: async (files) => {--}}
+{{--                return await $wire.reorderUploadedFiles('data.photo', files)--}}
+{{--            },--}}
+{{--            shouldAppendFiles: false,--}}
+{{--            shouldOrientImageFromExif: true,--}}
+{{--            shouldTransformImage: false,--}}
+{{--            state: $wire.entangle('data.photo').defer,--}}
+{{--            uploadButtonPosition: 'right',--}}
+{{--            uploadProgressIndicatorPosition: 'right',--}}
+{{--            uploadUsing: (fileKey, file, success, error, progress) => {--}}
+{{--                $wire.upload(`data.photo.${fileKey}`, file, () => {--}}
+{{--                    success(fileKey)--}}
+{{--                }, error, progress)--}}
+{{--            },--}}
+{{--        })" wire:ignore="" id="data.photo"  class="filament-forms-file-upload-component">--}}
+{{--        <input class="filepond--browser" type="file" id="filepond--browser-0ulzrured" aria-controls="filepond--assistant-0ulzrured" aria-labelledby="filepond--drop-label-0ulzrured" accept="">--}}
+
+
+{{--        <fieldset class="filepond--data"><input type="hidden" name="filepond" value="c37f52f5-8b15-4281-b468-dc0cbc0e54f2"></fieldset>--}}
+
+{{--    </div>--}}
+
 
 <div class="container-md row py-5 mx-auto">
 
@@ -118,7 +118,7 @@
         <div class="col-md-6">
             <div class="camera">
                 <video id="video">Видео недоступно</video>
-                <button class="btn btn-secondary" id="snap">Сделать снимок</button>
+                <div class="btn btn-secondary" id="snap">Сделать снимок</div>
             </div>
         </div>
         <div class="col-md-6">
@@ -130,17 +130,19 @@
             </div>
         </div>
     </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</div>
+    {{--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>--}}
 
-    <script>
-      // Set the CSRF token for all AJAX requests
-      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
+    {{--<script>--}}
+    {{--  // Set the CSRF token for all AJAX requests--}}
+    {{--  var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');--}}
+    {{--  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;--}}
 
-    </script>
+    {{--</script>--}}
     <script>
+
       (function() {
         // The width and height of the captured photo. We will set the
         // width to the value defined here, but the height will be
@@ -179,9 +181,9 @@
 
           var deviceId;
 
-          $(document).ready(function() {
-            $('.dropdown-toggle').dropdown();
-          });
+          // $(document).ready(function() {
+          //   $('.dropdown-toggle').dropdown();
+          // });
 
           // navigator.mediaDevices.enumerateDevices()
           //     .then(function(devices) {
@@ -247,10 +249,14 @@
             }
           }, false);
 
-          snap.addEventListener('click', function(ev) {
-            takepicture();
-            ev.preventDefault();
-          }, false);
+
+            snap.addEventListener('click', function(ev) {
+              ev.preventDefault();
+              takepicture();
+            }, false);
+
+
+
 
           clearphoto();
         }
@@ -292,11 +298,16 @@
             // fileInput.files = dataTransfer.files
           @this.upload('data', file, (filename) => {
             // Success callback.
-            const fileInput = document.getElementById('data.photo');
-            fileInput.value = filename;
+            // const fileInput = document.getElementById('data.photo');
+            // fileInput.value = filename;
+            // window.livewire.find($("#data.photo").attr('data.photo')).set('photo', filename);
+            {{--Livewire.set('{{ $getStatePath() }}', 'photo', filename);--}}
+
             // setDirtyState(fileInput, filename);
             console.log('success!')
             console.log(filename)
+                @this.set('data.photo', filename)
+            // console.log(@this.get('file'))
           }, () => {
             // Error callback.
           }, (event) => {
@@ -321,37 +332,38 @@
         //       console.log(err);
         //    });
         // });
-        document.getElementById('save').addEventListener('click', function() {
-
-          // Convert canvas to data URL and send the image to the server
-          var dataURL = canvas.toDataURL('image/png');
-
-          // fetch('/photo', {
-          fetch('http://filament.loc/livewire/message/app.filament.resources.patient-resource.pages.create-patient', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              image: dataURL,
-              _token: csrfToken
-            })
-          })
-              .then(function(response) {
-                if (!response.ok) {
-                  throw new Error('Network response was not ok');
-                }
-                return response.json();
-              })
-              .then(function(data) {
-                console.log(data.url);
-              })
-              .catch(function(err) {
-                console.log(err);
-              });
-        });
+        // document.getElementById('save').addEventListener('click', function() {
+        //
+        //   // Convert canvas to data URL and send the image to the server
+        //   var dataURL = canvas.toDataURL('image/png');
+        //
+        //   // fetch('/photo', {
+        //   fetch('http://filament.loc/livewire/message/app.filament.resources.patient-resource.pages.create-patient', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //       image: dataURL,
+        //       _token: csrfToken
+        //     })
+        //   })
+        //       .then(function(response) {
+        //         if (!response.ok) {
+        //           throw new Error('Network response was not ok');
+        //         }
+        //         return response.json();
+        //       })
+        //       .then(function(data) {
+        //         console.log(data.url);
+        //       })
+        //       .catch(function(err) {
+        //         console.log(err);
+        //       });
+        // });
         // Set up our event listener to run the startup process
         // once loading is complete.
         window.addEventListener('load', startup, false);
       })();
     </script>
+</div>

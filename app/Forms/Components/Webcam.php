@@ -12,13 +12,13 @@ class Webcam extends Field
     use WithFileUploads;
     
     public $photo;
-//    protected string $view = 'vendor.filament.pages.create-with-photo';
+    protected string $view = 'vendor.filament.pages.create-with-photo';
 
-    protected string $view = 'forms.components.webcam';
+//    protected string $view = 'forms.components.webcam';
     
     public function view(string $view): static
     {
-        info('yo');
+        info('view from webcam component');
         $this->view = $view;
         
         return $this;
@@ -33,13 +33,13 @@ class Webcam extends Field
 //            'photo' => 'image|max:1024', // 1MB Max
 //
 //        ]);
-        
+        info(print_r($this, true));
         $this->photo->store('photos');
         
     }
     public function setUp(): void
     {
         parent::setUp();
-        info('yo');
+        info('setUp from webcam component');
     }
 }
