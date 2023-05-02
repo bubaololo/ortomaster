@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('diagnosis');
             $table->string('photo');
+            $table->date('birthdate');
             $table->timestamps();
         });
     }
