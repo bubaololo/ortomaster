@@ -22,16 +22,18 @@ use Filament\Forms\Components\ViewField;
 
 class PatientResource extends Resource
 {
+    protected static ?string $pluralLabel = 'Пациенты';
+    protected static ?string $label = 'Пациент';
     protected static ?string $model = Patient::class;
-
+    protected static ?string $navigationLabel = 'Пациенты';
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Webcam::make('photo'),
-                TextInput::make('name'),
-                TextInput::make('diagnosis'),
+                Webcam::make('photo')->required()->label('Фото'),
+                TextInput::make('name')->required(),
+                TextInput::make('diagnosis')->required(),
 //                TextInput::make('photo'),
 //                ViewField::make('photo')->view('vendor.filament.pages.create-with-photo'),
 //                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
@@ -46,9 +48,10 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Имя')->sortable(),
+                TextColumn::make('name')->label('Имя')->sortable()->searchable(),
                 TextColumn::make('diagnosis'),
-                ImageColumn::make('photo')
+                ImageColumn::make('photo'),
+                TextColumn::make('created_at')->sortable()
             ])
             ->filters([
                 //
@@ -82,4 +85,8 @@ class PatientResource extends Resource
     {
         dd($this->form->getState());
     }
+//    protected function getRedirectUrl(): string
+//    {
+//        return $this->getResource()::getUrl('index');
+//    }
 }

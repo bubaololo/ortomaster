@@ -12,6 +12,11 @@ class CreatePatient extends CreateRecord
 {
     protected static string $resource = PatientResource::class;
     
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Карточка нового пациента создана';
+    }
+    
     protected function mutateFormDataBeforeCreate(array $data): array
     {
        
