@@ -29,10 +29,10 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
+                Webcam::make('photo'),
                 TextInput::make('name'),
                 TextInput::make('diagnosis'),
 //                TextInput::make('photo'),
-                Webcam::make('photo'),
 //                ViewField::make('photo')->view('vendor.filament.pages.create-with-photo'),
 //                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
 //                    info($state);
