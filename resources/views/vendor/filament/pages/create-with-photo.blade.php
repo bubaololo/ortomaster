@@ -1,34 +1,5 @@
 <div>
-<style>
-    #video {
-        border: 1px solid black;
-        box-shadow: 2px 2px 3px black;
-        width: 320px;
-        height: 240px;
-    }
 
-    #photo {
-        border: 1px solid black;
-        box-shadow: 2px 2px 3px black;
-        width: 320px;
-        height: 240px;
-    }
-
-    #canvas {
-        display: none;
-    }
-
-    .camera {
-        width: 340px;
-        display: inline-block;
-    }
-
-    .output {
-        width: 340px;
-        display: inline-block;
-    }
-
-</style>
 
 <x-dynamic-component
         :component="$getFieldWrapperView()"
@@ -43,65 +14,48 @@
         :required="$isRequired()"
         :state-path="$getStatePath()"
 >
+    <style>
+        #video {
+            border: 1px solid black;
+            box-shadow: 2px 2px 3px black;
+            width: 320px;
+            height: 240px;
+        }
+
+        #photo {
+            border: 1px solid black;
+            box-shadow: 2px 2px 3px black;
+            width: 320px;
+            height: 240px;
+        }
+
+        #canvas {
+            display: none;
+        }
+
+        .camera {
+            width: 340px;
+            display: inline-block;
+        }
+
+        .output {
+            width: 340px;
+            display: inline-block;
+        }
+
+    </style>
     <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
         <!-- Interact with the `state` property in Alpine.js -->
         {{ $photo }}
         <input id="data.photo" name="photo" hidden  type="file" wire:model.defer="{{ $getStatePath() }}" />
         {{--<input type="hidden" name="photo" wire:model="photo" />--}}
     </div>
+    <div class="camera">
+
+    </div>
 </x-dynamic-component>
 
-{{--<div x-data="fileUploadFormComponent({--}}
-{{--            acceptedFileTypes: null,--}}
-{{--            canDownload: false,--}}
-{{--            canOpen: false,--}}
-{{--            canPreview: true,--}}
-{{--            canReorder: false,--}}
-{{--            deleteUploadedFileUsing: async (fileKey) => {--}}
-{{--                return await $wire.deleteUploadedFile('data.photo', fileKey)--}}
-{{--            },--}}
-{{--            getUploadedFileUrlsUsing: async () => {--}}
-{{--                return await $wire.getUploadedFileUrls('data.photo')--}}
-{{--            },--}}
-{{--            imageCropAspectRatio: null,--}}
-{{--            imagePreviewHeight: null,--}}
-{{--            imageResizeMode: null,--}}
-{{--            imageResizeTargetHeight: null,--}}
-{{--            imageResizeTargetWidth: null,--}}
-{{--            imageResizeUpscale: true,--}}
-{{--            isAvatar: false,--}}
-{{--            loadingIndicatorPosition: 'right',--}}
-{{--            locale: 'ru',--}}
-{{--            panelAspectRatio: null,--}}
-{{--            panelLayout: 'compact',--}}
-{{--            placeholder: null,--}}
-{{--            maxSize: null,--}}
-{{--            minSize: null,--}}
-{{--            removeUploadedFileUsing: async (fileKey) => {--}}
-{{--                return await $wire.removeUploadedFile('data.photo', fileKey)--}}
-{{--            },--}}
-{{--            removeUploadedFileButtonPosition: 'left',--}}
-{{--            reorderUploadedFilesUsing: async (files) => {--}}
-{{--                return await $wire.reorderUploadedFiles('data.photo', files)--}}
-{{--            },--}}
-{{--            shouldAppendFiles: false,--}}
-{{--            shouldOrientImageFromExif: true,--}}
-{{--            shouldTransformImage: false,--}}
-{{--            state: $wire.entangle('data.photo').defer,--}}
-{{--            uploadButtonPosition: 'right',--}}
-{{--            uploadProgressIndicatorPosition: 'right',--}}
-{{--            uploadUsing: (fileKey, file, success, error, progress) => {--}}
-{{--                $wire.upload(`data.photo.${fileKey}`, file, () => {--}}
-{{--                    success(fileKey)--}}
-{{--                }, error, progress)--}}
-{{--            },--}}
-{{--        })" wire:ignore="" id="data.photo"  class="filament-forms-file-upload-component">--}}
-{{--        <input class="filepond--browser" type="file" id="filepond--browser-0ulzrured" aria-controls="filepond--assistant-0ulzrured" aria-labelledby="filepond--drop-label-0ulzrured" accept="">--}}
 
-
-{{--        <fieldset class="filepond--data"><input type="hidden" name="filepond" value="c37f52f5-8b15-4281-b468-dc0cbc0e54f2"></fieldset>--}}
-
-{{--    </div>--}}
 
 
 <div class="container-md row py-5 mx-auto">
@@ -132,16 +86,7 @@
         </div>
     </div>
 </div>
-    {{--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>--}}
-
-    {{--<script>--}}
-    {{--  // Set the CSRF token for all AJAX requests--}}
-    {{--  var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');--}}
-    {{--  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;--}}
-
-    {{--</script>--}}
+    {{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
     <script>
 
       (function() {
