@@ -119,10 +119,11 @@
             <div class="camera">
                 <video id="video">Видео недоступно</video>
                 <div class="btn btn-secondary" id="snap">Сделать снимок</div>
+
             </div>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-secondary" id="save">Сохранить снимок</button>
+            {{--<button class="btn btn-secondary" id="save">Сохранить снимок</button>--}}
             <canvas id="canvas">
             </canvas>
             <div class="output">
