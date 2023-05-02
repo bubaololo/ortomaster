@@ -1,19 +1,4 @@
 <div>
-
-
-<x-dynamic-component
-        :component="$getFieldWrapperView()"
-        :id="$getId()"
-        :label="$getLabel()"
-        :label-sr-only="$isLabelHidden()"
-        :helper-text="$getHelperText()"
-        :hint="$getHint()"
-        :hint-action="$getHintAction()"
-        :hint-color="$getHintColor()"
-        :hint-icon="$getHintIcon()"
-        :required="$isRequired()"
-        :state-path="$getStatePath()"
->
     <style>
         #video {
             border: 1px solid black;
@@ -44,49 +29,118 @@
         }
 
     </style>
-    <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
-        <!-- Interact with the `state` property in Alpine.js -->
-        {{ $photo }}
-        <input id="data.photo" name="photo" hidden  type="file" wire:model.defer="{{ $getStatePath() }}" />
-        {{--<input type="hidden" name="photo" wire:model="photo" />--}}
-    </div>
-    <div class="camera">
 
-    </div>
-</x-dynamic-component>
+    <x-dynamic-component
+            :component="$getFieldWrapperView()"
+            :id="$getId()"
+            :label="$getLabel()"
+            :label-sr-only="$isLabelHidden()"
+            :helper-text="$getHelperText()"
+            :hint="$getHint()"
+            :hint-action="$getHintAction()"
+            :hint-color="$getHintColor()"
+            :hint-icon="$getHintIcon()"
+            :required="$isRequired()"
+            :state-path="$getStatePath()"
+    >
+        <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
+            <!-- Interact with the `state` property in Alpine.js -->
+            {{ $getStatePath() }}
+            <input id="data.photo" name="photo"  type="file" wire:model.defer="{{ $getStatePath() }}" />
+            {{--<input type="hidden" name="photo" wire:model="photo" />--}}
+        </div>
+    </x-dynamic-component>
+
+    {{--<div x-data="fileUploadFormComponent({--}}
+    {{--            acceptedFileTypes: null,--}}
+    {{--            canDownload: false,--}}
+    {{--            canOpen: false,--}}
+    {{--            canPreview: true,--}}
+    {{--            canReorder: false,--}}
+    {{--            deleteUploadedFileUsing: async (fileKey) => {--}}
+    {{--                return await $wire.deleteUploadedFile('data.photo', fileKey)--}}
+    {{--            },--}}
+    {{--            getUploadedFileUrlsUsing: async () => {--}}
+    {{--                return await $wire.getUploadedFileUrls('data.photo')--}}
+    {{--            },--}}
+    {{--            imageCropAspectRatio: null,--}}
+    {{--            imagePreviewHeight: null,--}}
+    {{--            imageResizeMode: null,--}}
+    {{--            imageResizeTargetHeight: null,--}}
+    {{--            imageResizeTargetWidth: null,--}}
+    {{--            imageResizeUpscale: true,--}}
+    {{--            isAvatar: false,--}}
+    {{--            loadingIndicatorPosition: 'right',--}}
+    {{--            locale: 'ru',--}}
+    {{--            panelAspectRatio: null,--}}
+    {{--            panelLayout: 'compact',--}}
+    {{--            placeholder: null,--}}
+    {{--            maxSize: null,--}}
+    {{--            minSize: null,--}}
+    {{--            removeUploadedFileUsing: async (fileKey) => {--}}
+    {{--                return await $wire.removeUploadedFile('data.photo', fileKey)--}}
+    {{--            },--}}
+    {{--            removeUploadedFileButtonPosition: 'left',--}}
+    {{--            reorderUploadedFilesUsing: async (files) => {--}}
+    {{--                return await $wire.reorderUploadedFiles('data.photo', files)--}}
+    {{--            },--}}
+    {{--            shouldAppendFiles: false,--}}
+    {{--            shouldOrientImageFromExif: true,--}}
+    {{--            shouldTransformImage: false,--}}
+    {{--            state: $wire.entangle('data.photo').defer,--}}
+    {{--            uploadButtonPosition: 'right',--}}
+    {{--            uploadProgressIndicatorPosition: 'right',--}}
+    {{--            uploadUsing: (fileKey, file, success, error, progress) => {--}}
+    {{--                $wire.upload(`data.photo.${fileKey}`, file, () => {--}}
+    {{--                    success(fileKey)--}}
+    {{--                }, error, progress)--}}
+    {{--            },--}}
+    {{--        })" wire:ignore="" id="data.photo"  class="filament-forms-file-upload-component">--}}
+    {{--        <input class="filepond--browser" type="file" id="filepond--browser-0ulzrured" aria-controls="filepond--assistant-0ulzrured" aria-labelledby="filepond--drop-label-0ulzrured" accept="">--}}
 
 
+    {{--        <fieldset class="filepond--data"><input type="hidden" name="filepond" value="c37f52f5-8b15-4281-b468-dc0cbc0e54f2"></fieldset>--}}
+
+    {{--    </div>--}}
 
 
-<div class="container-md row py-5 mx-auto">
+    <div class="container-md row py-5 mx-auto">
 
-    <div class="col-auto">
-        <div class="dropdown my-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="cameraDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Выберите камеру
-            </button>
-            <div class="dropdown-menu" aria-labelledby="cameraDropdown" id="cameraList">
+        <div class="col-auto">
+            <div class="dropdown my-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="cameraDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Выберите камеру
+                </button>
+                <div class="dropdown-menu" aria-labelledby="cameraDropdown" id="cameraList">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="camera">
+                    <video id="video">Видео недоступно</video>
+                    <div class="btn btn-secondary" id="snap">Сделать снимок</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-secondary" id="save">Сохранить снимок</button>
+                <canvas id="canvas">
+                </canvas>
+                <div class="output">
+                    <img id="photo" alt="The screen capture will appear in this box.">
+                </div>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="camera">
-                <video id="video">Видео недоступно</video>
-                <div class="btn btn-secondary" id="snap">Сделать снимок</div>
-
-            </div>
-        </div>
-        <div class="col-md-6">
-            {{--<button class="btn btn-secondary" id="save">Сохранить снимок</button>--}}
-            <canvas id="canvas">
-            </canvas>
-            <div class="output">
-                <img id="photo" src="" alt="The screen capture will appear in this box.">
-            </div>
-        </div>
     </div>
-</div>
-    {{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
+    {{--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>--}}
+
+    {{--<script>--}}
+    {{--  // Set the CSRF token for all AJAX requests--}}
+    {{--  var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');--}}
+    {{--  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;--}}
+
+    {{--</script>--}}
     <script>
 
       (function() {
@@ -107,7 +161,6 @@
 
         var video = null;
         var canvas = null;
-        var canvasContext = null;
         var photo = null;
         var snap = null;
 
@@ -197,10 +250,13 @@
           }, false);
 
 
-            snap.addEventListener('click', function(ev) {
-              ev.preventDefault();
-              takepicture();
-            }, false);
+          snap.addEventListener('click', function(ev) {
+            ev.preventDefault();
+            takepicture();
+          }, false);
+
+
+
 
           clearphoto();
         }
@@ -209,9 +265,9 @@
         // captured.
 
         function clearphoto() {
-          canvasContext = canvas.getContext('2d');
-          canvasContext.fillStyle = "#AAA";
-          canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+          var context = canvas.getContext('2d');
+          context.fillStyle = "#AAA";
+          context.fillRect(0, 0, canvas.width, canvas.height);
 
           var data = canvas.toDataURL('image/png');
           photo.setAttribute('src', data);
@@ -224,6 +280,16 @@
         // other changes before drawing it.
 
         function takepicture() {
+          var context = canvas.getContext('2d');
+          if (width && height) {
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+          } else {
+            clearphoto();
+          }
           canvas.toBlob(function(blob) {
             var file = new File([blob], "name");
             // const fileInput = document.getElementById('fileInput');
@@ -235,12 +301,12 @@
             // const fileInput = document.getElementById('data.photo');
             // fileInput.value = filename;
             // window.livewire.find($("#data.photo").attr('data.photo')).set('photo', filename);
-            {{--Livewire.set('{{ $getStatePath() }}', 'photo', filename);--}}
+              {{--Livewire.set('{{ $getStatePath() }}', 'photo', filename);--}}
 
             // setDirtyState(fileInput, filename);
             console.log('success!')
             console.log(filename)
-                @this.set('data.photo', filename)
+          @this.set('data.photo', filename)
             // console.log(@this.get('file'))
           }, () => {
             // Error callback.
@@ -249,26 +315,11 @@
             // Progress callback.
             // event.detail.progress contains a number between 1 and 100 as the upload progresses.
           });
-          }, 'image/jpeg');
+          }, 'image/png');
           // console.log($wire.__instance)
           // $wire.set('photo', 'filename')
-          setTimeout(drawCapturedPhoto,3000)
-          // drawCapturedPhoto()
         }
 
-        function drawCapturedPhoto() {
-          var context = canvas.getContext('2d');
-          if (width && height) {
-            canvas.width = width;
-            canvas.height = height;
-            context.drawImage(video, 0, 0, width, height);
-            var data = canvas.toDataURL('image/jpeg');
-            photo.setAttribute('src', data);
-          } else {
-            clearphoto();
-          }
-          return context
-        }
         // Add event listener to save button
         // document.getElementById('save').addEventListener('click', function() {
         //    var dataURL = canvas.toDataURL('image/png');
