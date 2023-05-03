@@ -10,8 +10,6 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
-
     
     public function up(): void
     {
@@ -31,7 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('doctors');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

@@ -8,6 +8,7 @@ use App\Http\Livewire\PhotoInput;
 use App\Forms\Components\Webcam;
 use App\Models\Patient;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -24,16 +25,17 @@ class PatientResource extends Resource
 {
     protected static ?string $pluralLabel = 'Пациенты';
     protected static ?string $label = 'Пациент';
-    protected static ?string $model = Patient::class;
     protected static ?string $navigationLabel = 'Пациенты';
+    protected static ?string $model = Patient::class;
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Webcam::make('photo')->required()->label('Фото'),
-                TextInput::make('name')->required(),
-                TextInput::make('diagnosis')->required(),
+                TextInput::make('name')->required()->label('ФИО'),
+                TextInput::make('diagnosis')->required()->label('Диагноз'),
+                DatePicker::make('birthdate')->label('дата рождения')
 //                TextInput::make('photo'),
 //                ViewField::make('photo')->view('vendor.filament.pages.create-with-photo'),
 //                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
@@ -48,10 +50,11 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Имя')->sortable()->searchable(),
-                TextColumn::make('diagnosis'),
-                ImageColumn::make('photo'),
-                TextColumn::make('created_at')->sortable()
+                TextColumn::make('name')->label('Имя')->sortable()->searchable()->label('ФИО'),
+                TextColumn::make('diagnosis')->label('Диагноз'),
+                TextColumn::make('birthdate')->label('дата рождения'),
+                ImageColumn::make('photo')->label('Фото'),
+                TextColumn::make('created_at')->sortable()->label('Добавлен'),
             ])
             ->filters([
                 //

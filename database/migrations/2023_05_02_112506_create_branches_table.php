@@ -16,11 +16,6 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('address');
-            $table->foreignId('doctor_id')
-                ->nullable()
-                ->constrained()
-                ->cascadeOnDelete()
-                ->onUpdate('cascade');
         });
     }
 

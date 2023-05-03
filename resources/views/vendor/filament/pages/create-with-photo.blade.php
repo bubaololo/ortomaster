@@ -230,49 +230,7 @@
               // $wire.set('photo', 'filename')
             }
 
-            // Add event listener to save button
-            // document.getElementById('save').addEventListener('click', function() {
-            //    var dataURL = canvas.toDataURL('image/png');
-            //    axios.post('/photo', {
-            //       image: dataURL,
-            //       _token: csrfToken
-            //    }).then(function(response) {
-            //       console.log(response.data.url);
-            //    }).catch(function(err) {
-            //       console.log(err);
-            //    });
-            // });
-            // document.getElementById('save').addEventListener('click', function() {
-            //
-            //   // Convert canvas to data URL and send the image to the server
-            //   var dataURL = canvas.toDataURL('image/png');
-            //
-            //   // fetch('/photo', {
-            //   fetch('http://filament.loc/livewire/message/app.filament.resources.patient-resource.pages.create-patient', {
-            //     method: 'POST',
-            //     headers: {
-            //       'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //       image: dataURL,
-            //       _token: csrfToken
-            //     })
-            //   })
-            //       .then(function(response) {
-            //         if (!response.ok) {
-            //           throw new Error('Network response was not ok');
-            //         }
-            //         return response.json();
-            //       })
-            //       .then(function(data) {
-            //         console.log(data.url);
-            //       })
-            //       .catch(function(err) {
-            //         console.log(err);
-            //       });
-            // });
-            // Set up our event listener to run the startup process
-            // once loading is complete.
+
             window.addEventListener('load', startup, false);
           })();
         </script>
@@ -296,7 +254,6 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-secondary" id="save">Сохранить снимок</button>
                 <canvas id="canvas">
                 </canvas>
                 <div class="output">
