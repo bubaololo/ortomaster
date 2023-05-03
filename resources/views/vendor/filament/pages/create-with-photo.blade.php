@@ -1,4 +1,3 @@
-<div class="filament-forms-card-component p-6 bg-white rounded-xl border border-gray-300 dark:border-gray-600 dark:bg-gray-800" >
 
 
     <x-dynamic-component
@@ -14,6 +13,7 @@
             :required="$isRequired()"
             :state-path="$getStatePath()"
     >
+        <div {{ $attributes->merge($getExtraAttributes())->class(['filament-forms-text-input-component flex items-center space-x-2 rtl:space-x-reverse group']) }}>
         <style>
             #video {
                 border: 1px solid black;
@@ -45,12 +45,51 @@
 
         </style>
 
-
+        {{--INPUT--}}
         <div x-data="{ state: $wire.entangle('{{ $getStatePath() }}').defer }">
             <!-- Interact with the `state` property in Alpine.js -->
-            <input id="data.photo" name="photo" hidden  type="file" wire:model.defer="{{ $getStatePath() }}" />
+            <input id="data.photo" name="photo" hidden type="file" wire:model.defer="{{ $getStatePath() }}"/>
             {{--<input type="hidden" name="photo" wire:model="photo" />--}}
         </div>
+        {{--!INPUT--}}
+
+
+        {{--CONTENT--}}
+
+            @if(isset($getExtraAttributes()['src']))
+                <img src="http://filament.loc/storage/{{ $getExtraAttributes()['src'] }}" alt="">
+            @else
+                <div>
+
+
+            <div>
+                {{--<div class="dropdown my-3">--}}
+                {{--    <button class="btn btn-secondary dropdown-toggle" type="button" id="cameraDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                {{--        Выберите камеру--}}
+                {{--    </button>--}}
+                {{--    <div class="dropdown-menu" aria-labelledby="cameraDropdown" id="cameraList">--}}
+                {{--    </div>--}}
+                {{--</div>--}}
+
+                <div>
+                    <div class="camera">
+                        <video id="video">Видео недоступно</video>
+                        <div class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action" id="snap">Сделать снимок</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="canvas">
+                    </canvas>
+
+
+                    <div class="output">
+                        <img id="photo" alt="The screen capture will appear in this box.">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--!CONTENT--}}
+
         <script>
 
           (function() {
@@ -166,8 +205,6 @@
               }, false);
 
 
-
-
               clearphoto();
             }
 
@@ -234,36 +271,7 @@
             window.addEventListener('load', startup, false);
           })();
         </script>
+            @endif
+        </div>
     </x-dynamic-component>
 
-    <div >
-
-        <div >
-            {{--<div class="dropdown my-3">--}}
-            {{--    <button class="btn btn-secondary dropdown-toggle" type="button" id="cameraDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-            {{--        Выберите камеру--}}
-            {{--    </button>--}}
-            {{--    <div class="dropdown-menu" aria-labelledby="cameraDropdown" id="cameraList">--}}
-            {{--    </div>--}}
-            {{--</div>--}}
-
-            <div >
-                <div class="camera">
-                    <video id="video">Видео недоступно</video>
-                    <div class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action" id="snap">Сделать снимок</div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <canvas id="canvas">
-                </canvas>
-                <div class="output">
-                    <img id="photo" alt="The screen capture will appear in this box.">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-</div>
