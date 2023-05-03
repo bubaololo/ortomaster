@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('role',['user', 'doctor','admin','superadmin']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('branch_id')->nullable()->constrained();
+            $table->foreignId('doctor_id')->nullable()->constrained();
             $table->rememberToken();
             $table->timestamps();
         });
