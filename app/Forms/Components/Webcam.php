@@ -4,14 +4,16 @@ namespace App\Forms\Components;
 
 use Filament\Forms\Components\Field;
 use Livewire\WithFileUploads;
-    use Filament\Support\Concerns\HasExtraAlpineAttributes;
+use Filament\Support\Concerns\HasExtraAlpineAttributes;
 
 class Webcam extends Field
 {
     use HasExtraAlpineAttributes;
     use WithFileUploads;
     
-    public $photo;
+
+    
+    public  $photo;
     protected string $view = 'vendor.filament.pages.create-with-photo';
 
 //    protected string $view = 'forms.components.webcam';
@@ -19,6 +21,7 @@ class Webcam extends Field
     public function view(string $view): static
     {
         info('view from webcam component');
+        
         $this->view = $view;
         
         return $this;
@@ -40,6 +43,8 @@ class Webcam extends Field
     public function setUp(): void
     {
         parent::setUp();
-        info('setUp from webcam component');
+//        $this->photo = 'azaz';
+//        info('setUp from webcam component');
+        info(print_r($this->photo, true));
     }
 }

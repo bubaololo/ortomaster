@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Storage;
 
 class EditPatient extends EditRecord
 {
@@ -16,5 +17,16 @@ class EditPatient extends EditRecord
             Actions\ViewAction::make(),
             Actions\DeleteAction::make(),
         ];
+    }
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        info(print_r($data, true));
+        if ($data['photo']) {
+            $file = $data['photo'];
+            $oldPath = 'livewire-tmp/' . $file;
+            $newPath = 'public/' . $file;
+            Storage::move($oldPath, $newPath);
+        }
+        return $data;
     }
 }

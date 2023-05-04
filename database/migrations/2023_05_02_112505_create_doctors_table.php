@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->foreignId('branch_id')->nullable()->constrained()->onUpdate('cascade');
+            $table->foreignId('branch_id')->nullable()->constrained()->onUpdate('cascade')->cascadeOnDelete();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
@@ -34,3 +34,4 @@ return new class extends Migration
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };
+

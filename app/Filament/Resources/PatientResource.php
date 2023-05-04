@@ -18,6 +18,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\ViewField;
 
@@ -32,8 +33,33 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
-                Webcam::make('photo')->required()->label('Фото'),
-                TextInput::make('name')->required()->label('ФИО'),
+                Webcam::make('photo')
+                    ->label('Фото')
+                    ->required(function (string $context, Forms\Components\Component $component,?Model $record) {
+                        
+                        if($context == 'view') {
+                            if(isset($record->photo)) {
+                            $photoSrc = $record->photo;
+                            $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
+                            } else {
+                                $component->extraAttributes(['class' => 'view']);
+                            }
+                            
+                        }
+                        
+//                        info(print_r($photoSrc , true));
+                        return true;
+                    })
+                    ->columnSpanFull(),
+                    
+                TextInput::make('name')->required()
+//                  ->required(function (string $context, Forms\Components\Component $component) {
+//                    if($context == 'view') {
+//                        $component->extraAttributes(['class' => 'ebal']);
+//                    }
+//                    return true;
+//                })
+                    ->label('ФИО'),
                 TextInput::make('diagnosis')->required()->label('Диагноз'),
                 DatePicker::make('birthdate')->label('дата рождения')
 //                TextInput::make('photo'),
@@ -50,7 +76,7 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Имя')->sortable()->searchable()->label('ФИО'),
+                TextColumn::make('name')->sortable()->searchable()->label('ФИО'),
                 TextColumn::make('diagnosis')->label('Диагноз'),
                 TextColumn::make('birthdate')->label('дата рождения'),
                 ImageColumn::make('photo')->label('Фото'),
