@@ -83,7 +83,7 @@
 
 
                     <div class="output">
-                        <img id="photo" alt="The screen capture will appear in this box.">
+                        <img id="photo" wire:ignore alt="здесь появится сохранённое изображение">
                     </div>
                 </div>
             </div>
