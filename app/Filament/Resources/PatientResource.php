@@ -114,8 +114,5 @@ class PatientResource extends Resource
     {
         dd($this->form->getState());
     }
-//    protected function getRedirectUrl(): string
-//    {
-//        return $this->getResource()::getUrl('index');
-//    }
+
 }

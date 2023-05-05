@@ -28,7 +28,10 @@ class CreatePatient extends CreateRecord
     }
     
     
-    
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
     
 //    public function create()
 //    {
