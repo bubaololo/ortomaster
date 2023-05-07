@@ -15,13 +15,13 @@
         <style>
             #video {
 
-                width: 100%;
+                min-width: 100%;
                 /*height: 240px;*/
             }
 
             #photo {
 
-                width: 320px;
+                min-width: 100%;
                 height: 240px;
             }
 
@@ -35,8 +35,13 @@
             }
 
             .output {
-                width: 340px;
                 display: inline-block;
+            }
+            .camera__controls-wrapper{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
             }
 
         </style>
@@ -70,13 +75,14 @@
 
                         <div class="camera">
                             <video id="video">Видео недоступно</video>
+                            <div class="camera__controls-wrapper">
                             <div class="toggle">
                                 <div class="filament-forms-field-wrapper">
 
                                     <div class="space-y-2">
                                         <div class="flex items-center justify-between space-x-2 rtl:space-x-reverse">
                                             <label class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="camera-toggle">
-                                                <button x-data="{ state: null }" role="switch" aria-checked="false" x-bind:aria-checked="state?.toString()" x-on:click="state = ! state" x-bind:class="{
+                                                <button x-data="{ state: true }" role="switch" aria-checked="true" x-bind:aria-checked="state?.toString()" x-on:click="state = ! state" x-bind:class="{
                     'bg-primary-600': state,
                     'bg-gray-200 ': ! state,
                 }" wire:loading.attr="disabled" type="button" id="camera-toggle" class="filament-forms-toggle-component relative inline-flex border-2 border-transparent shrink-0 h-6 w-11 rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none disabled:opacity-70 disabled:cursor-not-allowed disabled:pointer-events-none bg-gray-200">
@@ -100,7 +106,7 @@
 
                                                 <span class="text-sm font-medium leading-4 text-gray-700">
 
-        Is admin    </span>
+        камера    </span>
 
                                             </label>
 
@@ -110,15 +116,18 @@
                                 </div>
                             </div>
                             <div class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action" id="snap">Сделать снимок</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div >
                         <canvas id="canvas">
                         </canvas>
 
                         <div class="output">
                             <img id="photo" wire:ignore alt="здесь появится сохранённое изображение">
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -126,13 +135,7 @@
 
             <script>
             // TOGGLE CAMERA
-              const toggleCamera = document.querySelector('#camera-toggle');
 
-              toggleCamera.addEventListener('click', function() {
-                const isChecked = toggleCamera.getAttribute('aria-checked') === 'true';
-                console.log('Toggle state changed:', isChecked);
-                // do something with the toggle state
-              });
 
               (function() {
                 // The width and height of the captured photo. We will set the
@@ -161,7 +164,9 @@
                   canvas = document.getElementById('canvas');
                   photo = document.getElementById('photo');
                   snap = document.getElementById('snap');
-
+                  const toggleCamera = document.querySelector('#camera-toggle');
+                  let isCameraOn = true;
+                  let videoStream = null;
                   navigator.mediaDevices.getUserMedia({video: true, audio: false})
                       .then(function(stream) {
                         video.srcObject = stream;
@@ -171,7 +176,26 @@
                         console.log("An error occurred: " + err);
                       });
 
-                  var deviceId;
+                  toggleCamera.addEventListener('click', function() {
+                    isCameraOn = !isCameraOn; // toggle the camera state
+
+                    if (isCameraOn) {
+                      // turn on the camera
+                      // video.srcObject = videoStream;
+                      video.play();
+                      toggleCamera.setAttribute('aria-checked', 'true');
+                    } else {
+                      // turn off the camera
+                      // video.srcObject = null;
+                      video.pause();
+                      toggleCamera.setAttribute('aria-checked', 'false');
+                    }
+
+                    console.log('Toggle state changed:', isCameraOn);
+                  });
+
+
+                  // var deviceId;
 
                   // $(document).ready(function() {
                   //   $('.dropdown-toggle').dropdown();
@@ -209,17 +233,17 @@
                   //       console.log(err.name + ": " + err.message);
                   //     });
 
-                  navigator.mediaDevices.getUserMedia({video: {deviceId: deviceId, width: {exact: 1920}, height: {exact: 0}}})
-                      .then(function(stream) {
-                        var video = document.getElementById('video');
-                        video.srcObject = stream;
-                        video.onloadedmetadata = function(e) {
-                          video.play();
-                        };
-                      })
-                      .catch(function(err) {
-                        console.log(err.name + ": " + err.message);
-                      });
+                  // navigator.mediaDevices.getUserMedia({video: {deviceId: deviceId, width: {exact: 1920}, height: {exact: 0}}})
+                  //     .then(function(stream) {
+                  //       var video = document.getElementById('video');
+                  //       video.srcObject = stream;
+                  //       video.onloadedmetadata = function(e) {
+                  //         video.play();
+                  //       };
+                  //     })
+                  //     .catch(function(err) {
+                  //       console.log(err.name + ": " + err.message);
+                  //     });
 
 
                   video.addEventListener('canplay', function(ev) {
