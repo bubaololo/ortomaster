@@ -10,7 +10,9 @@ use App\Models\Patient;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -33,25 +35,29 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
-                Webcam::make('photo')
-                    ->label('Фото')
-                    ->required(function (string $context, Forms\Components\Component $component,?Model $record) {
-                        
-                        if($context == 'view') {
-                            if(isset($record->photo)) {
-                            $photoSrc = $record->photo;
-                            $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
-                            } else {
-                                $component->extraAttributes(['class' => 'view']);
-                            }
-                            
-                        }
-                        
+                Section::make('Heading')
+                    ->description('Description')
+                    ->schema([
+                        Webcam::make('photo')
+                            ->label('Фото')
+                            ->required(function (string $context, Forms\Components\Component $component,?Model $record) {
+            
+                                if($context == 'view') {
+                                    if(isset($record->photo)) {
+                                        $photoSrc = $record->photo;
+                                        $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
+                                    } else {
+                                        $component->extraAttributes(['class' => 'view']);
+                                    }
+                
+                                }
+
 //                        info(print_r($photoSrc , true));
-                        return true;
-                    })
-                    ->columnSpanFull(),
-                    
+                                return true;
+                            })
+                            ->columnSpanFull(),
+                    ]),
+
                 TextInput::make('name')->required()
 //                  ->required(function (string $context, Forms\Components\Component $component) {
 //                    if($context == 'view') {
