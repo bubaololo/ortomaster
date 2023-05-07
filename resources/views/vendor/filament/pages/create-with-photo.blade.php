@@ -11,18 +11,23 @@
         :required="$isRequired()"
         :state-path="$getStatePath()"
 >
-    <div {{ $attributes->merge($getExtraAttributes())->class(['filament-forms-text-input-component flex items-center space-x-2 rtl:space-x-reverse group']) }}>
+    <div {{ $attributes->merge($getExtraAttributes())->class(['filament-forms-text-input-component flex items-center space-x-2 rtl:space-x-reverse group webcam-wrapper']) }}>
         <style>
-            #video {
+            .webcam-wrapper {
+                overflow: hidden;
+                display: block;
+            }
 
-                min-width: 100%;
+            #video {
+                width: 100%;
+                /*min-width: 100%;*/
                 /*height: 240px;*/
             }
 
-            #photo {
-
-                min-width: 100%;
-                height: 240px;
+            #output {
+                display: inline-block;
+                width: 100%;
+                /*height: 240px;*/
             }
 
             #canvas {
@@ -34,15 +39,13 @@
                 display: inline-block;
             }
 
-            .output {
-                display: inline-block;
-            }
-            .camera__controls-wrapper{
+            .camera__controls-wrapper {
                 display: flex;
                 align-items: center;
                 gap: 20px;
                 padding: 20px 0;
             }
+
 
         </style>
 
@@ -60,32 +63,37 @@
         @if(isset($getExtraAttributes()['src']))
             <img src="http://filament.loc/storage/{{ $getExtraAttributes()['src'] }}" alt="">
         @else
-            <div>
 
-                <div>
-                    {{--<div class="dropdown my-3">--}}
-                    {{--    <button class="btn btn-secondary dropdown-toggle" type="button" id="cameraDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                    {{--        Выберите камеру--}}
-                    {{--    </button>--}}
-                    {{--    <div class="dropdown-menu" aria-labelledby="cameraDropdown" id="cameraList">--}}
-                    {{--    </div>--}}
-                    {{--</div>--}}
 
-                    <div>
+            {{--SLIDER--}}
+            <div class="section-tabs" wire:ignore>
+                <!-- Swiper Tab -->
+                <div class="swiper-container swiper-tabs-nav">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            Камера
+                        </div>
+                        <div class="swiper-slide">
+                            Снимок
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+            <!-- Swiper Content -->
+            <div class="swiper-container swiper-tabs-content" wire:ignore>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
                         <div class="camera">
                             <video id="video">Видео недоступно</video>
-                            <div class="camera__controls-wrapper">
-                            <div class="toggle">
-                                <div class="filament-forms-field-wrapper">
 
-                                    <div class="space-y-2">
-                                        <div class="flex items-center justify-between space-x-2 rtl:space-x-reverse">
-                                            <label class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="camera-toggle">
-                                                <button x-data="{ state: true }" role="switch" aria-checked="true" x-bind:aria-checked="state?.toString()" x-on:click="state = ! state" x-bind:class="{
-                    'bg-primary-600': state,
-                    'bg-gray-200 ': ! state,
-                }" wire:loading.attr="disabled" type="button" id="camera-toggle" class="filament-forms-toggle-component relative inline-flex border-2 border-transparent shrink-0 h-6 w-11 rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none disabled:opacity-70 disabled:cursor-not-allowed disabled:pointer-events-none bg-gray-200">
+                            <div class="camera__controls-wrapper">
+                                <div class="toggle">
+                                    <div class="filament-forms-field-wrapper">
+                                        <div class="space-y-2">
+                                            <div class="flex items-center justify-between space-x-2 rtl:space-x-reverse">
+                                                <label class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="camera-toggle">
+                                                    <button x-data="{ state: true }" role="switch" aria-checked="true" x-bind:aria-checked="state?.toString()" x-on:click="state = ! state" x-bind:class="{'bg-primary-600': state,'bg-gray-200 ': ! state,}" wire:loading.attr="disabled" type="button" id="camera-toggle" class="filament-forms-toggle-component relative inline-flex border-2 border-transparent shrink-0 h-6 w-11 rounded-full cursor-pointer transition-colors ease-in-out duration-200 outline-none disabled:opacity-70 disabled:cursor-not-allowed disabled:pointer-events-none bg-gray-200">
                 <span class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 ease-in-out transition duration-200 translate-x-0" x-bind:class="{
                         'translate-x-5 rtl:-translate-x-5': state,
                         'translate-x-0': ! state,
@@ -94,47 +102,193 @@
                             'opacity-0 ease-out duration-100': state,
                             'opacity-100 ease-in duration-200': ! state,
                         }">
-                                            </span>
-
+                    </span>
                     <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-0 ease-out duration-100" aria-hidden="true" x-bind:class="{
                             'opacity-100 ease-in duration-200': state,
-                            'opacity-0 ease-out duration-100': ! state,
-                        }">
+                            'opacity-0 ease-out duration-100': ! state,}">
                                             </span>
                 </span>
-                                                </button>
 
-                                                <span class="text-sm font-medium leading-4 text-gray-700">
+                                                    </button>
 
-        камера    </span>
+                                                    <span class="text-sm font-medium leading-4 text-gray-700">камера</span>
 
-                                            </label>
-
+                                                </label>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
-                            </div>
-                            <div class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action" id="snap">Сделать снимок</div>
+                                <div class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action"
+                                        id="snap">Сделать снимок
+                                </div>
                             </div>
                         </div>
+                        Content 1
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet at, cumque delectus dolore enim error est eveniet explicabo iste neque numquam quaerat quas, quos repellendus sint tempore vero voluptatem.
                     </div>
-                    <div >
-                        <canvas id="canvas">
-                        </canvas>
-
+                    <div class="swiper-slide">
                         <div class="output">
-                            <img id="photo" wire:ignore alt="здесь появится сохранённое изображение">
+                            <canvas id="canvas">
+                            </canvas>
+                            <img id="output" wire:ignore alt="здесь появится сохранённое изображение">
                         </div>
-
-
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, eius id incidunt inventore minus non quod reprehenderit sed? Ab enim fugit laborum molestiae, molestias officia quas quibusdam ut vero voluptate!
                     </div>
+
                 </div>
             </div>
-            {{--!CONTENT--}}
 
+
+            <style>
+
+                .section-tabs {
+                    padding-top: 15px
+                }
+
+                .swiper-container {
+                    margin-left: auto;
+                    margin-right: auto;
+                    position: relative;
+                    overflow: hidden;
+                    list-style: none;
+                    padding: 0;
+                    z-index: 1;
+                }
+
+                .swiper-container-android .swiper-slide, .swiper-wrapper {
+                    transform: translate3d(0px, 0, 0);
+                }
+
+                .swiper-wrapper {
+                    position: relative;
+                    width: 100%;
+                    height: calc(100% + 60px);
+                    z-index: 1;
+                    display: flex;
+                    transition-property: transform;
+                    box-sizing: content-box;
+                }
+
+                .swiper-slide {
+                    flex-shrink: 0;
+                    max-width: 100%;
+                    height: 100%;
+                    position: relative;
+                    transition-property: transform;
+                    background-color: cornsilk;
+                }
+
+                .section-tabs .swiper-tabs-nav .swiper-slide {
+                    text-align: center;
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #f4f6f5;
+                    font-weight: 600;
+                    transition: all 0.3s ease-in-out;
+                    cursor: pointer
+                }
+
+                .section-tabs .swiper-tabs-nav .swiper-slide.swiper-slide-thumb-active {
+                    font-weight: 700;
+                    color: #CB0001;
+                    border-color: #CB0001
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide {
+                    padding: 25px 15px
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .full-height {
+                    display: flex;
+                    flex-direction: column;
+                    min-height: calc(65vh - 25px)
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .row {
+                    margin: 0 -5px
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .row .col-6,
+                .section-tabs .swiper-tabs-content .swiper-slide .row .col {
+                    padding: 0 5px
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .custom-select {
+                    border-radius: 0
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide textarea.form-control {
+                    border-radius: 0;
+                    background-color: #FFF
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .radio-courier .item-radio input ~ label {
+                    border-radius: 0;
+                    text-align: center
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .radio-courier .item-radio input ~ label h6 {
+                    color: #b8026f
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .radio-courier .item-radio input ~ label p {
+                    color: #989898
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .bottom {
+                    margin-top: auto
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .bottom .btn {
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-family: 'Cairo', sans-serif !important;
+                    position: relative
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .bottom .btn .icon {
+                    position: absolute;
+                    left: 15px;
+                    top: 60%;
+                    transform: translateY(-50%)
+                }
+
+                .section-tabs .swiper-tabs-content .swiper-slide .bottom .btn .icon img {
+                    height: 20px;
+                    width: auto;
+                    filter: invert(1)
+                }
+            </style>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
             <script>
-            // TOGGLE CAMERA
+              swiperTabsNav = new Swiper('.swiper-tabs-nav', {
+                spaceBetween: 0,
+                slidesPerView: 2,
+                loop: false,
+                loopedSlides: 5,
+                autoHeight: false,
+                resistanceRatio: 0,
+                watchOverflow: true,
+                watchSlidesVisibility: true,
+                watchSlidesProgress: true
+              });
+
+              // Swiper Content
+              swiperTabsContent = new Swiper('.swiper-tabs-content', {
+                spaceBetween: 0,
+                loop: false,
+                autoHeight: false,
+                longSwipes: true,
+                resistanceRatio: 0, // Disable First and Last Swiper
+                watchOverflow: true,
+                loopedSlides: 5,
+                thumbs: {
+                  swiper: swiperTabsNav
+                }
+              });
+            </script>
+            {{--SLIDER--}}
+            <script>
+              // TOGGLE CAMERA
 
 
               (function() {
@@ -162,7 +316,7 @@
 
                   video = document.getElementById('video');
                   canvas = document.getElementById('canvas');
-                  photo = document.getElementById('photo');
+                  photo = document.getElementById('output');
                   snap = document.getElementById('snap');
                   const toggleCamera = document.querySelector('#camera-toggle');
                   let isCameraOn = true;
@@ -326,6 +480,7 @@
                     // Error callback.
                   }, (event) => {
                     console.log(event);
+                    swiperTabsContent.slideNext()
                     // Progress callback.
                     // event.detail.progress contains a number between 1 and 100 as the upload progresses.
                   });
