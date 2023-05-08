@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class EditPatient extends EditRecord
@@ -15,7 +16,12 @@ class EditPatient extends EditRecord
     {
         return [
             Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->after(function (?Model $record) {
+                if(isset($record->photo)) {
+                    $fileName = $record->photo;
+                    Storage::delete('/public/'.$fileName);
+                }
+            }),
         ];
     }
     protected function mutateFormDataBeforeSave(array $data): array
