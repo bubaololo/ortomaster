@@ -175,7 +175,7 @@
                     height: 100%;
                     position: relative;
                     transition-property: transform;
-                    background-color: cornsilk;
+
                 }
 
                 .section-tabs .swiper-tabs-nav .swiper-slide {
@@ -189,8 +189,8 @@
 
                 .section-tabs .swiper-tabs-nav .swiper-slide.swiper-slide-thumb-active {
                     font-weight: 700;
-                    color: #CB0001;
-                    border-color: #CB0001
+                    color: rgb(217, 119, 6);
+                    border-color: rgb(217, 119, 6)
                 }
 
                 .section-tabs .swiper-tabs-content .swiper-slide {
