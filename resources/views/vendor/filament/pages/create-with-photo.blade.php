@@ -123,16 +123,13 @@
                                 </div>
                             </div>
                         </div>
-                        Content 1
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet at, cumque delectus dolore enim error est eveniet explicabo iste neque numquam quaerat quas, quos repellendus sint tempore vero voluptatem.
                     </div>
                     <div class="swiper-slide">
                         <div class="output">
                             <canvas id="canvas">
                             </canvas>
-                            <img id="output" wire:ignore alt="здесь появится сохранённое изображение">
+                            <img id="output"  wire:ignore alt="здесь появится сохранённое изображение">
                         </div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, eius id incidunt inventore minus non quod reprehenderit sed? Ab enim fugit laborum molestiae, molestias officia quas quibusdam ut vero voluptate!
                     </div>
 
                 </div>
@@ -434,7 +431,7 @@
 
                 function clearphoto() {
                   var context = canvas.getContext('2d');
-                  context.fillStyle = "#AAA";
+                  context.fillStyle = "#000";
                   context.fillRect(0, 0, canvas.width, canvas.height);
 
                   var data = canvas.toDataURL('image/png');
