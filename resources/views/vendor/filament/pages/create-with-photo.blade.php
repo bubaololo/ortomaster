@@ -434,7 +434,7 @@
                   context.fillStyle = "#000";
                   context.fillRect(0, 0, canvas.width, canvas.height);
 
-                  var data = canvas.toDataURL('image/png');
+                  var data = canvas.toDataURL('image/jpeg');
                   photo.setAttribute('src', data);
                 }
 
@@ -450,7 +450,7 @@
                     canvas.width = width;
                     canvas.height = height;
                     context.drawImage(video, 0, 0, width, height);
-                    var data = canvas.toDataURL('image/png');
+                    var data = canvas.toDataURL('image/jpeg');
                     photo.setAttribute('src', data);
                   } else {
                     clearphoto();
@@ -481,7 +481,7 @@
                     // Progress callback.
                     // event.detail.progress contains a number between 1 and 100 as the upload progresses.
                   });
-                  }, 'image/png');
+                  }, 'image/jpeg');
                   // console.log($wire.__instance)
                   // $wire.set('photo', 'filename')
                 }
