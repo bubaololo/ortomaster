@@ -9,7 +9,6 @@ use App\Forms\Components\Webcam;
 use App\Models\Patient;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -36,7 +35,8 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
-                Fieldset::make('Снимок')
+                Section::make('Heading')
+                    ->description('Description')
                     ->schema([
                         Webcam::make('photo')
                             ->label('Фото')
