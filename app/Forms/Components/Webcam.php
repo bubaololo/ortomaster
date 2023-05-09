@@ -36,7 +36,6 @@ class Webcam extends Field
 //            'photo' => 'image|max:1024', // 1MB Max
 //
 //        ]);
-        info(print_r($this, true));
         $this->photo->store('photos');
         
     }
@@ -45,6 +44,5 @@ class Webcam extends Field
         parent::setUp();
 //        $this->photo = 'azaz';
 //        info('setUp from webcam component');
-        info(print_r($this->photo, true));
     }
 }

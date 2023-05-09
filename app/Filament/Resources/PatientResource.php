@@ -114,6 +114,7 @@ class PatientResource extends Resource
             'create' => Pages\CreatePatient::route('/create'),
             'view' => Pages\ViewPatient::route('/{record}'),
             'edit' => Pages\EditPatient::route('/{record}/edit'),
+            'print' => Pages\PrintPatient::route('/{record}/print'),
         ];
     }
     public function submit()

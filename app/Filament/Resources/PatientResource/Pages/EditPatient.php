@@ -26,7 +26,6 @@ class EditPatient extends EditRecord
     }
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        info(print_r($data, true));
         if ($data['photo']) {
             $file = $data['photo'];
             $oldPath = 'livewire-tmp/' . $file;
