@@ -21,8 +21,7 @@ class ViewPatient extends ViewRecord
             Action::make('print')
                 ->label('Печать')
                 ->url(function ( ){
-                    $resource = static::getResource();
-                    return $resource::getUrl().'/'. $this->record->id.'/print/';
+                    return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';
                 }),
         ];
     }
