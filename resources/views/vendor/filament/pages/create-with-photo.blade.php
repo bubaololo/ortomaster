@@ -22,7 +22,9 @@
                 width: 100%;
                 /*min-width: 100%;*/
                 /*height: 240px;*/
+                position: relative;
             }
+
 
             #output {
                 display: inline-block;
@@ -37,7 +39,22 @@
             .camera {
                 width: 100%;
                 display: inline-block;
+                position: relative;
             }
+            .loading.camera::after {
+                content: "";
+                position: absolute;
+                width: 147px;
+                height: 147px;
+                background-image: url("{{ asset('img/ajax-loader-orange-transparent.gif') }}");
+                background-size: auto;
+                background-repeat: no-repeat;
+                top: 40%;
+                left: 50%;
+                transform: translateX(-50%)translateY(-50%) ;
+                z-index: 1;
+            }
+
 
             .camera__controls-wrapper {
                 display: flex;
@@ -121,6 +138,8 @@
                                 <div class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action cursor-pointer"
                                         id="snap">Сделать снимок
                                 </div>
+                                <audio id="my-audio" src="{{ asset('audio/snapshot-sound.mp3') }}"></audio>
+
                             </div>
                         </div>
                     </div>
@@ -308,6 +327,8 @@
                 var canvas = null;
                 var photo = null;
                 var snap = null;
+                 let camera = document.querySelector('.camera');
+               let audio = document.getElementById("my-audio");
 
                 function startup() {
 
@@ -419,6 +440,8 @@
 
                   snap.addEventListener('click', function(ev) {
                     ev.preventDefault();
+                    video.pause();
+                    camera.classList.add('loading');
                     takepicture();
                   }, false);
 
@@ -445,6 +468,7 @@
                 // other changes before drawing it.
 
                 function takepicture() {
+
                   var context = canvas.getContext('2d');
                   if (width && height) {
                     canvas.width = width;
@@ -469,6 +493,7 @@
                       {{--Livewire.set('{{ $getStatePath() }}', 'photo', filename);--}}
 
                     // setDirtyState(fileInput, filename);
+                    camera.classList.remove('loading');
                     console.log('success!')
                     console.log(filename)
                   @this.set('data.photo', filename)
@@ -477,7 +502,9 @@
                     // Error callback.
                   }, (event) => {
                     console.log(event);
+                    audio.play();
                     swiperTabsContent.slideNext()
+                    video.play();
                     // Progress callback.
                     // event.detail.progress contains a number between 1 and 100 as the upload progresses.
                   });
