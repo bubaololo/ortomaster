@@ -20,6 +20,7 @@ class ViewPatient extends ViewRecord
             Actions\EditAction::make(),
             Action::make('print')
                 ->label('Печать')
+                ->icon('heroicon-o-printer')
                 ->url(function ( ){
                     return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';
                 }),
