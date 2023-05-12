@@ -35,8 +35,8 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Heading')
-                    ->description('Description')
+                Section::make('Снимок')
+                    ->description('сделать фото стоп')
                     ->schema([
                         Webcam::make('photo')
                             ->label('Фото')
