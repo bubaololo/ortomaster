@@ -26,6 +26,15 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('email')->email(),
+                Forms\Components\Select::make('doctor_id')
+                ->relationship('doctor','name'),
+                Forms\Components\Select::make('role')
+                    ->options([
+                        'user' => 'user',
+                        'doctor' => 'doctor',
+                        'admin' => 'admin',
+                        'superadmin' => 'superadmin',
+                    ]),
             ]);
     }
 
