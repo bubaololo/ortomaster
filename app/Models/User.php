@@ -52,6 +52,8 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(Doctor::class);
     }
     
+
+    
     public function canAccessFilament(): bool
     {
 //        return str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail();
