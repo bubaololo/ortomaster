@@ -191,7 +191,7 @@
 
                 .swiper-slide {
                     flex-shrink: 0;
-                    max-width: 100%;
+                    width: 100%;
                     height: 100%;
                     position: relative;
                     transition-property: transform;
@@ -278,7 +278,8 @@
                     filter: invert(1)
                 }
             </style>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+            <script src="{{ asset('/js/swiper.min.js') }}"></script>
+
             <script>
               swiperTabsNav = new Swiper('.swiper-tabs-nav', {
                 spaceBetween: 0,
