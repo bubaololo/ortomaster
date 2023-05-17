@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('diagnosis')->nullable();
+            $table->json('diagnosis')->nullable();
             $table->string('photo')->nullable();
             $table->date('birthdate')->nullable();
             $table->foreignId('appointments_id')->nullable()->constrained();

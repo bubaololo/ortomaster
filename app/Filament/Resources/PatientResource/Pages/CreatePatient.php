@@ -19,7 +19,7 @@ class CreatePatient extends CreateRecord
     
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-       
+       info($data);
         $file = $data['photo'];
         $oldPath = 'livewire-tmp/'.$file;
         $newPath = 'public/'.$file;
