@@ -45,9 +45,8 @@ class CreatePatient extends CreateRecord
         $appointment->doctor_id = $doctorId;
         $appointment->branch_id = $branchId;
         $appointment->save();
-//        info(print_r($this->getModel()::create($data)->id,true));
-        info(print_r($appointment, true));
-        return $this->getModel()::create($data);
+        
+        return Patient::find($patientId);
     }
     protected function getRedirectUrl(): string
     {
