@@ -19,10 +19,12 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->onUpdate('cascade');
             $table->foreignId('doctor_id')
+                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->onUpdate('cascade');
             $table->foreignId('branch_id')
+                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->onUpdate('cascade');
