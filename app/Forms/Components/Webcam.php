@@ -18,7 +18,7 @@ class Webcam extends Field
 
 //    protected string $view = 'forms.components.webcam';
     
-    public function view(string $view): static
+    public function view(string $view, $viewData = []): static
     {
         info('view from webcam component');
         
