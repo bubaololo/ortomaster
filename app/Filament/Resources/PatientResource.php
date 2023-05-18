@@ -113,15 +113,7 @@ class PatientResource extends Resource
                         => "Врожденная деформация стопы неуточненная"
                     ])
                     ->label('Диагноз'),
-//                TextInput::make('diagnosis')->required()->label('Диагноз'),
                 DatePicker::make('birthdate')->label('дата рождения')
-//                TextInput::make('photo'),
-//                ViewField::make('photo')->view('vendor.filament.pages.create-with-photo'),
-//                FileUpload::make('photo')->view('vendor.filament.pages.create-with-photo')->beforeStateDehydrated(function (Forms\Components\FileUpload $component, $state) {
-//                    info($state);
-//                }),
-//                Forms\Components\FileUpload::make('photo'),
-//                Webcam::make('photo')
             ]);
     }
     
@@ -135,8 +127,24 @@ class PatientResource extends Resource
                 ImageColumn::make('photo')->label('Фото'),
                 TextColumn::make('diagnosis')->label('Диагноз'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from')->label('Добавлен С'),
+                        Forms\Components\DatePicker::make('created_until')->label('Добавлен По'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    })
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

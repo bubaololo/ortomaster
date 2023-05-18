@@ -17,27 +17,59 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AppointmentResource extends Resource
 {
     protected static ?string $model = Appointment::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
+    
+    protected static ?string $pluralLabel = 'Приёмы';
+    
+    protected static ?string $label = 'Приём';
+    
+    protected static ?string $navigationLabel = 'Приёмы';
+    
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
+    
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('patient_id')
+                    ->relationship('patient', 'name')
+                    ->searchable()
+                    ->label('Пациент'),
+                Forms\Components\Select::make('doctor_id')
+                    ->relationship('doctor', 'name')
+                    ->label('Врач'),
+                Forms\Components\Select::make('branch_id')
+                    ->relationship('branch', 'address')
+                    ->label('Филиал'),
             ]);
     }
-
+    
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('patient.name'),
-                TextColumn::make('branch.address'),
-                TextColumn::make('doctor.name'),
+                TextColumn::make('created_at')->sortable()->label('Дата приёма'),
+                TextColumn::make('patient.name')->label('Пациент')->sortable()->searchable(),
+                TextColumn::make('branch.address')->label('Филиал')->sortable(),
+                TextColumn::make('doctor.name')->label('Врач')->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                    Forms\Components\DatePicker::make('created_from')->label('С даты'),
+                    Forms\Components\DatePicker::make('created_until')->label('По дату'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    })
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -61,5 +93,5 @@ class AppointmentResource extends Resource
             'create' => Pages\CreateAppointment::route('/create'),
             'edit' => Pages\EditAppointment::route('/{record}/edit'),
         ];
-    }    
+    }
 }
