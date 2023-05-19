@@ -21,7 +21,7 @@ class DoctorResource extends Resource
     protected static ?string $label = 'Врач';
     protected static ?string $navigationLabel = 'Врачи';
     protected static ?string $model = Doctor::class;
-
+    protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form

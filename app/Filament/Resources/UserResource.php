@@ -20,6 +20,7 @@ use STS\FilamentImpersonate\Impersonate;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
+    protected static ?string $navigationGroup = 'azaza';
     
     protected static ?int $navigationSort = 9;
     
@@ -42,12 +43,18 @@ class UserResource extends Resource
     
     protected static function getNavigationGroup(): ?string
     {
-        return config('filament-user.group');
+//        return config('filament-user.group');
+        return 'Доступ';
     }
     
     protected function getTitle(): string
     {
         return trans('filament-user::user.resource.title.resource');
+    }
+    
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
     
     public static function form(Form $form): Form

@@ -26,6 +26,8 @@ class AppointmentResource extends Resource
     
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     
+    protected static ?int $navigationSort = 2;
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -48,29 +50,32 @@ class AppointmentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('created_at')->sortable()->label('Дата приёма'),
-                TextColumn::make('patient.name')->label('Пациент')->sortable()->searchable(),
+                TextColumn::make('patient.name')->label('Пациент')
+                    ->sortable()
+                    ->searchable()
+                    ->url(fn (Appointment $record) => PatientResource::getUrl('view', ['record' =>  $record])),
                 TextColumn::make('branch.address')->label('Филиал')->sortable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
-            ->filters([
-                Tables\Filters\Filter::make('created_at')
-                    ->form([
-                    Forms\Components\DatePicker::make('created_from')->label('С даты'),
-                    Forms\Components\DatePicker::make('created_until')->label('По дату'),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                            )
-                            ->when(
-                                $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                            );
-                    })
-            ])
+//            ->filters([
+//                Tables\Filters\Filter::make('created_at')
+//                    ->form([
+//                    Forms\Components\DatePicker::make('created_from')->label('С даты'),
+//                    Forms\Components\DatePicker::make('created_until')->label('По дату'),
+//                    ])
+//                    ->query(function (Builder $query, array $data): Builder {
+//                        return $query
+//                            ->when(
+//                                $data['created_from'],
+//                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+//                            )
+//                            ->when(
+//                                $data['created_until'],
+//                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+//                            );
+//                    })
+//            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

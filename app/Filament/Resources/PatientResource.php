@@ -31,6 +31,7 @@ class PatientResource extends Resource
     protected static ?string $navigationLabel = 'Пациенты';
     protected static ?string $model = Patient::class;
     protected static ?string $navigationIcon = 'heroicon-o-identification';
+    protected static ?int $navigationSort = 1;
     
     public static function form(Form $form): Form
     {
@@ -123,27 +124,27 @@ class PatientResource extends Resource
                 TextColumn::make('name')->sortable()->searchable()->label('ФИО'),
                 TextColumn::make('created_at')->sortable()->label('Добавлен'),
                 TextColumn::make('birthdate')->label('дата рождения'),
-                ImageColumn::make('photo')->label('Фото'),
+                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
                 TextColumn::make('diagnosis')->label('Диагноз'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                Tables\Filters\Filter::make('created_at')
-                    ->form([
-                        Forms\Components\DatePicker::make('created_from')->label('Добавлен С'),
-                        Forms\Components\DatePicker::make('created_until')->label('Добавлен По'),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-                            )
-                            ->when(
-                                $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-                            );
-                    })
+//                Tables\Filters\Filter::make('created_at')
+//                    ->form([
+//                        Forms\Components\DatePicker::make('created_from')->label('Добавлен С'),
+//                        Forms\Components\DatePicker::make('created_until')->label('Добавлен По'),
+//                    ])
+//                    ->query(function ($query, array $data){
+//                        return $query
+//                            ->when(
+//                                $data['created_from'],
+//                                fn ($query) => $query->whereDate('created_at', '>=', $data['created_from']),
+//                            )
+//                            ->when(
+//                                $data['created_until'],
+//                                fn ($query) => $query->whereDate('created_at', '<=', $data),
+//                            );
+//                    })
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -172,10 +173,15 @@ class PatientResource extends Resource
         ];
     }
     
-    protected function defaultSort()
+    protected function shouldPersistTableFiltersInSession(): bool
     {
-        $this->sortBy('created_at', 'desc');
+        return false;
     }
+    
+//    protected function defaultSort()
+//    {
+//        $this->sortBy('created_at', 'desc');
+//    }
     
 
 }
