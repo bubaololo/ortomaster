@@ -14,44 +14,19 @@ use Illuminate\Support\Facades\Storage;
 class CreatePatient extends CreateRecord
 {
     protected static string $resource = PatientResource::class;
-    
+    protected static bool $canCreateAnother = false;
     protected function getCreatedNotificationTitle(): ?string
     {
         return 'Карточка нового пациента создана';
     }
     
-    protected function mutateFormDataBeforeCreate(array $data): array
-    {
-        $file = $data['photo'];
-        $oldPath = 'livewire-tmp/'.$file;
-        $newPath = 'public/'.$file;
-        Storage::move($oldPath, $newPath);
-        return $data;
-    }
+
     
 //    public function afterCreate()
 //    {
 //    info('aftercreate');
 //    }
-    protected function handleRecordCreation(array $data): Model
-    {
-        //save new appointment after patient created
-        $patientId = $this->getModel()::create($data)->id;
-        $doctorId = auth()->user()->doctor_id;
-        $branchId = Doctor::find($doctorId)->branch_id;
-        
-        $appointment = new Appointment;
-        $appointment->patient_id = $patientId;
-        $appointment->doctor_id = $doctorId;
-        $appointment->branch_id = $branchId;
-        $appointment->save();
-        
-        return Patient::find($patientId);
-    }
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';
-    }
+
     
 //    public function create()
 //    {

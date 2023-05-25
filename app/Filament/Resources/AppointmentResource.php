@@ -4,14 +4,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource\RelationManagers;
+use App\Forms\Components\Webcam;
 use App\Models\Appointment;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AppointmentResource extends Resource
@@ -42,6 +47,74 @@ class AppointmentResource extends Resource
                 Forms\Components\Select::make('branch_id')
                     ->relationship('branch', 'address')
                     ->label('Филиал'),
+                Section::make('Снимок')
+                    ->description('сделать фото стоп')
+                    ->schema([
+                        Webcam::make('photo')
+                            ->label('Фото')
+                            ->required(function (string $context, Forms\Components\Component $component, ?Model $record) {
+                    
+                                if ($context == 'view') {
+                                    
+                                    if (isset($record->photo)) {
+                                        $photoSrc = $record->photo;
+                                        $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
+                                    } else {
+                                        $component->extraAttributes(['class' => 'view']);
+                                    }
+                        
+                                }
+                    
+                                return true;
+                            })
+                            ->columnSpanFull(),
+                    ]),
+                Select::make('diagnosis')
+                    ->multiple()
+                    ->searchable()
+                    ->options([
+                        "Врожденный вывих бедра односторонний"
+                        => "Врожденный вывих бедра односторонний",
+                        "Врожденный вывих бедра двусторонний"
+                        => "Врожденный вывих бедра двусторонний",
+                        "Врожденный вывих бедра неуточненный"
+                        => "Врожденный вывих бедра неуточненный",
+                        "Врожденный подвывих бедра односторонний"
+                        => "Врожденный подвывих бедра односторонний",
+                        "Врожденный подвывих бедра двусторонний"
+                        => "Врожденный подвывих бедра двусторонний",
+                        "Врожденный подвывих бедра неуточненный"
+                        => "Врожденный подвывих бедра неуточненный",
+                        "Неустойчивое бедро, предрасположенность к вывиху бедра, предрасположенность к подвывиху бедра"
+                        => "Неустойчивое бедро, предрасположенность к вывиху бедра, предрасположенность к подвывиху бедра",
+                        "Другие врожденные деформации бедра, врожденная дисплазия вертлужной впадины"
+                        => "Другие врожденные деформации бедра, врожденная дисплазия вертлужной впадины",
+                        "Варусные деформации (приобретённые)"
+                        => "Варусные деформации (приобретённые)",
+                        "Конско-варусная косолапость"
+                        => "Конско-варусная косолапость",
+                        "Пяточно-варусная косолапость"
+                        => "Пяточно-варусная косолапость",
+                        "Варусная стопа"
+                        => "Варусная стопа",
+                        "Другие врожденные варусные деформации стопы (dарусная деформация большого пальца стопы врожденная)"
+                        => "Другие врожденные варусные деформации стопы (dарусная деформация большого пальца стопы врожденная)",
+                        "Пяточно-вальгусная косолапость"
+                        => "Пяточно-вальгусная косолапость",
+                        "Врожденная плоская стопа"
+                        => "Врожденная плоская стопа",
+                        "Плоская стопа (приобретённая)"
+                        => "Плоская стопа (приобретённая)",
+                        "Другие врожденные вальгусные деформации стопы"
+                        => "Другие врожденные вальгусные деформации стопы",
+                        "Полая стопа"
+                        => "Полая стопа",
+                        "Другие врожденные деформации стопы (косолапость)"
+                        => "Другие врожденные деформации стопы (косолапость)",
+                        "Врожденная деформация стопы неуточненная"
+                        => "Врожденная деформация стопы неуточненная"
+                    ])
+                    ->label('Диагноз'),
             ]);
     }
     
@@ -56,6 +129,8 @@ class AppointmentResource extends Resource
                     ->url(fn (Appointment $record) => PatientResource::getUrl('view', ['record' =>  $record])),
                 TextColumn::make('branch.address')->label('Филиал')->sortable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
+                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
+                TextColumn::make('diagnosis')->label('Диагноз'),
             ])
             ->defaultSort('created_at', 'desc')
 //            ->filters([
@@ -83,7 +158,7 @@ class AppointmentResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
@@ -95,8 +170,9 @@ class AppointmentResource extends Resource
     {
         return [
             'index' => Pages\ListAppointments::route('/'),
-            'create' => Pages\CreateAppointment::route('/create'),
+            'create' => Pages\CreateAppointment::route('/create/{record?}'),
             'edit' => Pages\EditAppointment::route('/{record}/edit'),
+            'print' => Pages\PrintAppointment::route('/{record}/print'),
         ];
     }
 }

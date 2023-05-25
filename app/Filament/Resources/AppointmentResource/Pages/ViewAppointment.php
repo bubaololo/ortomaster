@@ -1,30 +1,29 @@
 <?php
 
-namespace App\Filament\Resources\PatientResource\Pages;
+namespace App\Filament\Resources\AppointmentResource\Pages;
 
 use App\Filament\Resources\AppointmentResource;
-use App\Filament\Resources\PatientResource;
 use App\Filament\Resources\UserResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Pages\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 
-class ViewPatient extends ViewRecord
+class ViewAppointment extends ViewRecord
 {
-    protected static string $resource = PatientResource::class;
+    protected static string $resource = AppointmentResource::class;
 //    protected static string $view = 'vendor.filament.pages.view-patient';
-
+    
     protected function getActions(): array
     {
         return [
             Actions\EditAction::make(),
-
-            Action::make('appointment')
-                ->label('Новый приём')
-                ->icon('heroicon-o-clipboard-list')
+            
+            Action::make('print')
+                ->label('Печать')
+                ->icon('heroicon-o-printer')
                 ->url(function ( ){
-                    return AppointmentResource::getUrl().'/create/'. $this->record->id;
+                    return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';
                 }),
         ];
     }

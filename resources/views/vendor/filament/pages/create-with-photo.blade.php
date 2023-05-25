@@ -25,7 +25,6 @@
                 position: relative;
             }
 
-
             #output {
                 display: inline-block;
                 width: 100%;
@@ -41,6 +40,7 @@
                 display: inline-block;
                 position: relative;
             }
+
             .loading.camera::after {
                 content: "";
                 position: absolute;
@@ -51,10 +51,9 @@
                 background-repeat: no-repeat;
                 top: 40%;
                 left: 50%;
-                transform: translateX(-50%)translateY(-50%) ;
+                transform: translateX(-50%) translateY(-50%);
                 z-index: 1;
             }
-
 
             .camera__controls-wrapper {
                 display: flex;
@@ -62,7 +61,6 @@
                 gap: 20px;
                 padding: 20px 0;
             }
-
 
         </style>
 
@@ -135,8 +133,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div aria-role="button tabindex="0" class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action cursor-pointer"
-                                        id="snap"><svg class="filament-button-icon w-5 h-5 mr-1 -ml-2 rtl:ml-1 rtl:-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <div tabindex="0" class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action cursor-pointer"
+                                        id="snap">
+                                    <svg class="filament-button-icon w-5 h-5 mr-1 -ml-2 rtl:ml-1 rtl:-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     </svg>
@@ -151,7 +150,7 @@
                         <div class="output">
                             <canvas id="canvas">
                             </canvas>
-                            <img id="output"  wire:ignore alt="здесь появится сохранённое изображение">
+                            <img id="output" wire:ignore alt="здесь появится сохранённое изображение">
                         </div>
                     </div>
 
@@ -332,8 +331,8 @@
                 var canvas = null;
                 var photo = null;
                 var snap = null;
-                 let camera = document.querySelector('.camera');
-               let audio = document.getElementById("my-audio");
+                let camera = document.querySelector('.camera');
+                let audio = document.getElementById("my-audio");
 
                 function startup() {
 

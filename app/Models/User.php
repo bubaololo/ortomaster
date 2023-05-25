@@ -6,6 +6,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -52,7 +53,10 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsTo(Doctor::class);
     }
     
-
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
     
     public function canAccessFilament(): bool
     {

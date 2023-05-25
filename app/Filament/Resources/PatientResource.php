@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
-use App\Http\Livewire\PhotoInput;
-use App\Forms\Components\Webcam;
 use App\Models\Patient;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -22,7 +20,6 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\ViewField;
 
 class PatientResource extends Resource
 {
@@ -37,27 +34,7 @@ class PatientResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Снимок')
-                    ->description('сделать фото стоп')
-                    ->schema([
-                        Webcam::make('photo')
-                            ->label('Фото')
-                            ->required(function (string $context, Forms\Components\Component $component, ?Model $record) {
-                                
-                                if ($context == 'view') {
-                                    if (isset($record->photo)) {
-                                        $photoSrc = $record->photo;
-                                        $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
-                                    } else {
-                                        $component->extraAttributes(['class' => 'view']);
-                                    }
-                                    
-                                }
-                                
-                                return true;
-                            })
-                            ->columnSpanFull(),
-                    ]),
+                
                 
                 TextInput::make('name')->required()
 //                  ->required(function (string $context, Forms\Components\Component $component) {
@@ -67,52 +44,7 @@ class PatientResource extends Resource
 //                    return true;
 //                })
                     ->label('ФИО'),
-                Select::make('diagnosis')
-                    ->multiple()
-                    ->searchable()
-                    ->options([
-                        "Врожденный вывих бедра односторонний"
-                        => "Врожденный вывих бедра односторонний",
-                        "Врожденный вывих бедра двусторонний"
-                        => "Врожденный вывих бедра двусторонний",
-                        "Врожденный вывих бедра неуточненный"
-                        => "Врожденный вывих бедра неуточненный",
-                        "Врожденный подвывих бедра односторонний"
-                        => "Врожденный подвывих бедра односторонний",
-                        "Врожденный подвывих бедра двусторонний"
-                        => "Врожденный подвывих бедра двусторонний",
-                        "Врожденный подвывих бедра неуточненный"
-                        => "Врожденный подвывих бедра неуточненный",
-                        "Неустойчивое бедро, предрасположенность к вывиху бедра, предрасположенность к подвывиху бедра"
-                        => "Неустойчивое бедро, предрасположенность к вывиху бедра, предрасположенность к подвывиху бедра",
-                        "Другие врожденные деформации бедра, врожденная дисплазия вертлужной впадины"
-                        => "Другие врожденные деформации бедра, врожденная дисплазия вертлужной впадины",
-                        "Варусные деформации (приобретённые)"
-                        => "Варусные деформации (приобретённые)",
-                        "Конско-варусная косолапость"
-                        => "Конско-варусная косолапость",
-                        "Пяточно-варусная косолапость"
-                        => "Пяточно-варусная косолапость",
-                        "Варусная стопа"
-                        => "Варусная стопа",
-                        "Другие врожденные варусные деформации стопы (dарусная деформация большого пальца стопы врожденная)"
-                        => "Другие врожденные варусные деформации стопы (dарусная деформация большого пальца стопы врожденная)",
-                        "Пяточно-вальгусная косолапость"
-                        => "Пяточно-вальгусная косолапость",
-                        "Врожденная плоская стопа"
-                        => "Врожденная плоская стопа",
-                        "Плоская стопа (приобретённая)"
-                        => "Плоская стопа (приобретённая)",
-                        "Другие врожденные вальгусные деформации стопы"
-                        => "Другие врожденные вальгусные деформации стопы",
-                        "Полая стопа"
-                        => "Полая стопа",
-                        "Другие врожденные деформации стопы (косолапость)"
-                        => "Другие врожденные деформации стопы (косолапость)",
-                        "Врожденная деформация стопы неуточненная"
-                        => "Врожденная деформация стопы неуточненная"
-                    ])
-                    ->label('Диагноз'),
+                
                 DatePicker::make('birthdate')->label('дата рождения')
             ]);
     }
@@ -124,8 +56,6 @@ class PatientResource extends Resource
                 TextColumn::make('name')->sortable()->searchable()->label('ФИО'),
                 TextColumn::make('created_at')->sortable()->label('Добавлен'),
                 TextColumn::make('birthdate')->label('дата рождения'),
-                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
-                TextColumn::make('diagnosis')->label('Диагноз'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -169,7 +99,7 @@ class PatientResource extends Resource
             'create' => Pages\CreatePatient::route('/create'),
             'view' => Pages\ViewPatient::route('/{record}'),
             'edit' => Pages\EditPatient::route('/{record}/edit'),
-            'print' => Pages\PrintPatient::route('/{record}/print'),
+            
         ];
     }
     

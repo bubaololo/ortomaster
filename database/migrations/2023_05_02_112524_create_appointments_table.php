@@ -28,6 +28,8 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->onUpdate('cascade');
+            $table->json('diagnosis')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
