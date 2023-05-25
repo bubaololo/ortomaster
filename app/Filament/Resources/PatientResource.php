@@ -4,22 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
+use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
 use App\Models\Patient;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class PatientResource extends Resource
 {
@@ -107,6 +101,14 @@ class PatientResource extends Resource
     {
         return false;
     }
+    
+    public static function getWidgets(): array
+    {
+        return [
+            AppointmentOverview::class,
+        ];
+    }
+    
     
 //    protected function defaultSort()
 //    {
