@@ -53,12 +53,13 @@ class AppointmentResource extends Resource
                         Webcam::make('photo')
                             ->label('Фото')
                             ->required(function (string $context, Forms\Components\Component $component, ?Model $record) {
-                    
+                        
                                 if ($context == 'view') {
                                     
                                     if (isset($record->photo)) {
                                         $photoSrc = $record->photo;
                                         $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
+                                        info($record->photo);
                                     } else {
                                         $component->extraAttributes(['class' => 'view']);
                                     }
@@ -172,6 +173,7 @@ class AppointmentResource extends Resource
             'index' => Pages\ListAppointments::route('/'),
             'create' => Pages\CreateAppointment::route('/create/{record?}'),
             'edit' => Pages\EditAppointment::route('/{record}/edit'),
+            'view' => Pages\ViewAppointment::route('/{record}'),
             'print' => Pages\PrintAppointment::route('/{record}/print'),
         ];
     }

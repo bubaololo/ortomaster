@@ -34,4 +34,8 @@ class ViewPatient extends ViewRecord
             AppointmentOverview::class,
         ];
     }
+    public function hasCombinedRelationManagerTabsWithForm(): bool
+    {
+        return true;
+    }
 }

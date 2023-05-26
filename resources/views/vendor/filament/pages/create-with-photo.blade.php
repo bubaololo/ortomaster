@@ -74,12 +74,11 @@
 
 
         {{--CONTENT--}}
-
+{{--if photo exist show picture--}}
         @if(isset($getExtraAttributes()['src']))
             <img src="{{ asset( 'storage/'.$getExtraAttributes()['src']) }}" alt="">
         @else
-
-
+{{--else show camera--}}
             {{--SLIDER--}}
             <div class="section-tabs" wire:ignore>
                 <!-- Swiper Tab -->

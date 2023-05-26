@@ -12,7 +12,7 @@ class Patient extends Model
     use HasFactory;
     protected $guarded = [];
     
-    public function appointments(): HasMany
+    public function appointment(): HasMany
     {
         return $this->hasMany(Appointment::class);
     }
