@@ -48,7 +48,7 @@ class AppointmentResource extends Resource
                     ->relationship('branch', 'address')
                     ->label('Филиал'),
                 Section::make('Снимок')
-                    ->description('сделать фото стоп')
+                    ->description('фото стоп')
                     ->schema([
                         Webcam::make('photo')
                             ->label('Фото')

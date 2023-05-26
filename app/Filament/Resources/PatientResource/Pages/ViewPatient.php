@@ -20,12 +20,12 @@ class ViewPatient extends ViewRecord
     {
         return [
             Actions\EditAction::make(),
-            Action::make('appointment')
-                ->label('Новый приём')
-                ->icon('heroicon-o-clipboard-list')
-                ->url(function ( ){
-                    return AppointmentResource::getUrl().'/create/'. $this->record->id;
-                }),
+//            Action::make('appointment')
+//                ->label('Новый приём')
+//                ->icon('heroicon-o-clipboard-list')
+//                ->url(function ( ){
+//                    return AppointmentResource::getUrl().'/create/'. $this->record->id;
+//                }),
         ];
     }
     protected function getFooterWidgets(): array
