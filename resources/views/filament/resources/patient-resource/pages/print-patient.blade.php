@@ -1,7 +1,7 @@
 <x-filament::page>
     <div class="print">
         <img src="{{ asset('/img/logo.svg') }}" alt="Logo" class="h-10 mb-2 print-logo">
-        <img src="{{ asset( 'storage/'.$patient->photo) }}" alt="">
+        <img src="{{ asset( 'storage/'.$appointment->photo) }}" alt="">
 
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -34,10 +34,17 @@
                         Диагноз
                     </th>
                     <td class="px-6 py-4">
-                        {{ $patient->name  }}
+                        {{ $appointment->diagnosis  }}
                     </td>
                 </tr>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Дата рождения
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ $patient->birthdate  }}
+                    </td>
+                </tr>                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         Дата рождения
                     </th>

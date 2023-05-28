@@ -41,12 +41,15 @@ class AppointmentResource extends Resource
                     ->relationship('patient', 'name')
                     ->searchable()
                     ->label('Пациент'),
+//                ->hidden(),
                 Forms\Components\Select::make('doctor_id')
                     ->relationship('doctor', 'name')
-                    ->label('Врач'),
+                    ->label('Врач')
+                    ->hidden(),
                 Forms\Components\Select::make('branch_id')
                     ->relationship('branch', 'address')
-                    ->label('Филиал'),
+                    ->label('Филиал')
+                    ->hidden(),
                 Section::make('Снимок')
                     ->description('фото стоп')
                     ->schema([
@@ -123,6 +126,7 @@ class AppointmentResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id'),
                 TextColumn::make('created_at')->sortable()->label('Дата приёма'),
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
@@ -153,6 +157,7 @@ class AppointmentResource extends Resource
 //                    })
 //            ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -165,6 +170,11 @@ class AppointmentResource extends Resource
         return [
             //
         ];
+    }
+    
+    public static function canCreate(): bool
+    {
+        return true;
     }
     
     public static function getPages(): array

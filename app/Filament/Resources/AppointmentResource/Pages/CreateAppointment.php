@@ -28,27 +28,42 @@ class CreateAppointment extends CreateRecord
     
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        if($this->record) {
+            $patientId = $this->record;
+            $data['patient_id'] = $patientId;
+        }
+        $doctorId = auth()->user()->doctor_id;
+        $branchId = Doctor::find($doctorId)->branch_id;
         $file = $data['photo'];
         $oldPath = 'livewire-tmp/'.$file;
         $newPath = 'public/'.$file;
         Storage::move($oldPath, $newPath);
+        
+        $data['doctor_id'] = $doctorId;
+        $data['branch_id'] = $branchId;
+//        $data['diagnosis'] = json_encode($data['diagnosis'], JSON_UNESCAPED_UNICODE);
+        
         return $data;
     }
-    protected function handleRecordCreation(array $data): Model
-    {
-        //save new appointment after patient created
-        $patientId = $this->record;
-        $doctorId = auth()->user()->doctor_id;
-        $branchId = Doctor::find($doctorId)->branch_id;
-        
-        $appointment = new Appointment;
-        $appointment->patient_id = $patientId;
-        $appointment->doctor_id = $doctorId;
-        $appointment->branch_id = $branchId;
-        $appointment->save();
-        
-        return Patient::find($patientId);
-    }
+//    protected function handleRecordCreation(array $data): Model
+//    {
+//
+//        info(print_r($data, true));
+//        //save new appointment after patient created
+//        $patientId = $this->record;
+//        $doctorId = auth()->user()->doctor_id;
+//        $branchId = Doctor::find($doctorId)->branch_id;
+//
+//        $appointment = new Appointment;
+//        $appointment->patient_id = $patientId;
+//        $appointment->doctor_id = $doctorId;
+//        $appointment->branch_id = $branchId;
+////        $appointment->photo = $data['photo'];
+////        $appointment->diagnosis = $data['diagnosis'];
+//        $appointment->save();
+//
+//        return $this->getModel()::create($data);
+//    }
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';

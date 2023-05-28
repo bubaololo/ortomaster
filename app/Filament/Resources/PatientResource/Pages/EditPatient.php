@@ -16,24 +16,10 @@ class EditPatient extends EditRecord
     {
         return [
             Actions\ViewAction::make(),
-            Actions\DeleteAction::make()->after(function (?Model $record) {
-                if(isset($record->photo)) {
-                    $fileName = $record->photo;
-                    Storage::delete('/public/'.$fileName);
-                }
-            }),
+
         ];
     }
-    protected function mutateFormDataBeforeSave(array $data): array
-    {
-        if ($data['photo']) {
-            $file = $data['photo'];
-            $oldPath = 'livewire-tmp/' . $file;
-            $newPath = 'public/' . $file;
-            Storage::move($oldPath, $newPath);
-        }
-        return $data;
-    }
+
     
     protected function getRedirectUrl(): string
     {

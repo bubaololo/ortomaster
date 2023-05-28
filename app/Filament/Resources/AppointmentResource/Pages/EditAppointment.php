@@ -5,6 +5,8 @@ namespace App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class EditAppointment extends EditRecord
 {
@@ -14,6 +16,27 @@ class EditAppointment extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->after(function (?Model $record) {
+                if(isset($record->photo)) {
+                    $fileName = $record->photo;
+                    Storage::delete('/public/'.$fileName);
+                }
+            }),
         ];
+    }
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        if ($data['photo']) {
+            $file = $data['photo'];
+            $oldPath = 'livewire-tmp/' . $file;
+            $newPath = 'public/' . $file;
+            Storage::move($oldPath, $newPath);
+        }
+        return $data;
+    }
+    
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

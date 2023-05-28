@@ -3,11 +3,9 @@
 namespace App\Filament\Resources\AppointmentResource\Pages;
 
 use App\Filament\Resources\AppointmentResource;
-use App\Filament\Resources\UserResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Pages\Actions\Action;
-use Illuminate\Database\Eloquent\Model;
 
 class ViewAppointment extends ViewRecord
 {

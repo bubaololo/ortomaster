@@ -19,6 +19,7 @@ class PrintAppointment extends Page
     {
         
         $this->appointment = Appointment::find($record);
+//        dd($this->appointment);
         $this->patient = Patient::find($this->appointment->patient_id);
         
     }

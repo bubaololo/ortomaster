@@ -29,7 +29,6 @@ class PatientResource extends Resource
         return $form
             ->schema([
                 
-                
                 TextInput::make('name')->required()
 //                  ->required(function (string $context, Forms\Components\Component $component) {
 //                    if($context == 'view') {

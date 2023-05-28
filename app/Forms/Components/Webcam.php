@@ -27,22 +27,5 @@ class Webcam extends Field
         return $this;
     }
     
-    public function save()
-    
-    {
 
-//        $this->validate([
-//
-//            'photo' => 'image|max:1024', // 1MB Max
-//
-//        ]);
-        $this->photo->store('photos');
-        
-    }
-    public function setUp(): void
-    {
-        parent::setUp();
-//        $this->photo = 'azaz';
-//        info('setUp from webcam component');
-    }
 }

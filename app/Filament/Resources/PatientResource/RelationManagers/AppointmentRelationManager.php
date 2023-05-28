@@ -44,7 +44,7 @@ class AppointmentRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата приёма')
                 ->url(fn (Appointment $record) => AppointmentResource::getUrl('view', ['record' =>  $record])),
-                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
+//                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
             ])
             ->filters([
                 //
@@ -54,7 +54,6 @@ class AppointmentRelationManager extends RelationManager
                     ->label('Новый приём')
                     ->icon('heroicon-o-clipboard-list')
                     ->url(function ( Livewire $livewire){
-                        info(print_r($livewire->ownerRecord,true));
                         return AppointmentResource::getUrl().'/create/'. $livewire->ownerRecord->id;
                     }),
             ])
