@@ -32,6 +32,11 @@ class CreateAppointment extends CreateRecord
             $patientId = $this->record;
             $data['patient_id'] = $patientId;
         }
+        if($data['extra_diagnosis']){
+            
+            $data['diagnosis'][] = $data['extra_diagnosis'];
+        }
+        unset($data['extra_diagnosis']);
         $doctorId = auth()->user()->doctor_id;
         $branchId = Doctor::find($doctorId)->branch_id;
         $file = $data['photo'];

@@ -118,7 +118,12 @@ class AppointmentResource extends Resource
                         "Врожденная деформация стопы неуточненная"
                         => "Врожденная деформация стопы неуточненная"
                     ])
-                    ->label('Диагноз'),
+                    ->label('Диагноз')
+                    ->helperText('Выбор диагноза из списка МКБ'),
+                Forms\Components\Textarea::make('extra_diagnosis')->label('Дополнительный диагноз')
+                    ->rows(2)
+                    ->visibleOn(['create','edit'])
+                    ->helperText('Добавление диагноза, которого нет в списке МКБ')
             ]);
     }
     

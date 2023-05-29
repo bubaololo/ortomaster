@@ -36,8 +36,12 @@
                     <td class="px-6 py-4">
                         @foreach($appointment->diagnosis as $diag)
 
-                            {{ $diag }},
 
+                            @if(!$loop->last)
+                                {{ $diag }},
+                            @else
+                                {{ $diag }}
+                            @endif
                         @endforeach
                     </td>
                 </tr>

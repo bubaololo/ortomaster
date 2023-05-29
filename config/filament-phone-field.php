@@ -142,7 +142,7 @@ return [
     |
     */
 
-    'separate_dial_code' => false,
+    'separate_dial_code' => true,
 
     /*
     |
