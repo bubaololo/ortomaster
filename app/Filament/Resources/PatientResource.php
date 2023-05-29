@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AbanoubNassem\FilamentPhoneField\Forms\Components\PhoneInput;
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
 use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
@@ -37,7 +38,8 @@ class PatientResource extends Resource
 //                    return true;
 //                })
                     ->label('ФИО'),
-                
+//                TextInput::make('phone')->label('Телефон'),
+                PhoneInput::make('phone')->label('Телефон')->tel(),
                 DatePicker::make('birthdate')->label('дата рождения')
             ]);
     }
@@ -48,7 +50,8 @@ class PatientResource extends Resource
             ->columns([
                 TextColumn::make('name')->sortable()->searchable()->label('ФИО'),
                 TextColumn::make('created_at')->sortable()->label('Добавлен'),
-                TextColumn::make('birthdate')->label('дата рождения'),
+                TextColumn::make('phone')->searchable()->label('Телефон'),
+                TextColumn::make('birthdate')->label('Дата рождения'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([

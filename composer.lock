@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50d6b7e0b75b407ae0da3e3853aef69e",
+    "content-hash": "5cd0dbb36982a4f75149bcc75bd8e83c",
     "packages": [
         {
             "name": "3x1io/filament-user",
@@ -73,6 +73,69 @@
                 }
             ],
             "time": "2023-01-28T21:16:57+00:00"
+        },
+        {
+            "name": "abanoubnassem/filament-phone-field",
+            "version": "v0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AbanoubNassem/filament-phone-field.git",
+                "reference": "908c59c1a3769f88912b502ff94c45dd1a4cadac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AbanoubNassem/filament-phone-field/zipball/908c59c1a3769f88912b502ff94c45dd1a4cadac",
+                "reference": "908c59c1a3769f88912b502ff94c45dd1a4cadac",
+                "shasum": ""
+            },
+            "require": {
+                "filament/forms": "^2.16",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0|^8.1|^8.2",
+                "spatie/laravel-package-tools": "^1.13.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AbanoubNassem\\FilamentPhoneField\\FilamentPhoneFieldServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentPhoneField": "AbanoubNassem\\FilamentPhoneField\\Facades\\FilamentPhoneField"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AbanoubNassem\\FilamentPhoneField\\": "src",
+                    "AbanoubNassem\\FilamentPhoneField\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abanoub Nassem",
+                    "email": "abanoubnassemmousa@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides a Phone Input field for the Filament Forms, works in Admin-Panel and Forntend-Forms",
+            "homepage": "https://github.com/abanoubnassem/filament-phone-field",
+            "keywords": [
+                "AbanoubNassem",
+                "International Telephone Input",
+                "filament-phone-field",
+                "intl-tel-input",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/AbanoubNassem/filament-phone-field/issues",
+                "source": "https://github.com/AbanoubNassem/filament-phone-field/tree/v0.0.4"
+            },
+            "time": "2023-04-22T11:27:12+00:00"
         },
         {
             "name": "akaunting/laravel-money",
