@@ -40,8 +40,8 @@ class AppointmentResource extends Resource
                 Forms\Components\Select::make('patient_id')
                     ->relationship('patient', 'name')
                     ->searchable()
-                    ->label('Пациент'),
-//                ->hidden(),
+                    ->label('Пациент')
+                ->hidden(),
                 Forms\Components\Select::make('doctor_id')
                     ->relationship('doctor', 'name')
                     ->label('Врач')
@@ -131,7 +131,7 @@ class AppointmentResource extends Resource
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
                     ->searchable()
-                    ->url(fn (Appointment $record) => PatientResource::getUrl('view', ['record' =>  $record])),
+                    ->url(fn (Appointment $record) => PatientResource::getUrl('view', ['record' =>  $record->patient_id])),
                 TextColumn::make('branch.address')->label('Филиал')->sortable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
                 ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
