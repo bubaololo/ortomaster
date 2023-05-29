@@ -107,7 +107,7 @@ class PatientResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            AppointmentOverview::class,
+//            AppointmentOverview::class,
         ];
     }
     

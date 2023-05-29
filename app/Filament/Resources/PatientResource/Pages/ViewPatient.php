@@ -31,11 +31,11 @@ class ViewPatient extends ViewRecord
     protected function getFooterWidgets(): array
     {
         return [
-            AppointmentOverview::class,
+//            AppointmentOverview::class,
         ];
     }
-    public function hasCombinedRelationManagerTabsWithForm(): bool
-    {
-        return true;
-    }
+//    public function hasCombinedRelationManagerTabsWithForm(): bool
+//    {
+//        return true;
+//    }
 }

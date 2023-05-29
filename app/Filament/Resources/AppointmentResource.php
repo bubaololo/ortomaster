@@ -80,8 +80,8 @@ class AppointmentResource extends Resource
                     ->searchable()
                     ->options(Diagnosis::all()->pluck('text', 'text'))
                     ->preload()
-                    ->label('Диагноз')
-                    ->helperText('Выбор диагноза из списка МКБ'),
+                    ->label('Диагноз'),
+            
                 Forms\Components\Textarea::make('extra_diagnosis')->label('Дополнительный диагноз')
                     ->rows(2)
                     ->visibleOn(['create','edit'])
