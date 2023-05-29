@@ -6,6 +6,7 @@ use App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource\RelationManagers;
 use App\Forms\Components\Webcam;
 use App\Models\Appointment;
+use App\Models\Diagnosis;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -13,6 +14,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -76,48 +78,8 @@ class AppointmentResource extends Resource
                 Select::make('diagnosis')
                     ->multiple()
                     ->searchable()
-                    ->options([
-                        "Врожденный вывих бедра односторонний"
-                        => "Врожденный вывих бедра односторонний",
-                        "Врожденный вывих бедра двусторонний"
-                        => "Врожденный вывих бедра двусторонний",
-                        "Врожденный вывих бедра неуточненный"
-                        => "Врожденный вывих бедра неуточненный",
-                        "Врожденный подвывих бедра односторонний"
-                        => "Врожденный подвывих бедра односторонний",
-                        "Врожденный подвывих бедра двусторонний"
-                        => "Врожденный подвывих бедра двусторонний",
-                        "Врожденный подвывих бедра неуточненный"
-                        => "Врожденный подвывих бедра неуточненный",
-                        "Неустойчивое бедро, предрасположенность к вывиху бедра, предрасположенность к подвывиху бедра"
-                        => "Неустойчивое бедро, предрасположенность к вывиху бедра, предрасположенность к подвывиху бедра",
-                        "Другие врожденные деформации бедра, врожденная дисплазия вертлужной впадины"
-                        => "Другие врожденные деформации бедра, врожденная дисплазия вертлужной впадины",
-                        "Варусные деформации (приобретённые)"
-                        => "Варусные деформации (приобретённые)",
-                        "Конско-варусная косолапость"
-                        => "Конско-варусная косолапость",
-                        "Пяточно-варусная косолапость"
-                        => "Пяточно-варусная косолапость",
-                        "Варусная стопа"
-                        => "Варусная стопа",
-                        "Другие врожденные варусные деформации стопы (dарусная деформация большого пальца стопы врожденная)"
-                        => "Другие врожденные варусные деформации стопы (dарусная деформация большого пальца стопы врожденная)",
-                        "Пяточно-вальгусная косолапость"
-                        => "Пяточно-вальгусная косолапость",
-                        "Врожденная плоская стопа"
-                        => "Врожденная плоская стопа",
-                        "Плоская стопа (приобретённая)"
-                        => "Плоская стопа (приобретённая)",
-                        "Другие врожденные вальгусные деформации стопы"
-                        => "Другие врожденные вальгусные деформации стопы",
-                        "Полая стопа"
-                        => "Полая стопа",
-                        "Другие врожденные деформации стопы (косолапость)"
-                        => "Другие врожденные деформации стопы (косолапость)",
-                        "Врожденная деформация стопы неуточненная"
-                        => "Врожденная деформация стопы неуточненная"
-                    ])
+                    ->options(Diagnosis::all()->pluck('text', 'text'))
+                    ->preload()
                     ->label('Диагноз')
                     ->helperText('Выбор диагноза из списка МКБ'),
                 Forms\Components\Textarea::make('extra_diagnosis')->label('Дополнительный диагноз')
@@ -164,6 +126,8 @@ class AppointmentResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                ReplicateAction::make()->excludeAttributes(['created_at','photo'])
+                    ->tooltip('создать копию приёма, за исключением даты и фото, для более быстрого заполнения')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

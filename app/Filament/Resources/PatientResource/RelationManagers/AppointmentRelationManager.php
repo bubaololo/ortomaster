@@ -11,6 +11,7 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -44,8 +45,10 @@ class AppointmentRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Дата приёма')
                 ->url(fn (Appointment $record) => AppointmentResource::getUrl('view', ['record' =>  $record])),
-//                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
+                Tables\Columns\TextColumn::make('diagnosis'),
+                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
@@ -58,6 +61,9 @@ class AppointmentRelationManager extends RelationManager
                     }),
             ])
             ->actions([
+                ReplicateAction::make()->excludeAttributes(['created_at','photo'])
+                    ->tooltip('создать копию приёма, за исключением даты и фото, для более быстрого заполнения')
+            
 //                Tables\Actions\EditAction::make(),
 //                Tables\Actions\DeleteAction::make(),
 //                Tables\Actions\ViewAction::make(),

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 //            UsersTableSeeder::class,
             DoctorsTableSeeder::class,
             BranchesTableSeeder::class,
+            DiagnosisSeeder::class,
         ]);
     }
 }
