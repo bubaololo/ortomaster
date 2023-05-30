@@ -20,7 +20,7 @@ class DiagnosisResource extends Resource
     protected static ?string $navigationLabel = 'Диагнозы';
     protected static ?string $model = Diagnosis::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
 
     public static function form(Form $form): Form
     {

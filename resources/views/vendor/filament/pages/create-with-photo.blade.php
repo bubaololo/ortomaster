@@ -279,31 +279,36 @@
             <script src="{{ asset('/js/swiper.min.js') }}"></script>
 
             <script>
-              swiperTabsNav = new Swiper('.swiper-tabs-nav', {
-                spaceBetween: 0,
-                slidesPerView: 2,
-                loop: false,
-                loopedSlides: 5,
-                autoHeight: false,
-                resistanceRatio: 0,
-                watchOverflow: true,
-                watchSlidesVisibility: true,
-                watchSlidesProgress: true
-              });
+              window.onload = function() {
+                swiperInit();
+              }
+              function swiperInit() {
+               swiperTabsNav = new Swiper('.swiper-tabs-nav', {
+                  spaceBetween: 0,
+                  slidesPerView: 2,
+                  loop: false,
+                  loopedSlides: 5,
+                  autoHeight: false,
+                  resistanceRatio: 0,
+                  watchOverflow: true,
+                  watchSlidesVisibility: true,
+                  watchSlidesProgress: true
+                });
 
-              // Swiper Content
-              swiperTabsContent = new Swiper('.swiper-tabs-content', {
-                spaceBetween: 0,
-                loop: false,
-                autoHeight: false,
-                longSwipes: true,
-                resistanceRatio: 0, // Disable First and Last Swiper
-                watchOverflow: true,
-                loopedSlides: 5,
-                thumbs: {
-                  swiper: swiperTabsNav
-                }
-              });
+                // Swiper Content
+                swiperTabsContent = new Swiper('.swiper-tabs-content', {
+                  spaceBetween: 0,
+                  loop: false,
+                  autoHeight: false,
+                  longSwipes: true,
+                  resistanceRatio: 0, // Disable First and Last Swiper
+                  watchOverflow: true,
+                  loopedSlides: 5,
+                  thumbs: {
+                    swiper: swiperTabsNav
+                  }
+                });
+              }
             </script>
             {{--SLIDER--}}
             <script>
