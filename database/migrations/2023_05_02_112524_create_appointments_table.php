@@ -30,6 +30,13 @@ return new class extends Migration
                 ->onUpdate('cascade');
             $table->json('diagnosis')->nullable();
             $table->string('photo')->nullable();
+            $table->float('longitudinal_arch_left')->nullable();
+            $table->float('longitudinal_arch_right')->nullable();
+            $table->float('transverse_arch')->nullable();
+            $table->text('pronator_type')->nullable();
+            $table->float('pronator_left')->nullable();
+            $table->float('pronator_right')->nullable();
+            $table->tinyText('bus')->nullable();
             $table->timestamps();
         });
     }

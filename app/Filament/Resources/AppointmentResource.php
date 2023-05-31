@@ -8,8 +8,12 @@ use App\Forms\Components\Webcam;
 use App\Models\Appointment;
 use App\Models\Diagnosis;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -20,6 +24,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Yepsua\Filament\Forms\Components\RangeSlider;
 
 class AppointmentResource extends Resource
 {
@@ -43,7 +48,7 @@ class AppointmentResource extends Resource
                     ->relationship('patient', 'name')
                     ->searchable()
                     ->label('Пациент')
-                ->hidden(),
+                    ->hidden(),
                 Forms\Components\Select::make('doctor_id')
                     ->relationship('doctor', 'name')
                     ->label('Врач')
@@ -58,7 +63,7 @@ class AppointmentResource extends Resource
                         Webcam::make('photo')
                             ->label('Фото')
                             ->required(function (string $context, Forms\Components\Component $component, ?Model $record) {
-                        
+                                
                                 if ($context == 'view') {
                                     
                                     if (isset($record->photo)) {
@@ -68,24 +73,81 @@ class AppointmentResource extends Resource
                                     } else {
                                         $component->extraAttributes(['class' => 'view']);
                                     }
-                        
+                                    
                                 }
-                    
+                                
                                 return true;
                             })
                             ->columnSpanFull(),
                     ]),
-                Select::make('diagnosis')
-                    ->multiple()
-                    ->searchable()
-                    ->options(Diagnosis::all()->pluck('text', 'text'))
-                    ->preload()
-                    ->label('Диагноз'),
-            
-                Forms\Components\Textarea::make('extra_diagnosis')->label('Дополнительный диагноз')
-                    ->rows(2)
-                    ->visibleOn(['create','edit'])
-                    ->helperText('Добавление диагноза, которого нет в списке МКБ')
+                Fieldset::make('Высота сводов')
+                    ->schema([
+                        // ...
+                        Grid::make(3)
+                            ->schema([
+                                TextInput::make('longitudinal_arch_left')
+                                    ->datalist(range(0.8, 2.8, 0.1))
+                                    ->numeric()
+                                    ->label('продольный свод левый'),
+                                TextInput::make('longitudinal_arch_right')
+                                    ->datalist(range(0.8, 2.8, 0.1))
+                                    ->numeric()
+                                    ->minValue(0.8)
+                                    ->maxValue(2.8)
+                                    ->label('продольный свод правый'),
+                                Select::make('transverse_arch')
+                                    ->options(range(0.3, 0.8, 0.1))
+                                    ->label('поперечный свод'),
+                            ])
+                    ]),
+                Fieldset::make('Пронаторы')
+                    ->schema([
+                        Grid::make(3)
+                            ->schema([
+                                Select::make('pronator_type')
+                                    ->searchable()
+                                    ->options([
+                                        'Супинатор',
+                                        'Подпяточник для компенсации укорочения конечности',
+                                        'Метатарзальный валик',
+                                        'Антивальгусный пронатор',
+                                        'Антиварусный пронатор',
+                                        'Передне-латеральный пронатор',
+                                        'Передне-медиальный пронатор',
+                                        'Дорсально-латеральный пронатор',
+                                        'Дорсально-медиальный пронатор',
+                                    ])
+                                    ->label('Тип пронатора'),
+                                Select::make('pronator_left')
+                                    ->options([0.5, 0.7, 0.8, 1])
+                                    ->label('слева'),
+                                Select::make('pronator_right')
+                                    ->options([0.5, 0.7, 0.8, 1])
+                                    ->label('справа'),
+                            ]),
+                        ]),
+                Fieldset::make('Диагноз')
+                    ->schema([
+                        Select::make('diagnosis')
+                            ->multiple()
+                            ->searchable()
+                            ->options(Diagnosis::all()->pluck('text', 'text'))
+                            ->preload()
+                            ->label('Диагноз'),
+                        
+                        Forms\Components\Textarea::make('extra_diagnosis')->label('Дополнительный диагноз')
+                            ->rows(2)
+                            ->visibleOn(['create', 'edit'])
+                            ->helperText('Добавление диагноза, которого нет в списке МКБ'),
+                    ]),
+                Radio::make('bus')
+                    ->options([
+                        'S' => 'S',
+                        'M' => 'M',
+                        'L' => 'L'
+                    ])
+                    ->inline()
+                    ->label('Отводящая шина'),
             ]);
     }
     
@@ -98,7 +160,7 @@ class AppointmentResource extends Resource
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
                     ->searchable()
-                    ->url(fn (Appointment $record) => PatientResource::getUrl('view', ['record' =>  $record->patient_id])),
+                    ->url(fn(Appointment $record) => PatientResource::getUrl('view', ['record' => $record->patient_id])),
                 TextColumn::make('branch.address')->label('Филиал')->sortable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
                 ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
@@ -126,14 +188,14 @@ class AppointmentResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                ReplicateAction::make()->excludeAttributes(['created_at','photo'])
+                ReplicateAction::make()->excludeAttributes(['created_at', 'photo'])
                     ->tooltip('создать копию приёма, за исключением даты и фото, для более быстрого заполнения')
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-
+    
     public static function getRelations(): array
     {
         return [
