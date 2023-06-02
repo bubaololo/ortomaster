@@ -69,9 +69,8 @@ class AppointmentResource extends Resource
                                     if (isset($record->photo)) {
                                         $photoSrc = $record->photo;
                                         $component->extraAttributes(['class' => 'view', 'src' => $photoSrc]);
-                                        info($record->photo);
                                     } else {
-                                        $component->extraAttributes(['class' => 'view']);
+                                        $component->extraAttributes(['class' => 'view', 'src' => 'no-photo.png']);
                                     }
                                     
                                 }
@@ -82,7 +81,6 @@ class AppointmentResource extends Resource
                     ]),
                 Fieldset::make('Высота сводов')
                     ->schema([
-                        // ...
                         Grid::make(3)
                             ->schema([
                                 TextInput::make('longitudinal_arch_left')
