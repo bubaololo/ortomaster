@@ -32,6 +32,11 @@ class EditAppointment extends EditRecord
             $newPath = 'public/' . $file;
             Storage::move($oldPath, $newPath);
         }
+        if($data['extra_diagnosis']){
+        
+            $data['diagnosis'][] = $data['extra_diagnosis'];
+        }
+        unset($data['extra_diagnosis']);
         return $data;
     }
     

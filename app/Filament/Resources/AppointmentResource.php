@@ -130,8 +130,11 @@ class AppointmentResource extends Resource
                                 Select::make('pronator_right')
                                     ->options([0.5, 0.7, 0.8, 1])
                                     ->label('справа'),
+                                Forms\Components\Textarea::make('shoes')
+                                    ->rows(2)->label('Обувь')
                             ]),
                     ]),
+
                 Fieldset::make('Диагноз')
                     ->schema([
                         Select::make('diagnosis')

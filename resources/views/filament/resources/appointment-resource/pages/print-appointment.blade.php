@@ -158,12 +158,20 @@
                 <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
                 <strong>{{ $appointment->pronator_right }}</strong>
             </div>
-            <div class="rec__item">
-                <strong>Отводящая шина:</strong> {{ $appointment->bus  }}
-            </div>
-            <div class="rec__item">
-                <strong>Удобная, широкая обувь с высотой каблука не более 3.0 см</strong>
-            </div>
+            @if ($appointment->bus)
+                <div class="rec__item">
+                    <strong>Отводящая шина:</strong> {{ $appointment->bus  }}
+                </div>
+            @endif
+            @if ($appointment->shoes)
+                <div class="rec__item">
+                    <strong>Обувь:</strong> {{ $appointment->shoes  }}
+                </div>
+            @else
+                <div class="rec__item">
+                    <strong>Удобная, широкая обувь с высотой каблука не более 3.0 см</strong>
+                </div>
+            @endif
             <div class="rec__item">
                 <strong>Тейпирование для тела</strong>
             </div>
