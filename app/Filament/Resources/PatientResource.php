@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class PatientResource extends Resource
@@ -55,22 +56,22 @@ class PatientResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-//                Tables\Filters\Filter::make('created_at')
-//                    ->form([
-//                        Forms\Components\DatePicker::make('created_from')->label('Добавлен С'),
-//                        Forms\Components\DatePicker::make('created_until')->label('Добавлен По'),
-//                    ])
-//                    ->query(function ($query, array $data){
-//                        return $query
-//                            ->when(
-//                                $data['created_from'],
-//                                fn ($query) => $query->whereDate('created_at', '>=', $data['created_from']),
-//                            )
-//                            ->when(
-//                                $data['created_until'],
-//                                fn ($query) => $query->whereDate('created_at', '<=', $data),
-//                            );
-//                    })
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('created_from')->label('С даты')->default('01.01.2022'),
+                        DatePicker::make('created_until')->label('По дату')->default(now()),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -103,20 +104,7 @@ class PatientResource extends Resource
     {
         return false;
     }
-    
-    public static function getWidgets(): array
-    {
-        return [
-//            AppointmentOverview::class,
-        ];
-    }
-    
-    
-//    protected function defaultSort()
-//    {
-//        $this->sortBy('created_at', 'desc');
-//    }
-    
+
 
 }
 

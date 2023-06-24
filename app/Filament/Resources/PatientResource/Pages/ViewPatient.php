@@ -28,12 +28,12 @@ class ViewPatient extends ViewRecord
 //                }),
         ];
     }
-    protected function getFooterWidgets(): array
-    {
-        return [
+//    protected function getFooterWidgets(): array
+//    {
+//        return [
 //            AppointmentOverview::class,
-        ];
-    }
+//        ];
+//    }
 //    public function hasCombinedRelationManagerTabsWithForm(): bool
 //    {
 //        return true;

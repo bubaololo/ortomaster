@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource\RelationManagers;
+use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
 use App\Forms\Components\Webcam;
 use App\Models\Appointment;
 use App\Models\Diagnosis;
@@ -21,6 +22,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -134,7 +136,7 @@ class AppointmentResource extends Resource
                                     ->rows(2)->label('Обувь')
                             ]),
                     ]),
-
+                
                 Fieldset::make('Диагноз')
                     ->schema([
                         Select::make('diagnosis')
@@ -176,24 +178,26 @@ class AppointmentResource extends Resource
                 TextColumn::make('diagnosis')->label('Диагноз'),
             ])
             ->defaultSort('created_at', 'desc')
-//            ->filters([
-//                Tables\Filters\Filter::make('created_at')
-//                    ->form([
-//                    Forms\Components\DatePicker::make('created_from')->label('С даты'),
-//                    Forms\Components\DatePicker::make('created_until')->label('По дату'),
-//                    ])
-//                    ->query(function (Builder $query, array $data): Builder {
-//                        return $query
-//                            ->when(
-//                                $data['created_from'],
-//                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
-//                            )
-//                            ->when(
-//                                $data['created_until'],
-//                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
-//                            );
-//                    })
-//            ])
+            ->filters([
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from')->label('С даты')->default('01.01.2022'),
+                        Forms\Components\DatePicker::make('created_until')->label('По дату')->default(now()),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
+                SelectFilter::make('doctor')->relationship('doctor', 'name')->label('Врач'),
+                SelectFilter::make('branch')->relationship('branch', 'address')->label('Филиал')
+            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
@@ -227,4 +231,9 @@ class AppointmentResource extends Resource
             'print' => Pages\PrintAppointment::route('/{record}/print'),
         ];
     }
+    protected function shouldPersistTableFiltersInSession(): bool
+    {
+        return false;
+    }
+
 }
