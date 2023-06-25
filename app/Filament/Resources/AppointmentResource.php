@@ -167,7 +167,6 @@ class AppointmentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
                 TextColumn::make('created_at')->sortable()->label('Дата приёма'),
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
