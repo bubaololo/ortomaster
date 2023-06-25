@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource\RelationManagers;
+use App\Filament\Resources\AppointmentResource\Widgets\TodayAppointments;
 use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
 use App\Forms\Components\Webcam;
 use App\Models\Appointment;
@@ -235,5 +236,10 @@ class AppointmentResource extends Resource
     {
         return false;
     }
-
+    public static function getWidgets(): array
+    {
+        return [
+            TodayAppointments::class,
+        ];
+    }
 }

@@ -10,17 +10,24 @@ use Filament\Resources\Pages\ListRecords;
 class ListAppointments extends ListRecords
 {
     protected static string $resource = AppointmentResource::class;
-
+    
     protected function getActions(): array
     {
         return [
 //            Actions\CreateAction::make(),
         ];
     }
-//    protected function getFooterWidgets(): array
-//    {
-//        return [
-//            AppointmentOverview::class,
-//        ];
-//    }
+    
+    protected function getFooterWidgets(): array
+    {
+        
+        if (auth()->user()->doctor) {
+            return [
+                AppointmentOverview::class,
+            ];
+        } else {
+            return [];
+        }
+        
+    }
 }
