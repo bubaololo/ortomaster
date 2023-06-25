@@ -50,9 +50,9 @@ class PatientResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->sortable()->searchable()->label('ФИО'),
-                TextColumn::make('created_at')->sortable()->label('Добавлен'),
+                TextColumn::make('created_at')->sortable()->searchable()->label('Добавлен'),
                 TextColumn::make('phone')->searchable()->label('Телефон'),
-                TextColumn::make('birthdate')->label('Дата рождения'),
+                TextColumn::make('birthdate')->searchable()->label('Дата рождения'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -78,7 +78,7 @@ class PatientResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+//                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     

@@ -38,8 +38,8 @@ class DoctorResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('branch.address'),
+                TextColumn::make('name')->label('ФИО врача'),
+                TextColumn::make('branch.address')->label('Филиал'),
             ])
             ->filters([
                 //
