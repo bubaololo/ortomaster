@@ -39,6 +39,13 @@
                 margin-top: 40pt;
                 font-size: 15pt !important;
                 line-height: 20pt !important;
+                position: relative;
+            }
+            .qr-code {
+                position: absolute;
+                top: 0;
+                right: 0;
+                text-align: center;
             }
 
             .rec__title {
@@ -175,7 +182,12 @@
             <div class="rec__item">
                 <strong>Тейпирование для тела</strong>
             </div>
+            <div class="qr-code">
+                {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
+                Фото
+            </div>
         </div>
+
         <div class="footer">
             <div class="doc">
                 Вр. {{ $doctor }}
