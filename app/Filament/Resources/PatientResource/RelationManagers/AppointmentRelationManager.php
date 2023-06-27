@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Component as Livewire;
@@ -47,7 +48,8 @@ class AppointmentRelationManager extends RelationManager
                     ->label('Дата приёма')
                 ->url(fn (Appointment $record) => AppointmentResource::getUrl('view', ['record' =>  $record])),
                 ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
-//                Tables\Columns\TextColumn::make('diagnosis'),
+                TextColumn::make('branch.address')->label('Филиал')->sortable(),
+                TextColumn::make('doctor.name')->label('Врач')->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
