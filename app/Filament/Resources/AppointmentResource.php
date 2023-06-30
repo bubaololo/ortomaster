@@ -97,7 +97,7 @@ class AppointmentResource extends Resource
                                     ->maxValue(2.8)
                                     ->label('продольный свод правый'),
                                 Select::make('transverse_arch')
-                                    ->options(range(0.3, 0.8, 0.1))
+                                    ->options(['0.3' => 0.3, '0.4' => 0.4, '0.5' => 0.5, '0.6' => 0.6,'0.7' => 0.7, '0.8' => 0.8])
                                     ->label('поперечный свод'),
                             ])
                     ]),
@@ -128,10 +128,10 @@ class AppointmentResource extends Resource
                                     ])
                                     ->label('Тип пронатора'),
                                 Select::make('pronator_left')
-                                    ->options([0.5, 0.7, 0.8, 1])
+                                    ->options(['0.5' => 0.5, '0.7' => 0.7, '0.8' => 0.8, '1' => 1])
                                     ->label('слева'),
                                 Select::make('pronator_right')
-                                    ->options([0.5, 0.7, 0.8, 1])
+                                    ->options(['0.5' => 0.5, '0.7' => 0.7, '0.8' => 0.8, '1' => 1])
                                     ->label('справа'),
                                 Forms\Components\Textarea::make('shoes')
                                     ->rows(2)->label('Обувь')
