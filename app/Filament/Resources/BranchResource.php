@@ -28,7 +28,8 @@ class BranchResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('address')->label('адрес')->required(),
+                TextInput::make('address')->label('Название филиала')->required(),
+                TextInput::make('full_address')->label('Полный адрес'),
             ]);
     }
 
@@ -36,7 +37,8 @@ class BranchResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('address')->label('адрес'),
+                TextColumn::make('address')->label('Название филиала'),
+                TextColumn::make('full_address')->label('Полный адрес'),
             ])
             ->filters([
                 //

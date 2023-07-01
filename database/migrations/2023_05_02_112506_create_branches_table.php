@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('address');
+            $table->string('full_address')->nullable();
         });
     }
 

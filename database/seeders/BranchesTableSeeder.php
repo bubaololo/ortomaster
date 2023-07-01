@@ -14,11 +14,9 @@ class BranchesTableSeeder extends Seeder
     public function run(): void
     {
         $branches = [
-            ['address' => 'г. Москва, ул. Ленина, д. 10'],
-            ['address' => 'г. Санкт-Петербург, пр. Невский, д. 20'],
-            ['address' => 'г. Новосибирск, ул. Красный проспект, д. 30'],
-            ['address' => 'г. Екатеринбург, ул. Ленина, д. 40'],
-            ['address' => 'г. Красноярск, ул. Красная, д. 50'],
+            ['address' => 'Байтик Баатыра','full_address' => 'Бишкек, улица Байтик Баатыра 19'],
+            ['address' => 'Суеркулова','full_address' => 'Бишкек, улица Суеркулова 1/3'],
+
         ];
         
         foreach ($branches as $branchData) {

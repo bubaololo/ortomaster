@@ -14,11 +14,10 @@ class DoctorsTableSeeder extends Seeder
     public function run(): void
     {
         $doctors = [
-            ['name' => 'Доктор Иванов', 'description' => 'Кардиолог'],
-            ['name' => 'Доктор Петров', 'description' => 'Невролог'],
-            ['name' => 'Доктор Сидоров', 'description' => 'Хирург'],
-            ['name' => 'Доктор Смирнова', 'description' => 'Терапевт'],
-            ['name' => 'Доктор Козлова', 'description' => 'Офтальмолог'],
+            ['name' => 'Мухамедалиева Наргиза Насырхановна', 'description' => 'Кардиолог'],
+            ['name' => 'Сатаров Умид Абдугапарович', 'description' => 'Невролог'],
+            ['name' => 'Никонов Эрстан Кенчибекович', 'description' => 'Хирург'],
+            ['name' => 'Юлдошев Абдумалик Холбутаевич', 'description' => 'Терапевт'],
         ];
     
         foreach ($doctors as $doctorData) {
