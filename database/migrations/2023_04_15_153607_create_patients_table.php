@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('surname');
             $table->string('middle_name')->nullable();
             $table->string('phone')->nullable();
+            $table->text('note')->nullable();
             $table->date('birthdate')->nullable();
             $table->boolean('gender')->nullable();
             $table->timestamps();

@@ -9,6 +9,7 @@ use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
 use App\Models\Patient;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -36,13 +37,6 @@ class PatientResource extends Resource
                 TextInput::make('name')->required()->label('Имя'),
                 TextInput::make('middle_name')->label('Отчество'),
                 PhoneInput::make('phone')->required()->label('Телефон')->tel(),
-                Radio::make('gender')
-                    ->label('Пол')
-                    ->required()
-                    ->options([
-                        0 => 'Мужской',
-                        1 => 'Женский',
-                    ]),
                 DatePicker::make('birthdate')
                     ->requiredWithout('alt_birthdate')
                     ->default(null)
@@ -52,6 +46,14 @@ class PatientResource extends Resource
                     ->rules(['date_format:Y-m-d'])
                     ->label('Дата рождения (текстом)')
                     ->helperText('Введите дату с клавиатуры в формате гггг-мм-дд'),
+                Radio::make('gender')
+                    ->label('Пол')
+                    ->required()
+                    ->options([
+                        0 => 'Мужской',
+                        1 => 'Женский',
+                    ]),
+                Textarea::make('note')->label('Примечание')
             ]);
     }
     
