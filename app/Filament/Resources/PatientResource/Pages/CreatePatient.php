@@ -20,7 +20,15 @@ class CreatePatient extends CreateRecord
         return 'Карточка нового пациента создана';
     }
     
-
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        if($data['alt_birthdate']){
+        
+            $data['birthdate'] = $data['alt_birthdate'];
+        }
+        unset($data['alt_birthdate']);
+        return $data;
+    }
     
 //    public function afterCreate()
 //    {

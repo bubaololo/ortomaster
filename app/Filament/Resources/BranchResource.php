@@ -30,7 +30,7 @@ class BranchResource extends Resource
             ->schema([
                 TextInput::make('address')->label('Название филиала')->required(),
                 TextInput::make('full_address')->label('Полный адрес'),
-                TextInput::make('ip')->label('IP адрес')
+                TextInput::make('ip')->label('IP адрес')->ip()
             ]);
     }
 

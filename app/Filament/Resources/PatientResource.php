@@ -38,17 +38,20 @@ class PatientResource extends Resource
                 PhoneInput::make('phone')->required()->label('Телефон')->tel(),
                 Radio::make('gender')
                     ->label('Пол')
+                    ->required()
                     ->options([
                         0 => 'Мужской',
                         1 => 'Женский',
                     ]),
                 DatePicker::make('birthdate')
-                    ->required()
-//                    ->format('d-m-Y')
-//                    ->storeFormat('Y-m-d H:i:s')
-                    ->minDate(now()
-                    ->subYears(100))
-                    ->maxDate(now())->label('дата рождения')
+                    ->requiredWithout('alt_birthdate')
+                    ->default(null)
+                    ->label('Дата рождения'),
+                TextInput::make('alt_birthdate')
+                    ->visibleOn(['create'])
+                    ->rules(['date_format:Y-m-d'])
+                    ->label('Дата рождения (текстом)')
+                    ->helperText('Введите дату с клавиатуры в формате гггг-мм-дд'),
             ]);
     }
     
