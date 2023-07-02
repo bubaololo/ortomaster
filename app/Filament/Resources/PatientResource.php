@@ -42,6 +42,7 @@ class PatientResource extends Resource
                     ->default(null)
                     ->label('Дата рождения'),
                 TextInput::make('alt_birthdate')
+                    ->placeholder('1990-08-24')
                     ->visibleOn(['create'])
                     ->rules(['date_format:Y-m-d'])
                     ->label('Дата рождения (текстом)')

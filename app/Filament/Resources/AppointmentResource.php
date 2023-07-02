@@ -9,11 +9,13 @@ use App\Forms\Components\Webcam;
 use App\Models\Appointment;
 use App\Models\Diagnosis;
 use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -25,7 +27,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Yepsua\Filament\Forms\Components\RangeSlider;
 
 class AppointmentResource extends Resource
 {
@@ -80,61 +81,90 @@ class AppointmentResource extends Resource
                             })
                             ->columnSpanFull(),
                     ]),
+                Checkbox::make('diabetic')->inline()->label('Диабетическая стопа'),
                 Fieldset::make('Высота сводов')
                     ->schema([
                         Grid::make(3)
                             ->schema([
                                 TextInput::make('longitudinal_arch_left')
+                                    ->placeholder('0.8')
                                     ->datalist(range(0.8, 2.8, 0.1))
+                                    ->minValue(0.8)
+                                    ->maxValue(2.8)
                                     ->numeric()
                                     ->label('продольный свод левый'),
                                 TextInput::make('longitudinal_arch_right')
+                                    ->placeholder('0.8')
                                     ->datalist(range(0.8, 2.8, 0.1))
                                     ->numeric()
                                     ->minValue(0.8)
                                     ->maxValue(2.8)
                                     ->label('продольный свод правый'),
                                 Select::make('transverse_arch')
-                                    ->options(['0.3' => 0.3, '0.4' => 0.4, '0.5' => 0.5, '0.6' => 0.6,'0.7' => 0.7, '0.8' => 0.8])
+                                    ->options(['0.3' => 0.3, '0.4' => 0.4, '0.5' => 0.5, '0.6' => 0.6, '0.7' => 0.7, '0.8' => 0.8])
                                     ->label('поперечный свод'),
                             ])
                     ]),
-                Fieldset::make('Пронаторы')
-                    ->schema([
-                        Grid::make(3)
+                Tabs::make('Изделие')
+                    ->columnSpan('full')
+                    ->tabs([
+                        Tabs\Tab::make('Стелька')
                             ->schema([
-                                Select::make('pronator_type')
-                                    ->searchable()
-                                    ->options([
-                                        'Супинатор' =>
-                                            'Супинатор',
-                                        'Подпяточник для компенсации укорочения конечности' =>
-                                            'Подпяточник для компенсации укорочения конечности',
-                                        'Метатарзальный валик' =>
-                                            'Метатарзальный валик',
-                                        'Антивальгусный пронатор' =>
-                                            'Антивальгусный пронатор',
-                                        'Антиварусный пронатор' =>
-                                            'Антиварусный пронатор',
-                                        'Передне-латеральный пронатор' =>
-                                            'Передне-латеральный пронатор',
-                                        'Передне-медиальный пронатор' =>
-                                            'Передне-медиальный пронатор',
-                                        'Дорсально-латеральный пронатор',
-                                        'Дорсально-медиальный пронатор' =>
-                                            'Дорсально-медиальный пронатор',
-                                    ])
-                                    ->label('Тип пронатора'),
-                                Select::make('pronator_left')
-                                    ->options(['0.5' => 0.5, '0.7' => 0.7, '0.8' => 0.8, '1' => 1])
-                                    ->label('слева'),
-                                Select::make('pronator_right')
-                                    ->options(['0.5' => 0.5, '0.7' => 0.7, '0.8' => 0.8, '1' => 1])
-                                    ->label('справа'),
-                                Forms\Components\Textarea::make('shoes')
-                                    ->rows(2)->label('Обувь')
+                                Grid::make(3)
+                                    ->schema([
+                                        Select::make('pronator_type')
+                                            ->searchable()
+                                            ->options([
+                                                'Супинатор' =>
+                                                    'Супинатор',
+                                                'Подпяточник для компенсации укорочения конечности' =>
+                                                    'Подпяточник для компенсации укорочения конечности',
+                                                'Метатарзальный валик' =>
+                                                    'Метатарзальный валик',
+                                                'Антивальгусный пронатор' =>
+                                                    'Антивальгусный пронатор',
+                                                'Антиварусный пронатор' =>
+                                                    'Антиварусный пронатор',
+                                                'Передне-латеральный пронатор' =>
+                                                    'Передне-латеральный пронатор',
+                                                'Передне-медиальный пронатор' =>
+                                                    'Передне-медиальный пронатор',
+                                                'Дорсально-латеральный пронатор',
+                                                'Дорсально-медиальный пронатор' =>
+                                                    'Дорсально-медиальный пронатор',
+                                            ])
+                                            ->label('Тип пронатора'),
+                                        Select::make('pronator_left')
+                                            ->options(['0.5' => 0.5, '0.7' => 0.7, '0.8' => 0.8, '1' => 1])
+                                            ->label('слева'),
+                                        Select::make('pronator_right')
+                                            ->options(['0.5' => 0.5, '0.7' => 0.7, '0.8' => 0.8, '1' => 1])
+                                            ->label('справа'),
+                                    
+                                    ]),
                             ]),
+                        Tabs\Tab::make('Обувь')
+                            ->schema([
+                                TextInput::make('shoes')
+                                    ->label('Модель обуви')
+                                    ->placeholder('Модель 1: высота 7-8 см.')
+                                    ->datalist([
+                                        'Модель 1: высота 7-8 см.',
+                                        'Модель 2: высота 9-10 см.',
+                                        'Модель 3: профилактика',
+                                    ]),
+                                Select::make('shoes_sides')
+                                    ->label('Укрепление борта')
+                                    ->options([
+                                        'правый' => 'правый',
+                                        'левый' => 'левый',
+                                        'внутренний' => 'внутренний',
+                                        'наружный' => 'наружный',
+                                    ])
+                            ]),
+                    
                     ]),
+                
                 
                 Fieldset::make('Диагноз')
                     ->schema([
@@ -143,12 +173,23 @@ class AppointmentResource extends Resource
                             ->searchable()
                             ->options(Diagnosis::all()->pluck('text', 'text'))
                             ->preload()
-                            ->label('Диагноз'),
+                            ->label('Диагноз')
+                            ->requiredWithout('extra_diagnosis'),
                         
                         Forms\Components\Textarea::make('extra_diagnosis')->label('Дополнительный диагноз')
+                            ->requiredWithout('diagnosis')
                             ->rows(2)
                             ->visibleOn(['create', 'edit'])
                             ->helperText('Добавление диагноза, которого нет в списке МКБ'),
+                    ]),
+                Select::make('checkup_date')
+                    ->required()
+                    ->label('Контрольный осмотр')
+                    ->prefix('Через')
+                    ->options([
+                        '3 месяца' => '3 месяца',
+                        '6-8 месяцев' => '6-8 месяцев',
+                        'внутренний' => '1 год',
                     ]),
                 Radio::make('bus')
                     ->options([
@@ -158,6 +199,7 @@ class AppointmentResource extends Resource
                     ])
                     ->inline()
                     ->label('Отводящая шина'),
+                
             ]);
     }
     
@@ -199,11 +241,12 @@ class AppointmentResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 ReplicateAction::make()->excludeAttributes(['created_at', 'photo'])
                     ->tooltip('создать копию приёма, за исключением даты и фото, для более быстрого заполнения')
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+//                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
@@ -229,10 +272,12 @@ class AppointmentResource extends Resource
             'print' => Pages\PrintAppointment::route('/{record}/print'),
         ];
     }
+    
     protected function shouldPersistTableFiltersInSession(): bool
     {
         return false;
     }
+    
     public static function getWidgets(): array
     {
         return [
