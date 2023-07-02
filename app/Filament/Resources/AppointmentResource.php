@@ -22,7 +22,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\ReplicateAction;
-use Filament\Tables\Columns\Column;
+use Livewire\Component as Livewire;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -209,9 +209,16 @@ class AppointmentResource extends Resource
         return $table
             
             ->columns([
-                TextColumn::make('#')->getStateUsing(function (Model $record): float {
-                    return $record->id;
-                }),
+                TextColumn::make('index')->getStateUsing(
+                    static function (\stdClass $rowLoop, Livewire $livewire ): string {
+                        return (string) (
+                            $rowLoop->iteration +
+                            ($livewire->tableRecordsPerPage * (
+                                    $livewire->page - 1
+                                ))
+                        );
+                    }
+                ),
                 TextColumn::make('created_at')->sortable()->label('Дата приёма'),
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
