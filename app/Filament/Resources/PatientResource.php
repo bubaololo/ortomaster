@@ -8,6 +8,7 @@ use App\Filament\Resources\PatientResource\RelationManagers;
 use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
 use App\Models\Patient;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -31,18 +32,20 @@ class PatientResource extends Resource
         return $form
             ->schema([
                 
-                TextInput::make('name')->required()
-//                  ->required(function (string $context, Forms\Components\Component $component) {
-//                    if($context == 'view') {
-//                        $component->extraAttributes(['class' => 'ebal']);
-//                    }
-//                    return true;
-//                })
-                    ->label('ФИО'),
-//                TextInput::make('phone')->label('Телефон'),
-                PhoneInput::make('phone')->label('Телефон')->tel(),
+                TextInput::make('surname')->required()->label('Фамилия'),
+                TextInput::make('name')->required()->label('Имя'),
+                TextInput::make('middle_name')->label('Отчество'),
+                PhoneInput::make('phone')->required()->label('Телефон')->tel(),
+                Radio::make('gender')
+                    ->label('Пол')
+                    ->options([
+                        0 => 'Мужской',
+                        1 => 'Женский',
+                    ]),
                 DatePicker::make('birthdate')
-                    ->format('d-m-Y')
+                    ->required()
+//                    ->format('d-m-Y')
+//                    ->storeFormat('Y-m-d H:i:s')
                     ->minDate(now()
                     ->subYears(100))
                     ->maxDate(now())->label('дата рождения')
