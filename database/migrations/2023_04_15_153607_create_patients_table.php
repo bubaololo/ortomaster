@@ -15,9 +15,11 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('surname');
+            $table->string('middle_name')->nullable();
             $table->string('phone')->nullable();
             $table->date('birthdate')->nullable();
-            $table->foreignId('appointments_id')->nullable()->constrained();
+            $table->boolean('gender')->nullable();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

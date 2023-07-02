@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -37,10 +36,14 @@ return new class extends Migration
             $table->float('pronator_left')->nullable();
             $table->float('pronator_right')->nullable();
             $table->tinyText('bus')->nullable();
+            $table->string('shoes')->nullable();
+            $table->string('shoes_sides')->nullable();
+            $table->string('checkup_date')->nullable();
+            $table->boolean('diabetic')->default(false);
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */

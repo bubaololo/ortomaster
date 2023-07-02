@@ -30,6 +30,7 @@ class BranchResource extends Resource
             ->schema([
                 TextInput::make('address')->label('Название филиала')->required(),
                 TextInput::make('full_address')->label('Полный адрес'),
+                TextInput::make('ip')->label('IP адрес')
             ]);
     }
 
@@ -39,6 +40,7 @@ class BranchResource extends Resource
             ->columns([
                 TextColumn::make('address')->label('Название филиала'),
                 TextColumn::make('full_address')->label('Полный адрес'),
+                TextColumn::make('ip')->label('IP адрес'),
             ])
             ->filters([
                 //

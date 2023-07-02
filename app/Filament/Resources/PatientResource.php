@@ -41,7 +41,11 @@ class PatientResource extends Resource
                     ->label('ФИО'),
 //                TextInput::make('phone')->label('Телефон'),
                 PhoneInput::make('phone')->label('Телефон')->tel(),
-                DatePicker::make('birthdate')->label('дата рождения')
+                DatePicker::make('birthdate')
+                    ->format('d-m-Y')
+                    ->minDate(now()
+                    ->subYears(100))
+                    ->maxDate(now())->label('дата рождения')
             ]);
     }
     

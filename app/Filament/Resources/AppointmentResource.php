@@ -4,8 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource\RelationManagers;
-use App\Filament\Resources\AppointmentResource\Widgets\TodayAppointments;
-use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
+use App\Filament\Widgets\TodayAppointments;
 use App\Forms\Components\Webcam;
 use App\Models\Appointment;
 use App\Models\Diagnosis;
@@ -26,7 +25,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Yepsua\Filament\Forms\Components\RangeSlider;
 
 class AppointmentResource extends Resource
