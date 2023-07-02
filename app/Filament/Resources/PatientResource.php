@@ -62,7 +62,9 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->sortable()->searchable()->label('ФИО'),
+                TextColumn::make('surname')->sortable()->searchable(isIndividual: true)->label('Фамилия'),
+                TextColumn::make('name')->sortable()->searchable()->label('Имя'),
+                TextColumn::make('middle_name')->sortable()->searchable()->label('Отчество'),
                 TextColumn::make('created_at')->sortable()->searchable()->label('Добавлен'),
                 TextColumn::make('phone')->searchable()->label('Телефон'),
                 TextColumn::make('birthdate')->searchable()->label('Дата рождения'),

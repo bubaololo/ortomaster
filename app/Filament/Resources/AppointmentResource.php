@@ -22,6 +22,7 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Actions\ReplicateAction;
+use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -206,16 +207,20 @@ class AppointmentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            
             ->columns([
+                TextColumn::make('#')->getStateUsing(function (Model $record): float {
+                    return $record->id;
+                }),
                 TextColumn::make('created_at')->sortable()->label('Дата приёма'),
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
                     ->searchable()
                     ->url(fn(Appointment $record) => PatientResource::getUrl('view', ['record' => $record->patient_id])),
-                TextColumn::make('branch.address')->label('Филиал')->sortable(),
+                TextColumn::make('branch.address')->label('Филиал')->sortable()->toggleable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
-                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
-                TextColumn::make('diagnosis')->label('Диагноз'),
+                ImageColumn::make('photo')->label('Фото')->width(70)->height(50)->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('diagnosis')->label('Диагноз')->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
