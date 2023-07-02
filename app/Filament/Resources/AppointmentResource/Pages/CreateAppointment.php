@@ -4,6 +4,7 @@ namespace App\Filament\Resources\AppointmentResource\Pages;
 
 use App\Filament\Resources\AppointmentResource;
 use App\Models\Appointment;
+use App\Models\Branch;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Filament\Pages\Actions;
@@ -17,9 +18,6 @@ class CreateAppointment extends CreateRecord
     protected static bool $canCreateAnother = false;
     
     public $record;
-    
-
-    
     
     protected function getCreatedNotificationTitle(): ?string
     {
@@ -38,7 +36,7 @@ class CreateAppointment extends CreateRecord
         }
         unset($data['extra_diagnosis']);
         $doctorId = auth()->user()->doctor_id;
-        $branchId = Doctor::find($doctorId)->branch_id;
+        $branchId = $this->getBranch($doctorId);
         $file = $data['photo'];
         $oldPath = 'livewire-tmp/'.$file;
         $newPath = 'public/'.$file;
@@ -72,5 +70,16 @@ class CreateAppointment extends CreateRecord
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';
+    }
+    private function getBranch($doctorId) {
+    
+//        $clientIP = \Request::ip();
+//        $clientIP = $_SERVER['REMOTE_ADDR'];
+        $branchId = Branch::findByIP();
+        if($branchId) {
+            return $branchId;
+        } else {
+            return Doctor::find($doctorId)->branch_id;
+        }
     }
 }
