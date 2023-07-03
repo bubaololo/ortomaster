@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7478caf6a99eb668453df4e764e944b3",
+    "content-hash": "e79a8b475eb27971426c7c9dc0d3b43e",
     "packages": [
         {
             "name": "3x1io/filament-user",
@@ -205,6 +205,88 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/4.0.1"
             },
             "time": "2023-03-16T14:39:27+00:00"
+        },
+        {
+            "name": "archilex/filament-stacked-image-column",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/archilex/filament-stacked-image-column.git",
+                "reference": "c0242c1ad99e40c01f9369fb5bf93d983bcd6ddb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/archilex/filament-stacked-image-column/zipball/c0242c1ad99e40c01f9369fb5bf93d983bcd6ddb",
+                "reference": "c0242c1ad99e40c01f9369fb5bf93d983bcd6ddb",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^2.0",
+                "illuminate/contracts": "^9.0|^10.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.13.5"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^6.0|^7.0",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "pestphp/pest-plugin-livewire": "^1.0",
+                "pestphp/pest-plugin-parallel": "^0.3",
+                "phpunit/phpunit": "^9.5|^10.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Archilex\\StackedImageColumn\\StackedImageColumnServiceProvider"
+                    ],
+                    "aliases": {
+                        "StackedImageColumn": "Archilex\\StackedImageColumn\\Facades\\StackedImageColumn"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Archilex\\StackedImageColumn\\": "src",
+                    "Archilex\\StackedImageColumn\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kenneth Sese",
+                    "email": "kmsese@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An stacked image column for Filament",
+            "homepage": "https://github.com/archilex/filament-stacked-image-column",
+            "keywords": [
+                "admin panel",
+                "archilex",
+                "column",
+                "filament-stacked-image-column",
+                "images",
+                "laravel",
+                "tables"
+            ],
+            "support": {
+                "issues": "https://github.com/archilex/filament-stacked-image-column/issues",
+                "source": "https://github.com/archilex/filament-stacked-image-column/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/archilex",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-05-30T02:42:49+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",

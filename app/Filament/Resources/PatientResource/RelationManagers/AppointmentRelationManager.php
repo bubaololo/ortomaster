@@ -45,9 +45,14 @@ class AppointmentRelationManager extends RelationManager
             ->columns([
                 
                 Tables\Columns\TextColumn::make('created_at')
+                    ->date()
                     ->label('Дата приёма')
                 ->url(fn (Appointment $record) => AppointmentResource::getUrl('view', ['record' =>  $record])),
-                ImageColumn::make('photo')->label('Фото')->width(70)->height(50),
+                ImageColumn::make('photo')
+                    ->label('Фото')
+                    ->width(70)
+                    ->height(50)
+                ->square(),
                 TextColumn::make('branch.address')->label('Филиал')->sortable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
             ])

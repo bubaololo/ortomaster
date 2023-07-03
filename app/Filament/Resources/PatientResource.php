@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use AbanoubNassem\FilamentPhoneField\Forms\Components\PhoneInput;
 use App\Filament\Resources\PatientResource\Pages;
 use App\Filament\Resources\PatientResource\RelationManagers;
-use App\Filament\Resources\PatientResource\Widgets\AppointmentOverview;
+use Archilex\StackedImageColumn\Columns\StackedImageColumn;
 use App\Models\Patient;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Radio;
@@ -41,12 +41,12 @@ class PatientResource extends Resource
                     ->requiredWithout('alt_birthdate')
                     ->default(null)
                     ->label('Дата рождения'),
-                TextInput::make('alt_birthdate')
-                    ->placeholder('1990-08-24')
-                    ->visibleOn(['create'])
-                    ->rules(['date_format:Y-m-d'])
-                    ->label('Дата рождения (текстом)')
-                    ->helperText('Введите дату с клавиатуры в формате гггг-мм-дд'),
+//                TextInput::make('alt_birthdate')
+//                    ->placeholder('1990-08-24')
+//                    ->visibleOn(['create'])
+//                    ->rules(['date_format:Y-m-d'])
+//                    ->label('Дата рождения (текстом)')
+//                    ->helperText('Введите дату с клавиатуры в формате гггг-мм-дд'),
                 Radio::make('gender')
                     ->label('Пол')
                     ->required()
@@ -54,7 +54,7 @@ class PatientResource extends Resource
                         0 => 'Мужской',
                         1 => 'Женский',
                     ]),
-                Textarea::make('note')->label('Примечание')
+//                Textarea::make('note')->label('Примечание')
             ]);
     }
     
@@ -62,12 +62,28 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('surname')->sortable()->searchable(isIndividual: true)->label('Фамилия'),
+                TextColumn::make('surname')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Фамилия')
+                ->grow(true)
+                    ->size('lg')
+                    ->weight('bold'),
                 TextColumn::make('name')->sortable()->searchable()->label('Имя'),
                 TextColumn::make('middle_name')->sortable()->searchable()->label('Отчество'),
-                TextColumn::make('created_at')->sortable()->searchable()->label('Добавлен'),
+                
+                StackedImageColumn::make('appointment.photo')
+                    ->label('приёмы')
+                    ->circular()
+                    ->limit(3)
+                    ->showRemaining(),
+                
+                TextColumn::make('created_at')->sortable()->searchable()->label('Добавлен')->date(),
                 TextColumn::make('phone')->searchable()->label('Телефон'),
-                TextColumn::make('birthdate')->searchable()->label('Дата рождения'),
+                TextColumn::make('birthdate')
+                    ->sortable()
+                    ->date()
+                    ->label('Дата рождения'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -112,7 +128,7 @@ class PatientResource extends Resource
             'create' => Pages\CreatePatient::route('/create'),
             'view' => Pages\ViewPatient::route('/{record}'),
             'edit' => Pages\EditPatient::route('/{record}/edit'),
-            
+        
         ];
     }
     
@@ -120,8 +136,8 @@ class PatientResource extends Resource
     {
         return false;
     }
-
-
+    
+    
 }
 
 

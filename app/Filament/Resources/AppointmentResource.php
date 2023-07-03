@@ -219,15 +219,25 @@ class AppointmentResource extends Resource
                         );
                     }
                 ),
-                TextColumn::make('created_at')->sortable()->label('Дата приёма'),
+                TextColumn::make('created_at')
+                    ->sortable()
+                    ->dateTime()
+                    ->label('Дата приёма'),
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
                     ->searchable()
                     ->url(fn(Appointment $record) => PatientResource::getUrl('view', ['record' => $record->patient_id])),
                 TextColumn::make('branch.address')->label('Филиал')->sortable()->toggleable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
-                ImageColumn::make('photo')->label('Фото')->width(70)->height(50)->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('diagnosis')->label('Диагноз')->toggleable(isToggledHiddenByDefault: true),
+                ImageColumn::make('photo')->label('Фото')
+                    ->width(70)
+                    ->height(50)
+                    ->circular()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('diagnosis')->label('Диагноз')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->limit(50)
+                    ->size('sm'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -254,8 +264,8 @@ class AppointmentResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                ReplicateAction::make()->excludeAttributes(['created_at', 'photo'])
-                    ->tooltip('создать копию приёма, за исключением даты и фото, для более быстрого заполнения')
+//                ReplicateAction::make()->excludeAttributes(['created_at', 'photo'])
+//                    ->tooltip('создать копию приёма, за исключением даты и фото, для более быстрого заполнения')
             ])
             ->bulkActions([
 //                Tables\Actions\DeleteBulkAction::make(),
