@@ -18,16 +18,5 @@ class ListAppointments extends ListRecords
         ];
     }
     
-    protected function getFooterWidgets(): array
-    {
-        
-        if (auth()->user()->doctor) {
-            return [
-                AppointmentOverview::class,
-            ];
-        } else {
-            return [];
-        }
-        
-    }
+
 }

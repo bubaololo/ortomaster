@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PatientResource\Widgets;
 
 use App\Models\Appointment;
+use Filament\Widgets\StatsOverviewWidget\Card;
 use Filament\Widgets\Widget;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,5 +19,6 @@ class AppointmentOverview extends Widget
     {
         $this->appointmentQty = auth()->user()->doctor->appointmentsToday();
     }
+    
     
 }
