@@ -38,7 +38,7 @@ class PatientResource extends Resource
                 TextInput::make('middle_name')->label('Отчество'),
                 PhoneInput::make('phone')->required()->label('Телефон')->tel(),
                 DatePicker::make('birthdate')
-                    ->requiredWithout('alt_birthdate')
+//                    ->requiredWithout('alt_birthdate')
                     ->default(null)
                     ->label('Дата рождения'),
 //                TextInput::make('alt_birthdate')
@@ -46,6 +46,7 @@ class PatientResource extends Resource
 //                    ->visibleOn(['create'])
 //                    ->rules(['date_format:Y-m-d'])
 //                    ->label('Дата рождения (текстом)')
+//            ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00-00-0000'))
 //                    ->helperText('Введите дату с клавиатуры в формате гггг-мм-дд'),
                 Radio::make('gender')
                     ->label('Пол')

@@ -26,21 +26,22 @@
 
             .main-title {
                 margin-top: 20pt;
-                font-size: 30pt;
+                font-size: 25pt;
                 text-align: center;
             }
 
             table {
-                font-size: 15pt !important;
-                line-height: 20pt !important;
+                font-size: 10pt !important;
+                line-height: 15pt !important;
             }
 
             .rec {
                 margin-top: 40pt;
-                font-size: 15pt !important;
-                line-height: 20pt !important;
+                font-size: 8pt !important;
+                line-height: 12pt !important;
                 position: relative;
             }
+
             .qr-code {
                 position: absolute;
                 top: 0;
@@ -54,7 +55,7 @@
             }
 
             .rec__item {
-                margin-bottom: 10pt;
+                margin-bottom: 4pt;
             }
 
             .arc {
@@ -66,6 +67,7 @@
                 font-style: italic;
                 text-align: right;
             }
+
             .subs {
                 margin-top: 40pt;
                 font-size: 10pt;
@@ -106,7 +108,7 @@
                         Дата рождения
                     </th>
                     <td class="px-6 py-4">
-                        {{ $patient->birthdate  }}
+                        {{ $this->birthdate }} ({{ $this->age }})
                     </td>
                 </tr>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -114,16 +116,25 @@
                         Дата и время обследования
                     </th>
                     <td class="px-6 py-4">
-                        {{ $appointment->created_at->format('d.m.Y в h:m')  }}
+                        {{ $this->date }}
                     </td>
                 </tr>
+                @if($appointment->diabetic)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <strong>Индивидуальные особенности:</strong>
+                        </th>
+                        <td class="px-6 py-4">
+                            <strong style="text-decoration: underline">ДИАБЕТИЧЕСКАЯ СТОПА</strong>
+                        </td>
+                    </tr>
+                @endif
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         Диагноз
                     </th>
                     <td class="px-6 py-4">
                         @foreach($appointment->diagnosis as $diag)
-
                             @if(!$loop->last)
                                 {{ $diag }},
                             @else
@@ -147,41 +158,61 @@
                 Балансировочный диск 10-15 мин. в день
             </div>
             <div class="rec__item">
-                Ортопедические стельки
-            </div>
-            <div class="rec__item arc">
-                <div class="arc__title"><strong>Высота сводов:</strong></div>
-                <div class="arc__grid">
-                    <div class="arc__top-row">
-                        продольный свод: слева <strong>{{ $appointment->longitudinal_arch_left }}</strong>, справа
-                        <strong>{{ $appointment->longitudinal_arch_right }}</strong>
-                    </div>
-                    <div class="arc__bot-row">
-                        поперечный свод: <strong>{{ $appointment->transverse_arch  }}</strong>
-                    </div>
-                </div>
+                Ортопедический коврик
             </div>
             <div class="rec__item">
-                <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
-                <strong>{{ $appointment->pronator_right }}</strong>
+                Ходьба по зыбучей поверхности (песок)
             </div>
+            <div class="rec__item">
+                Подушка-балансир по 5-10 мин. 2-3 р\день (диск-балансир)
+            </div>
+            <div class="rec__item">
+                <strong>Тейпирование для тела</strong>
+            </div>
+
             @if ($appointment->bus)
                 <div class="rec__item">
                     <strong>Отводящая шина:</strong> {{ $appointment->bus  }}
                 </div>
             @endif
             @if ($appointment->shoes)
+                {{--SHOES--}}
                 <div class="rec__item">
-                    <strong>Обувь:</strong> {{ $appointment->shoes  }}
+                    <strong>Обувь:</strong> {{ $appointment->shoes }}
                 </div>
+                @if ($appointment->shoes_sides)
+                <div class="rec__item">
+                    <strong>Укрепление борта:</strong> {{ $appointment->shoes_sides }}
+                </div>
+                @endif
+                {{--!SHOES--}}
             @else
+                {{--INSOLES--}}
+                <div class="rec__item">
+                    <strong>Ортопедические стельки:</strong>
+                </div>
+                <div class="rec__item arc">
+                    <div class="arc__title"><strong>Высота сводов:</strong></div>
+                    <div class="arc__grid">
+                        <div class="arc__top-row">
+                            продольный свод: слева <strong>{{ $appointment->longitudinal_arch_left }}</strong>, справа
+                            <strong>{{ $appointment->longitudinal_arch_right }}</strong>
+                        </div>
+                        <div class="arc__bot-row">
+                            поперечный свод: <strong>{{ $appointment->transverse_arch  }}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="rec__item">
+                    <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
+                    <strong>{{ $appointment->pronator_right }}</strong>
+                </div>
                 <div class="rec__item">
                     <strong>Удобная, широкая обувь с высотой каблука не более 3.0 см</strong>
                 </div>
+                {{--!INSOLES--}}
             @endif
-            <div class="rec__item">
-                <strong>Тейпирование для тела</strong>
-            </div>
+
             <div class="qr-code">
                 {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
                 Фото
