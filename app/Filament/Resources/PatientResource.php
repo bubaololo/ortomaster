@@ -62,15 +62,14 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('surname')
+                TextColumn::make('fullName')
                     ->sortable()
                     ->searchable()
-                    ->label('Фамилия')
+                    ->label('ФИО')
                 ->grow(true)
                     ->size('lg')
                     ->weight('bold'),
-                TextColumn::make('name')->sortable()->searchable()->label('Имя'),
-                TextColumn::make('middle_name')->sortable()->searchable()->label('Отчество'),
+
                 
                 StackedImageColumn::make('appointment.photo')
                     ->label('приёмы')

@@ -58,6 +58,13 @@ class Patient extends Model
         );
     }
     
+    public function shortName(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->concatShortName()
+        );
+    }
+    
     private function concatFullName(): string
     {
         return
@@ -67,6 +74,19 @@ class Patient extends Model
                     ->append($this->attributes['name'])
                     ->append(' ')
                     ->append($this->attributes['middle_name'])
+            );
+    }
+    
+    private function concatShortName(): string
+    {
+        return
+            ucwords(
+                str($this->attributes['surname'])
+                    ->append(' ')
+                    ->append(mb_substr($this->attributes['name'], 0, 1))
+                    ->append('. ')
+                    ->append(mb_substr($this->attributes['middle_name'], 0, 1))
+                    ->append('.')
             );
     }
     

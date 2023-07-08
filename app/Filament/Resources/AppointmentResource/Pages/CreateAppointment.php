@@ -72,9 +72,6 @@ class CreateAppointment extends CreateRecord
         return $this->getResource()::getUrl().'/'. $this->record->id.'/print/';
     }
     private function getBranch($doctorId) {
-    
-//        $clientIP = \Request::ip();
-//        $clientIP = $_SERVER['REMOTE_ADDR'];
         $branchId = Branch::findByIP();
         if($branchId) {
             return $branchId;

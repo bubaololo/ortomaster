@@ -213,7 +213,7 @@ class AppointmentResource extends Resource
                     ->sortable()
                     ->dateTime('d M Y h:m')
                     ->label('Дата приёма'),
-                TextColumn::make('patient.name')->label('Пациент')
+                TextColumn::make('patient.shortName')->label('Пациент')
                     ->sortable()
                     ->searchable()
                     ->url(fn(Appointment $record) => PatientResource::getUrl('view', ['record' => $record->patient_id])),
