@@ -16,4 +16,8 @@ class ManageDiagnoses extends ManageRecords
             Actions\CreateAction::make(),
         ];
     }
+    protected function isTablePaginationEnabled(): bool
+    {
+        return false;
+    }
 }

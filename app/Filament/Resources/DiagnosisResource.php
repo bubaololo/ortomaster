@@ -37,6 +37,7 @@ class DiagnosisResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('text')->label('Диагноз')
+                ->wrap()
             ])
             ->filters([
                 //
@@ -49,7 +50,7 @@ class DiagnosisResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [

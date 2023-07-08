@@ -209,19 +209,9 @@ class AppointmentResource extends Resource
         return $table
             
             ->columns([
-                TextColumn::make('index')->getStateUsing(
-                    static function (\stdClass $rowLoop, Livewire $livewire ): string {
-                        return (string) (
-                            $rowLoop->iteration +
-                            ($livewire->tableRecordsPerPage * (
-                                    $livewire->page - 1
-                                ))
-                        );
-                    }
-                ),
                 TextColumn::make('created_at')
                     ->sortable()
-                    ->dateTime()
+                    ->dateTime('d M Y h:m')
                     ->label('Дата приёма'),
                 TextColumn::make('patient.name')->label('Пациент')
                     ->sortable()
@@ -270,6 +260,11 @@ class AppointmentResource extends Resource
             ->bulkActions([
 //                Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+    
+    protected function getTableRecordsPerPageSelectOptions(): array
+    {
+        return [ 50, 100];
     }
     
     public static function getRelations(): array

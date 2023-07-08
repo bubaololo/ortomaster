@@ -59,7 +59,7 @@ class TodayAppointments extends ListRecords
                     }
                 ),
                 TextColumn::make('created_at')
-                    ->time()
+                    ->time('h:m')
                     ->label('Время приёма'),
                 TextColumn::make('patient.fullName')->label('Пациент')
                     ->url(fn(Appointment $record) => PatientResource::getUrl('view', ['record' => $record->patient_id])),
@@ -98,12 +98,8 @@ class TodayAppointments extends ListRecords
     
     protected function getHeaderWidgets(): array
     {
-        
-   
             return [
                 AppointmentOverview::class,
             ];
-
-        
     }
 }
