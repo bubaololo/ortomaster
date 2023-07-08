@@ -18,6 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('photo')->nullable();
             $table->foreignId('branch_id')->nullable()->constrained()->onUpdate('cascade')->cascadeOnDelete();
             $table->timestamps();
         });

@@ -29,10 +29,10 @@ class ViewAppointment extends ViewRecord
         
         
     }
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            AppointmentOverview::class,
-        ];
-    }
+//    protected function getHeaderWidgets(): array
+//    {
+//        return [
+//            AppointmentOverview::class,
+//        ];
+//    }
 }
