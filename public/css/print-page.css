@@ -1,0 +1,100 @@
+/*@media print {*/
+/*    !*aside, header, .filament-main-footer {*!*/
+/*    !*    display: none;*!*/
+/*    !*}*!*/
+/*    body {*/
+/*        visibility: hidden;*/
+
+/*    }*/
+/*    header {*/
+/*        display: none;*/
+/*    }*/
+/*    .print {*/
+/*        visibility: visible;*/
+/*        position: fixed;*/
+/*        top: 5px;*/
+/*        left: 5px;*/
+/*    }*/
+/*}*/
+.filament-page {
+    height: 100%;
+}
+
+@media print {
+    .print {
+        height: 100vh;
+    }
+}
+
+.print__inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.logo {
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.main-title {
+    margin-top: 20pt;
+    font-size: 25pt;
+    text-align: center;
+}
+
+table {
+    font-size: 10pt !important;
+    line-height: 15pt !important;
+}
+
+.rec {
+    margin-top: 40pt;
+    font-size: 10pt !important;
+    line-height: 12pt !important;
+    position: relative;
+
+}
+
+.qr-code {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+}
+
+.rec__title {
+    font-weight: bold;
+    margin-bottom: 20pt;
+}
+
+.rec__item {
+    margin-bottom: 4pt;
+    max-width: 60ch;
+    hyphens: none;
+}
+
+.arc {
+    display: flex;
+    gap: 10pt;
+}
+
+.doc {
+    font-style: italic;
+    text-align: right;
+}
+
+.subs {
+    margin-top: 40pt;
+    font-size: 10pt;
+    font-style: italic;
+}
+
+.appointment {
+    margin-top: 10pt;
+}
