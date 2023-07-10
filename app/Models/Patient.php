@@ -35,6 +35,11 @@ class Patient extends Model
         );
     }
     
+    public function getMiddleNameAttribute($value)
+    {
+        return $value ? ucfirst($value) : null;
+    }
+    
     protected function middleName(): Attribute
     {
         return Attribute::make(
@@ -65,12 +70,12 @@ class Patient extends Model
         );
     }
     
-    protected function phone(): Attribute
-    {
-        return Attribute::make(
-            get: fn(?string $value) => $value ? '+996'.$value : null,
-        );
-    }
+//    protected function phone(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn(?string $value) => $value ? '+996'.$value : null,
+//        );
+//    }
     
     private function concatFullName(): string
     {
