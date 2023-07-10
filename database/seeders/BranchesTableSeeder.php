@@ -16,7 +16,7 @@ class BranchesTableSeeder extends Seeder
         $branches = [
             ['address' => 'Байтик Баатыра','full_address' => 'Бишкек, улица Байтик Баатыра 19'],
             ['address' => 'Суеркулова','full_address' => 'Бишкек, улица Суеркулова 1/3'],
-
+            ['address' => 'Oш','full_address' => 'Исхака Разакова 59а'],
         ];
         
         foreach ($branches as $branchData) {
