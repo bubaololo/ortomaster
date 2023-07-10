@@ -63,14 +63,10 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('fullName')
-                    ->sortable()
-                    ->searchable()
-                    ->label('ФИО')
-                ->grow(true)
-                    ->size('lg')
-                    ->weight('bold'),
 
+                TextColumn::make('surname')->searchable()->sortable()->label('Фамилия'),
+                TextColumn::make('name')->searchable()->label('Имя'),
+                TextColumn::make('middle_name')->searchable()->label('Отчество'),
                 
                 StackedImageColumn::make('appointment.photo')
                     ->label('приёмы')
@@ -78,7 +74,7 @@ class PatientResource extends Resource
                     ->limit(3)
                     ->showRemaining(),
                 
-                TextColumn::make('created_at')->sortable()->searchable()->label('Добавлен')->date(),
+                TextColumn::make('created_at')->sortable()->label('Добавлен')->date(),
                 TextColumn::make('phone')->searchable()->label('Телефон'),
                 TextColumn::make('birthdate')
                     ->sortable()
@@ -89,7 +85,7 @@ class PatientResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([
-                        DatePicker::make('created_from')->label('С даты')->default('01.01.2022'),
+                        DatePicker::make('created_from')->label('С даты')->default('01.06.2023'),
                         DatePicker::make('created_until')->label('По дату')->default(now()),
                     ])
                     ->query(function (Builder $query, array $data): Builder {

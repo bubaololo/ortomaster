@@ -65,6 +65,13 @@ class Patient extends Model
         );
     }
     
+    protected function phone(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value) => $value ? '+996'.$value : null,
+        );
+    }
+    
     private function concatFullName(): string
     {
         return

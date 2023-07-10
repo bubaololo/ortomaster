@@ -215,8 +215,10 @@ class AppointmentResource extends Resource
                     ->label('Дата приёма'),
                 TextColumn::make('patient.shortName')->label('Пациент')
                     ->sortable()
-                    ->searchable()
                     ->url(fn(Appointment $record) => PatientResource::getUrl('view', ['record' => $record->patient_id])),
+//                TextColumn::make('patient.surname')->searchable()->sortable()->label('Фамилия')->hidden(),
+//                TextColumn::make('patient.name')->searchable()->label('Имя')->hidden(),
+//                TextColumn::make('patient.middle_name')->searchable()->label('Отчество')->hidden(),
                 TextColumn::make('branch.address')->label('Филиал')->sortable()->toggleable(),
                 TextColumn::make('doctor.name')->label('Врач')->sortable(),
                 ImageColumn::make('photo')->label('Фото')
