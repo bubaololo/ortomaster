@@ -35,10 +35,10 @@ class Patient extends Model
         );
     }
     
-    public function getMiddleNameAttribute($value)
-    {
-        return $value ? ucfirst($value) : null;
-    }
+//    public function getMiddleNameAttribute($value)
+//    {
+//        return $value ? ucfirst($value) : null;
+//    }
     
     protected function middleName(): Attribute
     {

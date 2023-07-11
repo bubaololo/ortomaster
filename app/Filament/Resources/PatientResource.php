@@ -117,6 +117,11 @@ class PatientResource extends Resource
         ];
     }
     
+    protected function getTableRecordsPerPageSelectOptions(): array
+    {
+        return [ 50, 100];
+    }
+    
     public static function getPages(): array
     {
         return [
