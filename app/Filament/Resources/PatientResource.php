@@ -41,13 +41,13 @@ class PatientResource extends Resource
 //                    ->requiredWithout('alt_birthdate')
                     ->default(null)
                     ->label('Дата рождения'),
-//                TextInput::make('alt_birthdate')
-//                    ->placeholder('1990-08-24')
-//                    ->visibleOn(['create'])
-//                    ->rules(['date_format:Y-m-d'])
-//                    ->label('Дата рождения (текстом)')
-//            ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00-00-0000'))
-//                    ->helperText('Введите дату с клавиатуры в формате гггг-мм-дд'),
+                TextInput::make('alt_birthdate')
+                    ->placeholder('22-02-2000')
+                    ->visibleOn(['create'])
+//                    ->mask(fn(TextInput\Mask $mask) => $mask->pattern('00-00-0000'))
+                    ->rules(['date_format:d-m-Y'])
+                    ->label('Дата рождения (текстом)')
+                    ->helperText('Введите дату с клавиатуры в формате дд-мм-гггг'),
                 Radio::make('gender')
                     ->label('Пол')
                     ->required()
@@ -63,17 +63,10 @@ class PatientResource extends Resource
     {
         return $table
             ->columns([
-
+                
                 TextColumn::make('surname')->searchable()->sortable()->label('Фамилия'),
                 TextColumn::make('name')->searchable()->label('Имя'),
                 TextColumn::make('middle_name')->searchable()->label('Отчество'),
-                
-                StackedImageColumn::make('appointment.photo')
-                    ->label('приёмы')
-                    ->circular()
-                    ->limit(3)
-                    ->showRemaining(),
-                
                 TextColumn::make('created_at')->sortable()->label('Добавлен')->date(),
                 TextColumn::make('phone')->searchable()->label('Телефон'),
                 TextColumn::make('birthdate')
@@ -119,7 +112,7 @@ class PatientResource extends Resource
     
     protected function getTableRecordsPerPageSelectOptions(): array
     {
-        return [ 50, 100];
+        return [50, 100];
     }
     
     public static function getPages(): array

@@ -131,10 +131,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="rec__item">
-                            <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
-                            <strong>{{ $appointment->pronator_right }}</strong>
-                        </div>
+                        @if($appointment->pronator_type)
+                            <div class="rec__item">
+                                <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
+                                <strong>{{ $appointment->pronator_right }}</strong>
+                            </div>
+                        @endif
                         <div class="rec__item">
                             <strong>Удобная, широкая обувь с высотой каблука не более 3.0 см</strong>
                         </div>
