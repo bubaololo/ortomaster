@@ -6,6 +6,7 @@ use App\Filament\Resources\PatientResource;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
+use Carbon\Carbon;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Exceptions\Halt;
@@ -20,15 +21,15 @@ class CreatePatient extends CreateRecord
         return 'Карточка нового пациента создана';
     }
     
-//    protected function mutateFormDataBeforeCreate(array $data): array
-//    {
-//        if($data['alt_birthdate']){
-//
-//            $data['birthdate'] = $data['alt_birthdate'];
-//        }
-//        unset($data['alt_birthdate']);
-//        return $data;
-//    }
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        if($data['alt_birthdate']){
+
+            $data['birthdate'] = Carbon::createFromFormat('d-m-Y',$data['alt_birthdate']);
+        }
+        unset($data['alt_birthdate']);
+        return $data;
+    }
     
 //    public function afterCreate()
 //    {
