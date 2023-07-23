@@ -386,7 +386,7 @@
                     <div class="contacts__data_title">
                         Режим работы:
                     </div>
-                    <div class="contacts__data_text"><em>Пн-Пт</em> 7:30-20:00<br><em>Сб</em> 9:00-14:00</div>
+                    <div class="contacts__data_text"><em>Пн-Пт</em> 9:00-19:00<br><em>Сб, Вс</em> 10:00-18:00</div>
                 </div>
                 <div class="main_contacts_tel">
                     <div class="main_contacts_tel_title contacts__title">
@@ -397,18 +397,18 @@
                             <a href="tel:+996509040200" class="main_contacts_tel_no main_tel1">
                                 +996-509-04-02-00
                             </a>
-                            <a href="tel:+74012389110" class="main_contacts_tel_no main_tel3">
-                                +7 (4012) 38-91-10
-                            </a>
+                            {{--<a href="tel:+74012389110" class="main_contacts_tel_no main_tel3">--}}
+                            {{--    +7 (4012) 38-91-10--}}
+                            {{--</a>--}}
                         </div>
-                        <div class="main__tel_wrapper">
-                            <a href="tel:+79062389003" class="main_contacts_tel_no main_tel2">
-                                +7-906-238-90-03
-                            </a>
-                            <a href="tel:+79062389110" class="main_contacts_tel_no main_tel4">
-                                +7-906-238-91-10
-                            </a>
-                        </div>
+                        {{--<div class="main__tel_wrapper">--}}
+                        {{--    <a href="tel:+79062389003" class="main_contacts_tel_no main_tel2">--}}
+                        {{--        +7-906-238-90-03--}}
+                        {{--    </a>--}}
+                        {{--    <a href="tel:+79062389110" class="main_contacts_tel_no main_tel4">--}}
+                        {{--        +7-906-238-91-10--}}
+                        {{--    </a>--}}
+                        {{--</div>--}}
                     </div>
                     <div class="main_contacts_adr">
                         <div class="main_contacts_adr_title contacts__title">

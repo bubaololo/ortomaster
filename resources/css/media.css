@@ -639,10 +639,20 @@
   }
 }
 @media (max-width: 900px) {
+
   .main_contacts {
+    position: relative;
     width: unset;
     height: unset;
     background-image: unset;
+  }
+  .main_contacts::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
   .main__mission_wrapper {
     flex-direction: column;

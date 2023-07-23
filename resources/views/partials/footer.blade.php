@@ -162,8 +162,8 @@
                                 г. Бишкек,<br> ул. Байтик Баатыра, 19
                             </div>
                             <div class="contacts__hours contacts__item">
-                                <em>Пн-Пт</em> 7:30-20:00<br>
-                                <em>Сб</em> 9:00-14:00
+                                <em>Пн-Пт</em> 9:00-19:00<br>
+                                <em>Сб, Вс</em> 10:00-18:00
                             </div>
                             <a href="tel:+996509040200" class="contacts__phone contacts__item">
                                 +996-509-04-02-00
