@@ -25,7 +25,7 @@
 </div>
 
 @include('partials.footer')
-@include('partials.reg-form')
+{{--@include('partials.reg-form')--}}
 
 @stack('scripts')
 </body>
