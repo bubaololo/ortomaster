@@ -77,91 +77,99 @@
                 </div>
             </section>
             <section class="content">
+                <div class="qr-code">
+                    {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
+                    Фото
+                </div>
                 <div class="rec">
                     <div class="rec__title">
                         Рекомендации:
                     </div>
 
                     <div class="rec__item">
-                        Балансировочный диск 10-15 мин. в день
+                        ЛФК
                     </div>
                     <div class="rec__item">
                         Ортопедический коврик
                     </div>
                     <div class="rec__item">
-                        Ходьба по зыбучей поверхности (песок)
+                        Физиолечение
                     </div>
                     <div class="rec__item">
                         Подушка-балансир по 5-10 мин. 2-3 р\день (диск-балансир)
                     </div>
                     <div class="rec__item">
-                        <strong>Тейпирование для тела</strong>
+                        Парафин
                     </div>
-
-                    @if ($appointment->bus)
+                    <div class="rec__item">
+                        Массаж с упором на нижние конечности
+                    </div>
+                    @foreach($appointment->recommendation as $rec)
                         <div class="rec__item">
-                            <strong>Отводящая шина:</strong> {{ $appointment->bus  }}
+                            {{ $rec }}
                         </div>
-                    @endif
-                    @if ($appointment->shoes)
-                        {{--SHOES--}}
-                        <div class="rec__item">
-                            <strong>Обувь:</strong> {{ $appointment->shoes }}
+                    @endforeach
+                </div>
+                @if ($appointment->bus)
+                    <div class="rec__item">
+                        <strong>Отводящая шина:</strong> {{ $appointment->bus  }}
+                    </div>
+                @endif
+                <div class="rec__item arc">
+                    <div class="arc__title"><strong>Высота сводов:</strong></div>
+                    <div class="arc__grid">
+                        <div class="arc__top-row">
+                            продольный свод: слева <strong>{{ $appointment->longitudinal_arch_left }}</strong>, справа
+                            <strong>{{ $appointment->longitudinal_arch_right }}</strong>
                         </div>
-                        @if ($appointment->shoes_sides)
-                            <div class="rec__item">
-                                <strong>Укрепление борта:</strong> {{ $appointment->shoes_sides }}
-                            </div>
-                        @endif
-                        {{--!SHOES--}}
-                    @else
-                        {{--INSOLES--}}
-                        <div class="rec__item">
-                            <strong>Ортопедические стельки:</strong>
+                        <div class="arc__bot-row">
+                            поперечный свод: <strong>{{ $appointment->transverse_arch  }}</strong>
                         </div>
-                        <div class="rec__item arc">
-                            <div class="arc__title"><strong>Высота сводов:</strong></div>
-                            <div class="arc__grid">
-                                <div class="arc__top-row">
-                                    продольный свод: слева <strong>{{ $appointment->longitudinal_arch_left }}</strong>, справа
-                                    <strong>{{ $appointment->longitudinal_arch_right }}</strong>
-                                </div>
-                                <div class="arc__bot-row">
-                                    поперечный свод: <strong>{{ $appointment->transverse_arch  }}</strong>
-                                </div>
-                            </div>
-                        </div>
-                        @if($appointment->pronator_type)
-                            <div class="rec__item">
-                                <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
-                                <strong>{{ $appointment->pronator_right }}</strong>
-                            </div>
-                        @endif
-                        <div class="rec__item">
-                            <strong>Удобная, широкая обувь с высотой каблука не более 3.0 см</strong>
-                        </div>
-                        {{--!INSOLES--}}
-                    @endif
-
-                    <div class="qr-code">
-                        {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
-                        Фото
                     </div>
                 </div>
-                <div class="appointment">
-                    Повторный приём через: {{ $this->checkup  }}&#42
-                </div>
+                @if ($appointment->shoes)
+                    {{--SHOES--}}
+                    <div class="rec__item">
+                        <strong>Обувь:</strong> {{ $appointment->shoes }}
+                    </div>
+                    @if ($appointment->shoes_sides)
+                        <div class="rec__item">
+                            <strong>Укрепление борта:</strong> {{ $appointment->shoes_sides }}
+                        </div>
+                    @endif
+                    {{--!SHOES--}}
+                @else
+                    {{--INSOLES--}}
+                    <div class="rec__item">
+                        <strong>Ортопедические стельки:</strong>
+                    </div>
+                    @if($appointment->pronator_type)
+                        <div class="rec__item">
+                            <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
+                            <strong>{{ $appointment->pronator_right }}</strong>
+                        </div>
+                    @endif
+                    <div class="rec__item">
+                        <strong>Удобная, широкая обувь с высотой каблука не более 3.0 см</strong>
+                    </div>
+                    {{--!INSOLES--}}
+                @endif
             </section>
-            <section class="footer">
-                <div class="doc">
-                    Вр. {{ $doctor }}
-                </div>
-                <div class="subs">
-                    *Скидка на повторный приём врача-ортопеда в течение 6 месяцев -50%.<br>
-                    *Скидка действует ТОЛЬКО ПРИ ПРЕДЪЯВЛЕНИИ ПРОТОКОЛА О ПРОХОЖДЕНИИ ПЛАНТОСКОПИИ в филиалах " <strong>Orto-Master</strong>".<br>
-                    *При одновременном заказе второй пары ортопедических стелек действует скидка 20%.
-                </div>
-            </section>
+        </div>
+        <div class="appointment">
+            Повторный приём через: {{ $this->checkup  }}&#42
+        </div>
+
+        <section class="footer">
+            <div class="doc">
+                Вр. {{ $doctor }}
+            </div>
+            <div class="subs">
+                *Скидка на повторный приём врача-ортопеда в течение 6 месяцев -50%.<br>
+                *Скидка действует ТОЛЬКО ПРИ ПРЕДЪЯВЛЕНИИ ПРОТОКОЛА О ПРОХОЖДЕНИИ ПЛАНТОСКОПИИ в филиалах " <strong>Orto-Master</strong>".<br>
+                *При одновременном заказе второй пары ортопедических стелек действует скидка 20%.
+            </div>
+        </section>
         </div>
     </main>
     <div class="print-button filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action cursor-pointer">

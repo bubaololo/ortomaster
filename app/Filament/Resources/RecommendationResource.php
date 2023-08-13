@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class RecommendationResource extends Resource
 {
     protected static ?string $model = Recommendation::class;
-    protected static ?string $pluralLabel = 'Рекоммендации';
-    protected static ?string $label = 'Рекоммендация';
-    protected static ?string $navigationLabel = 'Рекоммендации';
+    protected static ?string $pluralLabel = 'Рекомендации';
+    protected static ?string $label = 'Рекомендация';
+    protected static ?string $navigationLabel = 'Рекомендации';
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?int $navigationSort = 10;

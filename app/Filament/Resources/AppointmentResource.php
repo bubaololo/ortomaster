@@ -192,7 +192,7 @@ class AppointmentResource extends Resource
                     ->options([
                         '3 месяца' => '3 месяца',
                         '6-8 месяцев' => '6-8 месяцев',
-                        'внутренний' => '1 год',
+                        '1 год' => '1 год',
                     ]),
                 Radio::make('bus')
                     ->options([
@@ -202,7 +202,7 @@ class AppointmentResource extends Resource
                     ])
                     ->inline()
                     ->label('Отводящая шина'),
-                Fieldset::make('Индивидуальные рекоммендации')
+                Fieldset::make('Индивидуальные рекомендации')
                     ->schema([
                 CheckboxList::make('recommendation')
                     ->options(self::getRecs())

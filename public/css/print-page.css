@@ -35,6 +35,7 @@
 
 .content {
     flex-grow: 1;
+    position: relative;
 }
 
 .logo {
@@ -62,9 +63,8 @@ table {
 }
 
 .qr-code {
-    position: absolute;
-    top: 0;
-    right: 0;
+    float: right;
+    margin: 20px;
     text-align: center;
 }
 
