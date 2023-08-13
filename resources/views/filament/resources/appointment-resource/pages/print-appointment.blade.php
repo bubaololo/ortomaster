@@ -2,7 +2,121 @@
 
     <main class="print">
 
-        <link rel="stylesheet" href="{{ asset('css/print-page.css') }}">
+        {{--<link rel="stylesheet" href="{{ asset('css/print-page.css') }}">--}}
+        <style>
+            /*@media print {*/
+            /*    !*aside, header, .filament-main-footer {*!*/
+            /*    !*    display: none;*!*/
+            /*    !*}*!*/
+            /*    body {*/
+            /*        visibility: hidden;*/
+
+            /*    }*/
+            /*    header {*/
+            /*        display: none;*/
+            /*    }*/
+            /*    .print {*/
+            /*        visibility: visible;*/
+            /*        position: fixed;*/
+            /*        top: 5px;*/
+            /*        left: 5px;*/
+            /*    }*/
+            /*}*/
+            .filament-page {
+                height: 100%;
+            }
+
+            @media print {
+                html, body, .print {
+                    height: 100%;
+                }
+
+                .print__inner {
+                    height: 100%;
+                }
+            }
+
+            .print__inner {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .content {
+                flex-grow: 1;
+                position: relative;
+                margin-top: 20pt;
+                font-size: 10pt !important;
+                line-height: 12pt !important;
+            }
+
+            .logo {
+                width: 30vw;
+                margin: 0 auto;
+            }
+
+            .main-title {
+                margin-top: 20pt;
+                font-size: 20pt;
+                text-align: center;
+            }
+
+            table {
+                font-size: 10pt !important;
+                line-height: 15pt !important;
+            }
+            .rec {
+                margin-top: 15pt;
+            }
+            .rec-list {
+
+                padding-left: 2ch;
+                list-style: decimal;
+
+            }
+            .rec-list__item {
+                margin-bottom: 1ch;
+            }
+            .rec__title {
+                font-size: 14pt !important;
+                font-weight: bold;
+                margin-bottom: 10pt;
+            }
+
+            .rec__item {
+                margin-bottom: 4pt;
+                max-width: 60ch;
+                hyphens: none;
+            }
+            .qr-code {
+                float: right;
+                margin: 20px;
+                text-align: center;
+            }
+
+
+
+            .arc {
+                display: flex;
+                gap: 10pt;
+            }
+
+            .doc {
+                font-style: italic;
+                text-align: right;
+            }
+
+            .subs {
+                margin-top: 40pt;
+                font-size: 10pt;
+                font-style: italic;
+            }
+
+            .appointment {
+                margin-top: 10pt;
+            }
+        </style>
         <div class="print__inner">
             <section class="header">
                 <img src="{{ asset('/img/logo.svg') }}" alt="Logo" class="logo">
