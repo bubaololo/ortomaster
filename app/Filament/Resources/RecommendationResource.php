@@ -20,7 +20,7 @@ class RecommendationResource extends Resource
     protected static ?string $label = 'Рекомендация';
     protected static ?string $navigationLabel = 'Рекомендации';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?int $navigationSort = 10;
     protected static ?string $navigationGroup = 'Параметры';
 
@@ -51,12 +51,14 @@ class RecommendationResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+        
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageRecommendations::route('/'),
         ];
-    }    
+    }
+
 }

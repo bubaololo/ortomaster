@@ -60,7 +60,9 @@ table {
     font-size: 10pt !important;
     line-height: 15pt !important;
 }
-
+.rec {
+    margin-top: 10pt;
+}
 .rec-list {
 
     padding-left: 2ch;
@@ -70,13 +72,6 @@ table {
 .rec-list__item {
     margin-bottom: 1ch;
 }
-
-.qr-code {
-    float: right;
-    margin: 20px;
-    text-align: center;
-}
-
 .rec__title {
     font-size: 14pt !important;
     font-weight: bold;
@@ -88,6 +83,13 @@ table {
     max-width: 60ch;
     hyphens: none;
 }
+.qr-code {
+    float: right;
+    margin: 20px;
+    text-align: center;
+}
+
+
 
 .arc {
     display: flex;

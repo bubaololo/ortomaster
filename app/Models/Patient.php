@@ -27,35 +27,54 @@ class Patient extends Model
         return $this->hasMany(Appointment::class);
     }
     
+//    protected function name(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn(?string $value) => $value ? ucfirst($value) : null,
+//            set: fn(?string $value) => $value ? strtolower($value) : null,
+//        );
+//    }
+//
+//    protected function middleName(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn(?string $value) => $value ? ucfirst($value) : null,
+//            set: fn(?string $value) => $value ? strtolower($value) : null,
+//        );
+//    }
+//
+//    protected function surname(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn(?string $value) => $value ? ucfirst($value) : null,
+//            set: fn(?string $value) => $value ? strtolower($value) : null,
+//        );
+//    }
+    
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value) => $value ? ucfirst($value) : null,
-            set: fn(?string $value) => $value ? strtolower($value) : null,
+            get: fn(?string $value) => $value ? mb_convert_case($value, MB_CASE_TITLE, "UTF-8") : null,
+            set: fn(?string $value) => $value ? mb_strtolower($value) : null,
         );
     }
-    
-//    public function getMiddleNameAttribute($value)
-//    {
-//        return $value ? ucfirst($value) : null;
-//    }
     
     protected function middleName(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value) => $value ? ucfirst($value) : null,
-            set: fn(?string $value) => $value ? strtolower($value) : null,
+            get: fn(?string $value) => $value ? mb_convert_case($value, MB_CASE_TITLE, "UTF-8") : null,
+            set: fn(?string $value) => $value ? mb_strtolower($value) : null,
         );
     }
     
     protected function surname(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value) => $value ? ucfirst($value) : null,
-            set: fn(?string $value) => $value ? strtolower($value) : null,
+            get: fn(?string $value) => $value ? mb_convert_case($value, MB_CASE_TITLE, "UTF-8") : null,
+            set: fn(?string $value) => $value ? mb_strtolower($value) : null,
         );
     }
-    
+
     public function fullName(): Attribute
     {
         return Attribute::make(
@@ -81,29 +100,30 @@ class Patient extends Model
     {
         return
             ucwords(
-                str($this->attributes['surname'])
+                str(self::capitalize($this->attributes['surname']))
                     ->append(' ')
-                    ->append($this->attributes['name'])
+                    ->append(self::capitalize($this->attributes['name']))
                     ->append(' ')
-                    ->append($this->attributes['middle_name'])
+                    ->append(self::capitalize($this->attributes['middle_name']))
             );
     }
     
     private function concatShortName(): string
     {
-        return
-            ucwords(
-                str($this->attributes['surname'])
-                    ->append(' ')
-                    ->append(mb_substr($this->attributes['name'], 0, 1))
-                    ->append('. ')
-                    ->append(mb_substr($this->attributes['middle_name'], 0, 1))
-                    ->append('.')
-            );
+        $shortName = self::capitalize($this->attributes['surname']);
+        
+        if ($this->attributes['name']) {
+            $shortName = self::capitalize($this->attributes['surname']). ' ' . mb_substr(self::capitalize($this->attributes['name']), 0, 1) . '.';
+        }
+        
+        if ($this->attributes['middle_name']) {
+            $shortName .= ' ' . mb_substr(self::capitalize($this->attributes['middle_name']), 0, 1) . '.';
+        }
+        
+        return $shortName;
     }
     
-    
-    protected $casts = [
-        'diagnosis' => 'array',
-    ];
+    private static function capitalize($str) {
+        return mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
+    }
 }

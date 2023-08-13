@@ -81,36 +81,6 @@
                     {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
                     Фото
                 </div>
-                <div class="rec">
-                    <div class="rec__title">
-                        Рекомендации:
-                    </div>
-                    <ol class="rec-list">
-                        <li class="rec-list__item">
-                            ЛФК
-                        </li>
-                        <li class="rec-list__item">
-                            Ортопедический коврик
-                        </li>
-                        <li class="rec-list__item">
-                            Физиолечение
-                        </li>
-                        <li class="rec-list__item">
-                            Подушка-балансир по 5-10 мин. 2-3 р\день (диск-балансир)
-                        </li>
-                        <li class="rec-list__item">
-                            Парафин
-                        </li>
-                        <li class="rec-list__item">
-                            Массаж с упором на нижние конечности
-                        </li>
-                        @foreach($appointment->recommendation as $rec)
-                            <li class="rec-list__item">
-                                {{ $rec }}
-                            </li>
-                        @endforeach
-                    </ol>
-                </div>
                 @if ($appointment->bus)
                     <div class="rec__item">
                         <strong>Отводящая шина:</strong> {{ $appointment->bus  }}
@@ -156,7 +126,36 @@
                     </div>
                     {{--!INSOLES--}}
                 @endif
-
+                <div class="rec">
+                    <div class="rec__title">
+                        Рекомендации:
+                    </div>
+                    <ol class="rec-list">
+                        <li class="rec-list__item">
+                            ЛФК
+                        </li>
+                        <li class="rec-list__item">
+                            Ортопедический коврик
+                        </li>
+                        <li class="rec-list__item">
+                            Физиолечение
+                        </li>
+                        <li class="rec-list__item">
+                            Подушка-балансир по 5-10 мин. 2-3 р\день (диск-балансир)
+                        </li>
+                        <li class="rec-list__item">
+                            Парафин
+                        </li>
+                        <li class="rec-list__item">
+                            Массаж с упором на нижние конечности
+                        </li>
+                        @foreach($appointment->recommendation as $rec)
+                            <li class="rec-list__item">
+                                {{ $rec }}
+                            </li>
+                        @endforeach
+                    </ol>
+                </div>
                 <div class="appointment">
                     Повторный приём через: {{ $this->checkup  }}&#42
                 </div>

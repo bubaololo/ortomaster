@@ -79,5 +79,9 @@ class AppointmentRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
+    protected function isTablePaginationEnabled(): bool
+    {
+        return false;
+    }
 }

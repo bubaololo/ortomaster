@@ -66,5 +66,9 @@ class DoctorResource extends Resource
             'create' => Pages\CreateDoctor::route('/create'),
             'edit' => Pages\EditDoctor::route('/{record}/edit'),
         ];
-    }    
+    }
+    protected function isTablePaginationEnabled(): bool
+    {
+        return false;
+    }
 }

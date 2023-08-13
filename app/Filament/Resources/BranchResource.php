@@ -67,5 +67,9 @@ class BranchResource extends Resource
             'create' => Pages\CreateBranch::route('/create'),
             'edit' => Pages\EditBranch::route('/{record}/edit'),
         ];
-    }    
+    }
+    protected function isTablePaginationEnabled(): bool
+    {
+        return false;
+    }
 }
