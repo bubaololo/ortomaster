@@ -81,7 +81,7 @@
                     {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
                     Фото
                 </div>
-                <div class="rec">
+                <div class="rec-list">
                     <div class="rec__title">
                         Рекомендации:
                     </div>
@@ -145,7 +145,7 @@
                     </div>
                     @if($appointment->pronator_type)
                         <div class="rec__item">
-                            <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
+                            <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} <br> слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
                             <strong>{{ $appointment->pronator_right }}</strong>
                         </div>
                     @endif
@@ -154,22 +154,22 @@
                     </div>
                     {{--!INSOLES--}}
                 @endif
-            </section>
-        </div>
-        <div class="appointment">
-            Повторный приём через: {{ $this->checkup  }}&#42
-        </div>
 
-        <section class="footer">
-            <div class="doc">
-                Вр. {{ $doctor }}
-            </div>
-            <div class="subs">
-                *Скидка на повторный приём врача-ортопеда в течение 6 месяцев -50%.<br>
-                *Скидка действует ТОЛЬКО ПРИ ПРЕДЪЯВЛЕНИИ ПРОТОКОЛА О ПРОХОЖДЕНИИ ПЛАНТОСКОПИИ в филиалах " <strong>Orto-Master</strong>".<br>
-                *При одновременном заказе второй пары ортопедических стелек действует скидка 20%.
-            </div>
-        </section>
+                <div class="appointment">
+                    Повторный приём через: {{ $this->checkup  }}&#42
+                </div>
+            </section>
+
+            <section class="footer">
+                <div class="doc">
+                    Вр. {{ $doctor }}
+                </div>
+                <div class="subs">
+                    *Скидка на повторный приём врача-ортопеда в течение 6 месяцев -50%.<br>
+                    *Скидка действует ТОЛЬКО ПРИ ПРЕДЪЯВЛЕНИИ ПРОТОКОЛА О ПРОХОЖДЕНИИ ПЛАНТОСКОПИИ в филиалах " <strong>Orto-Master</strong>".<br>
+                    *При одновременном заказе второй пары ортопедических стелек действует скидка 20%.
+                </div>
+            </section>
         </div>
     </main>
     <div class="print-button filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action cursor-pointer">

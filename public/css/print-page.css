@@ -21,8 +21,12 @@
 }
 
 @media print {
-    .print {
-        height: 100vh;
+   html, body, .print {
+        height: 100%;
+    }
+
+    .print__inner {
+        height: 100%;
     }
 }
 
@@ -36,6 +40,9 @@
 .content {
     flex-grow: 1;
     position: relative;
+    margin-top: 20pt;
+    font-size: 10pt !important;
+    line-height: 12pt !important;
 }
 
 .logo {
@@ -45,7 +52,7 @@
 
 .main-title {
     margin-top: 20pt;
-    font-size: 25pt;
+    font-size: 20pt;
     text-align: center;
 }
 
@@ -54,11 +61,8 @@ table {
     line-height: 15pt !important;
 }
 
-.rec {
-    margin-top: 40pt;
-    font-size: 10pt !important;
-    line-height: 12pt !important;
-    position: relative;
+.rec-list {
+
 
 }
 
@@ -69,8 +73,9 @@ table {
 }
 
 .rec__title {
+    font-size: 14pt !important;
     font-weight: bold;
-    margin-bottom: 20pt;
+    margin-bottom: 10pt;
 }
 
 .rec__item {
