@@ -40,7 +40,6 @@ return new class extends Migration {
             $table->string('shoes_sides')->nullable();
             $table->string('checkup_date')->nullable();
             $table->boolean('diabetic')->default(false);
-            $table->json('recommendation')->nullable();
             $table->timestamps();
         });
     }

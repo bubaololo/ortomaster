@@ -206,7 +206,7 @@ class AppointmentResource extends Resource
                     ->schema([
                 CheckboxList::make('recommendation')
                     ->options(self::getRecs())
-                    ->columns(2)
+                    ->columns()
                     ->label('')
                     ]),
             
