@@ -43,6 +43,8 @@ class AppointmentResource extends Resource
     
     protected static ?int $navigationSort = 2;
     
+    
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -166,7 +168,6 @@ class AppointmentResource extends Resource
                     
                     ]),
                 
-                
                 Fieldset::make('Диагноз')
                     ->schema([
                         Select::make('diagnosis')
@@ -200,14 +201,18 @@ class AppointmentResource extends Resource
                     ])
                     ->inline()
                     ->label('Отводящая шина'),
-                
+                Fieldset::make('Рекоммендации')
+                    ->schema([
+                        Grid::make()
+                            ->schema(self::getRecs())
+                    ]),
+            
             ]);
     }
     
     public static function table(Table $table): Table
     {
         return $table
-            
             ->columns([
                 TextColumn::make('created_at')
                     ->sortable()
@@ -264,9 +269,19 @@ class AppointmentResource extends Resource
             ]);
     }
     
+    protected static function getRecs()
+    {
+        $recs = ['Пресс качат', 'бегит', 'анжумання', 'турник'];
+        $fields = [];
+        foreach ($recs as $rec) {
+          $fields[] =  Checkbox::make($rec);
+}
+        return $fields;
+    }
+    
     protected function getTableRecordsPerPageSelectOptions(): array
     {
-        return [ 50, 100];
+        return [50, 100];
     }
     
     public static function getRelations(): array
