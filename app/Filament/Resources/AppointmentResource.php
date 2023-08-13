@@ -8,8 +8,10 @@ use App\Filament\Widgets\TodayAppointments;
 use App\Forms\Components\Webcam;
 use App\Models\Appointment;
 use App\Models\Diagnosis;
+use App\Models\Recommendation;
 use Filament\Forms;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
@@ -42,7 +44,6 @@ class AppointmentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     
     protected static ?int $navigationSort = 2;
-    
     
     
     public static function form(Form $form): Form
@@ -201,10 +202,12 @@ class AppointmentResource extends Resource
                     ])
                     ->inline()
                     ->label('Отводящая шина'),
-                Fieldset::make('Рекоммендации')
+                Fieldset::make('Индивидуальные рекоммендации')
                     ->schema([
-                        Grid::make()
-                            ->schema(self::getRecs())
+                CheckboxList::make('recommendation')
+                    ->options(self::getRecs())
+                    ->columns(2)
+                    ->label('')
                     ]),
             
             ]);
@@ -271,12 +274,20 @@ class AppointmentResource extends Resource
     
     protected static function getRecs()
     {
-        $recs = ['Пресс качат', 'бегит', 'анжумання', 'турник'];
-        $fields = [];
-        foreach ($recs as $rec) {
-          $fields[] =  Checkbox::make($rec);
-}
-        return $fields;
+        $recommendations = Recommendation::all()->toArray();
+        
+        $transformedArray = collect($recommendations)->mapWithKeys(function ($item) {
+            $maxChars = 25; // Максимальное количество символов для значения
+            $value = mb_substr($item['text'], 0, $maxChars); // Обрезаем текст до нужного количества символов
+            
+            if (mb_strlen($item['text']) > $maxChars) {
+                $value .= '...'; // Добавляем многоточие, если текст был обрезан
+            }
+            
+            return [$item['text'] => $value];
+        })->toArray();
+        
+        return $transformedArray;
     }
     
     protected function getTableRecordsPerPageSelectOptions(): array
@@ -319,3 +330,4 @@ class AppointmentResource extends Resource
         ];
     }
 }
+

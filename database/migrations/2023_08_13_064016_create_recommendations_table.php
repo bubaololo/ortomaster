@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->timestamps();
         });
     }
 
