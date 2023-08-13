@@ -63,7 +63,12 @@ table {
 
 .rec-list {
 
+    padding-left: 2ch;
+    list-style: decimal;
 
+}
+.rec-list__item {
+    margin-bottom: 1ch;
 }
 
 .qr-code {

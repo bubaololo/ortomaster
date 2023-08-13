@@ -81,34 +81,35 @@
                     {!! QrCode::size(130)->generate(asset( 'storage/'.$appointment->photo)); !!}
                     Фото
                 </div>
-                <div class="rec-list">
+                <div class="rec">
                     <div class="rec__title">
                         Рекомендации:
                     </div>
-
-                    <div class="rec__item">
-                        ЛФК
-                    </div>
-                    <div class="rec__item">
-                        Ортопедический коврик
-                    </div>
-                    <div class="rec__item">
-                        Физиолечение
-                    </div>
-                    <div class="rec__item">
-                        Подушка-балансир по 5-10 мин. 2-3 р\день (диск-балансир)
-                    </div>
-                    <div class="rec__item">
-                        Парафин
-                    </div>
-                    <div class="rec__item">
-                        Массаж с упором на нижние конечности
-                    </div>
-                    @foreach($appointment->recommendation as $rec)
-                        <div class="rec__item">
-                            {{ $rec }}
-                        </div>
-                    @endforeach
+                    <ol class="rec-list">
+                        <li class="rec-list__item">
+                            ЛФК
+                        </li>
+                        <li class="rec-list__item">
+                            Ортопедический коврик
+                        </li>
+                        <li class="rec-list__item">
+                            Физиолечение
+                        </li>
+                        <li class="rec-list__item">
+                            Подушка-балансир по 5-10 мин. 2-3 р\день (диск-балансир)
+                        </li>
+                        <li class="rec-list__item">
+                            Парафин
+                        </li>
+                        <li class="rec-list__item">
+                            Массаж с упором на нижние конечности
+                        </li>
+                        @foreach($appointment->recommendation as $rec)
+                            <li class="rec-list__item">
+                                {{ $rec }}
+                            </li>
+                        @endforeach
+                    </ol>
                 </div>
                 @if ($appointment->bus)
                     <div class="rec__item">
@@ -145,7 +146,8 @@
                     </div>
                     @if($appointment->pronator_type)
                         <div class="rec__item">
-                            <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} <br> слева: <strong>{{ $appointment->pronator_left }}</strong>, справа:
+                            <strong>Пронаторы:</strong> {{ $appointment->pronator_type }} <br> слева:
+                            <strong>{{ $appointment->pronator_left }}</strong>, справа:
                             <strong>{{ $appointment->pronator_right }}</strong>
                         </div>
                     @endif
