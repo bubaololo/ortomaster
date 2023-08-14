@@ -29,12 +29,9 @@ class Doctor extends Model
     {
         return $this->hasMany(Appointment::class)->whereDate('created_at', Carbon::today())->count();
     }
-    
-    /**
-     * Get all of the patients of doctor     */
-//    public function patients(): HasManyThrough
-//    {
-//        return $this->hasManyThrough(Appointment::class, Patient::class);
-//    }
+    public function appointmentsForDay($day): int
+    {
+        return $this->hasMany(Appointment::class)->whereDate('created_at', $day)->count();
+    }
     
 }

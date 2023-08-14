@@ -28,7 +28,9 @@ class RecommendationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('text')->label('текст рекоммендации')
+                Forms\Components\Textarea::make('text')
+                    ->label('текст рекоммендации')
+                ->required()
             ]);
     }
 
