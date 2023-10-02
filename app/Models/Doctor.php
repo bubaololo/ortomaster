@@ -20,6 +20,7 @@ class Doctor extends Model
         return $this->belongsTo(Branch::class);
     }
     
+    
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
@@ -29,6 +30,7 @@ class Doctor extends Model
     {
         return $this->hasMany(Appointment::class)->whereDate('created_at', Carbon::today())->count();
     }
+    
     public function appointmentsForDay($day): int
     {
         return $this->hasMany(Appointment::class)->whereDate('created_at', $day)->count();
