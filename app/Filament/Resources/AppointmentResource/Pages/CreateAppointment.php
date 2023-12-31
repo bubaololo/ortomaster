@@ -39,7 +39,7 @@ class CreateAppointment extends CreateRecord
         $branchId = $this->getBranch($doctorId);
         $file = $data['photo'];
         $oldPath = 'livewire-tmp/'.$file;
-        $newPath = 'public/'.$file;
+        $newPath = $file;
         Storage::move($oldPath, $newPath);
         
         $data['doctor_id'] = $doctorId;
