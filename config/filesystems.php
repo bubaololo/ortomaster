@@ -68,9 +68,13 @@ return [
             'passphrase' => env('SFTP_PASSPHRASE'),
         
             // Settings for file / directory permissions...
-            'visibility' => 'private', // `private` = 0600, `public` = 0644
-            'directory_visibility' => 'private', // `private` = 0700, `public` = 0755
-        
+           // 'visibility' => 'private', // `private` = 0600, `public` = 0644
+           // 'directory_visibility' => 'private', // `private` = 0700, `public` = 0755
+    
+            'visibility' => 'public', // `private` = 0600, `public` = 0644
+            'directory_visibility' => 'public', // `private` = 0700, `public` = 0755
+            'url' => env('APP_URL').'/storage',
+            
             // Optional SFTP Settings...
             // 'hostFingerprint' => env('SFTP_HOST_FINGERPRINT'),
             // 'maxTries' => 4,

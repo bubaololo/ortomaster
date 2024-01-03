@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//serve patients photos from sftp storage
+if (env('FILESYSTEM_DISK') == 'sftp') {
+    Route::get('/storage/{filename}', function ($filename) {
+        if (Storage::disk('sftp')->exists($filename)) {
+            $content = Storage::disk('sftp')->get($filename);
+            return response($content, 200)->header('Content-Type', 'image/jpeg');
+        } else {
+            abort(404);
+        }
+    });
+}
 
