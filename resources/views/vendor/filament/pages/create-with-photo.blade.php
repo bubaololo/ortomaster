@@ -504,13 +504,13 @@
                     camera.classList.remove('loading');
                     console.log('success!')
                     console.log(filename)
+                    audio.play();
                   @this.set('data.photo', filename)
                     // console.log(@this.get('file'))
                   }, () => {
                     // Error callback.
                   }, (event) => {
                     console.log(event);
-                    audio.play();
                     swiperTabsContent.slideNext()
                     video.play();
                     // Progress callback.
