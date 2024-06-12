@@ -1,191 +1,81 @@
 <footer class="footer">
-    <div class="footer__top">
-        <div class="container">
-            <div class="footer__top_wrapper">
-                <div class="footer__column fc1">
-                    <img class="footer__logo" src="/img/logo.svg" alt="logo">
-                    <div class="footer__copyright">
-                        © ООО “Ортомастер”<br>Все права защищены 2023
-                    </div>
-                    {{--<a href="#" class="footer__policy">--}}
-                    {{--    Политика конфидециальности--}}
-                    {{--</a>--}}
-                    {{--<a href="#" class="footer__license">--}}
-                    {{--    Лицензии--}}
-                    {{--</a>--}}
+    <div id="num" class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div>
+                    <p>Адреса наших филиалов:</p>
                 </div>
-                {{--<div class="footer__column fc2">--}}
-                {{--    <div class="footer__title closed">--}}
-                {{--        Меню--}}
-                {{--        <div class="footer__title_line"></div>--}}
-                {{--    </div>--}}
-                {{--    <nav class="closed">--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Главная--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            О клинике--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Новости--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Специалисты--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Отзывы--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Контакты--}}
-                {{--        </a>--}}
-                {{--    </nav>--}}
-                {{--</div>--}}
-                {{--<div class="footer__column fc3">--}}
-                {{--    <a href="specs.php" class="footer__title closed">--}}
-                {{--        Приём специалистов--}}
-                {{--        <div class="footer__title_line"></div>--}}
-                {{--    </a>--}}
-                {{--    <nav class="closed">--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Педиатр--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Терапевт--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Невролог--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Эндокринолог--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Логопед--}}
-                {{--        </a>--}}
-                {{--    </nav>--}}
-                {{--</div>--}}
-                {{--<div class="footer__column fc4">--}}
-                {{--    <a href="massage.php" class="footer__title closed">--}}
-                {{--        Массаж--}}
-                {{--        <div class="footer__title_line"></div>--}}
-                {{--    </a>--}}
-                {{--    <nav class="closed">--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Взрослые массажи--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Классические--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Детский массаж--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Массаж спины--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Массаж ног--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Лимфодренажные--}}
-                {{--        </a>--}}
-                {{--        <div class="footer__massage_mobile">--}}
-                {{--            <a href="#" class="footer__link">--}}
-                {{--                Спортивные--}}
-                {{--            </a>--}}
-                {{--            <a href="#" class="footer__link">--}}
-                {{--                Мануальная терапия--}}
-                {{--            </a>--}}
-                {{--            <a href="#" class="footer__link">--}}
-                {{--                Шейного отдела--}}
-                {{--            </a>--}}
-                {{--            <a href="#" class="footer__link">--}}
-                {{--                Остеопатия--}}
-                {{--            </a>--}}
-                {{--            <a href="#" class="footer__link">--}}
-                {{--                Антицеллюлитные--}}
-                {{--            </a>--}}
-                {{--            <a href="#" class="footer__link">--}}
-                {{--                Висцеральный массаж--}}
-                {{--            </a>--}}
-                {{--        </div>--}}
-                {{--    </nav>--}}
-                {{--</div>--}}
-                {{--<div class="footer__column fc5">--}}
-                {{--    <nav>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Спортивные--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Мануальная терапия--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Шейного отдела--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Остеопатия--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Антицеллюлитные--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__link">--}}
-                {{--            Висцеральный массаж--}}
-                {{--        </a>--}}
-                {{--    </nav>--}}
-                {{--</div>--}}
-
-                {{--<div class="footer__column fc6">--}}
-                {{--    <div class="footer__right_links">--}}
-                {{--        <a href="#" class="footer__right_bold footer__weight">--}}
-                {{--            Программы<br>с лишним весом--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__right_bold">--}}
-                {{--            Процедурный кабинет с забором анализов--}}
-                {{--        </a>--}}
-                {{--        <a href="#" class="footer__doc_call">--}}
-                {{--            Вызвать врача на дом--}}
-                {{--        </a>--}}
-                {{--    </div>--}}
-                {{--</div>--}}
+                <div class="first_location">
+                    <img class="geo" src="/img/geo-alt.svg" alt="">
+                    <a class="g" href="https://2gis.kg/bishkek/firm/70000001019336620?m=74.610164%2C42.852414%2F19">
+                    г. Бишкек, ул. Байтик Баатыра, 19
+                    </a>
+                </div>
+                <div class="second_location">
+                    <img class="geo" src="/img/geo-alt.svg" alt="">
+                    <a class="g" href="https://2gis.kg/bishkek/firm/70000001054729052?m=74.617493%2C42.837133%2F19.35">
+                    г. Бишкек, ул. Суеркулова, 1/4
+                    </a>
+                </div>
+                <div class="third_location">
+                    <img class="geo" src="/img/geo-alt.svg" alt="">
+                    <a class="g" href="https://2gis.kg/osh/firm/70000001034294900?m=72.801353%2C40.551871%2F18">
+                    г. Ош, ул. Раззакова, 59а
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div>
+                    <p>Наши контакты:</p>
+                </div>
+                <div class="first_number">
+                    <img class="wsp" src="/img/whatsapp.svg" alt="">
+                    <a class="n" href="tel:+996500544458">+996 555 544 558</a>
+                </div>
+                <div class="second_number">
+                    <img class="wsp" src="/img/whatsapp.svg" alt="">
+                    <a class="n" href="tel:+996555544558">+996 500 544 458</a>
+                </div>
+                <div class="third_number">
+                    <img class="wsp" src="/img/whatsapp.svg" alt="">
+                    <a class="n" href="tel:+996555544558">+996 704 544 544</a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div>
+                    <p>Инстаграмм:</p>
+                </div>
+                <div class="instagram1">
+                    <img src="/img/instagram.svg" alt="">
+                    <a class="i" href="https://www.instagram.com/orto_master.kg?igsh=a2NyeXZ4cWoydnBo">orto_master.kg</a>
+                </div>
+                <div class="instagram2">
+                    <img src="/img/instagram.svg" alt="">
+                    <a class="i" href="https://www.instagram.com/ortomaster.shoes?igsh=ZHJmemt0YmFzZGNr">ortomaster.shoes</a>
+                </div>
+                <div class="instagram3">
+                    <img src="/img/instagram.svg" alt="">
+                    <a class="i" href="https://www.instagram.com/orto_master_osh?igsh=MWQyZzVhbHc4azNlYQ==">orto_master.osh</a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="working_hours">
+                    <span class="w_h">График работы:</span>
+                    <span>Пн-Сб  9:00-20:00</span>
+                    <span>Вс     10:00-18:00</span>
+                </div>
+            </div>
             </div>
         </div>
     </div>
-    <div class="footer__bottom">
-        <div class="container">
-            <div class="footer__bottom_wrapper">
-                <div class="header__inner">
-                    <div class="header__top">
-                        {{--<a class="logo__link" href="/">--}}
-                        {{--    <div class="">Разработано</div>--}}
-                        {{--    <img src="img/diez_logo.svg" class="diez_logo" alt="">--}}
-                        {{--</a>--}}
-                        <div class="footer__contacts contacts__wrapper">
-                            <div class="contacts__adress contacts__item">
-                                г. Бишкек,<br> ул. Байтик Баатыра, 19
-                            </div>
-                            <div class="contacts__hours contacts__item">
-                                <em>Пн-Пт</em> 9:00-19:00<br>
-                                <em>Сб, Вс</em> 10:00-18:00
-                            </div>
-                            <a href="tel:+996509040200" class="contacts__phone contacts__item">
-                                +996-509-04-02-00
-                            </a>
-                        </div>
-                        <div class="footer__mob_bottom">
-                            <div class="footer__copyright">
-                                © ООО “Ортомастер”<br>Все права защищены 2023
-                            </div>
-                            {{--<a href="#" class="footer__policy">--}}
-                            {{--    Политика конфидециальности--}}
-                            {{--</a>--}}
-                            {{--<a href="#" class="footer__license">--}}
-                            {{--    Лицензии--}}
-                            {{--</a>--}}
-                        </div>
-                        {{--<a href="#" class="header__button button" data-hystmodal="#registerModal">--}}
-                        {{--    Записаться на приём--}}
-                        {{--</a>--}}
-                    </div>
-                </div>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="/img/logo.svg" alt="">
+            </div>
+            <div class="col">
+                <p>ОсОО "Ортомастер <br>Все права защищены 2024"</p>
             </div>
         </div>
-    </div>
+    </div> -->
 </footer>

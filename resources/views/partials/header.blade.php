@@ -1,192 +1,28 @@
 <header class="header">
-
-    <div class="container">
-        <div class="header__inner">
-            <div class="header__top">
-                <a class="logo__link" href="/">
-                    <img class="logo" src="/img/logo.svg" alt="logo">
-                </a>
-                <div class="contacts__wrapper">
-                    <div class="contacts__adress contacts__item">
-                        г. Бишкек,<br> ул. Байтик Баатыра, 19
-                    </div>
-                    <div class="contacts__hours contacts__item">
-                        <em>Пн-Пт</em> 7:30-20:00<br>
-                        <em>Сб</em> 9:00-14:00
-                    </div>
-                    <a href="tel:+996509040200" class="contacts__phone contacts__item">
-                        +996-509-04-02-00
-                    </a>
-                </div>
-                {{--<a href="#" class="header__button button" data-hystmodal="#registerModal">--}}
-                {{--    Записаться на приём--}}
-                {{--</a>--}}
-
-                {{--<div class="menu__icon">--}}
-                {{--    <div class="menu__line_top line"></div>--}}
-                {{--    <div class="menu__line_middle line"></div>--}}
-                {{--    <div class="menu__line_bottom line"></div>--}}
-                {{--</div>--}}
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="/img/logo.svg" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <a class="" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></svg></a>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#us">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#orthopeds">Ортопеды</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mass">Массаж</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#num">Контакты</a>
+                    </li>
+                </ul>
             </div>
-            {{--<nav class="header__menu">--}}
-            {{--    <a href="/" class="header__menu_item" aria-label="0">--}}
-            {{--        Главная--}}
-            {{--    </a>--}}
-            {{--    <a href="about.php" class="header__menu_item" aria-label="0">--}}
-            {{--        О клинике--}}
-            {{--    </a>--}}
-            {{--    <a href="#" class="header__menu_item services_item" aria-label="0">--}}
-            {{--        Услуги--}}
-            {{--    </a>--}}
-            {{--    <a href="news.php" class="header__menu_item" aria-label="0">--}}
-            {{--        Новости--}}
-            {{--    </a>--}}
-            {{--    <a href="specs.php" class="header__menu_item" aria-label="0">--}}
-            {{--        Специалисты--}}
-            {{--    </a>--}}
-            {{--    <a href="reviews.php" class="header__menu_item" aria-label="0">--}}
-            {{--        Отзывы--}}
-            {{--    </a>--}}
-            {{--    <a href="contacts.php" class="header__menu_item" aria-label="0">--}}
-            {{--        Контакты--}}
-            {{--    </a>--}}
-            {{--</nav>--}}
-
-
-
-
         </div>
-
-    </div>
-    {{--<nav class="header__panel">--}}
-    {{--    <div class="container">--}}
-    {{--        <div class="header__panel_wrapper">--}}
-    {{--            <div class="header__panel_menu">--}}
-
-    {{--                <div class="header__panel_menu-title">--}}
-    {{--                    Меню--}}
-    {{--                </div>--}}
-    {{--                <nav class="header__panel_menu_links">--}}
-    {{--                    <a href="/" class="header__menu_item" aria-label="0">--}}
-    {{--                        Главная--}}
-    {{--                    </a>--}}
-    {{--                    <a href="about.php" class="header__menu_item" aria-label="0">--}}
-    {{--                        О клинике--}}
-    {{--                    </a>--}}
-
-    {{--                    <a href="news.php" class="header__menu_item" aria-label="0">--}}
-    {{--                        Новости--}}
-    {{--                    </a>--}}
-    {{--                    <a href="reviews.php" class="header__menu_item" aria-label="0">--}}
-    {{--                        Отзывы--}}
-    {{--                    </a>--}}
-    {{--                    <a href="specs.php" class="header__menu_item" aria-label="0">--}}
-    {{--                        Специалисты--}}
-    {{--                    </a>--}}
-    {{--                    <a href="contacts.php" class="header__menu_item" aria-label="0">--}}
-    {{--                        Контакты--}}
-    {{--                    </a>--}}
-    {{--                </nav>--}}
-
-    {{--            </div>--}}
-    {{--            <div class="header__panel_spec">--}}
-    {{--                <a href="spec_reception.php" class="header__panel_spec_title panel__title">--}}
-    {{--                    Приём специалистов--}}
-    {{--                </a>--}}
-    {{--                <nav class="header__panel_spec_list panel__list">--}}
-    {{--                    <a href="pediatr.php" class="panel__link" aria-label="0">--}}
-    {{--                        Педиатр--}}
-    {{--                    </a>--}}
-    {{--                    <a href="therapist.php" class="panel__link" aria-label="0">--}}
-    {{--                        Терапевт--}}
-    {{--                    </a>--}}
-    {{--                    <a href="neuro.php" class="panel__link" aria-label="0">--}}
-    {{--                        Невролог--}}
-    {{--                    </a>--}}
-    {{--                    <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                        Невролог детский--}}
-    {{--                    </a>--}}
-    {{--                    <a href="endo.php" class="panel__link" aria-label="0">--}}
-    {{--                        Эндокринолог--}}
-    {{--                    </a>--}}
-    {{--                    <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                        Эндокринолог детский--}}
-    {{--                    </a>--}}
-    {{--                    <a href="logoped.php" class="panel__link" aria-label="0">--}}
-    {{--                        Логопед--}}
-    {{--                    </a>--}}
-    {{--                    <a href="services.php" class="panel__link_services" aria-label="0">--}}
-    {{--                        На страницу услуг--}}
-    {{--                    </a>--}}
-    {{--                </nav>--}}
-    {{--            </div>--}}
-    {{--            <div class="header__panel_massage">--}}
-    {{--                <a href="massage.php" class="header__panel_massage_title panel__title">--}}
-    {{--                    Массаж--}}
-    {{--                </a>--}}
-    {{--                <div class="header__panel_massage_list_wrapper">--}}
-    {{--                    <div class="header__panel_massage_list-left">--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Взрослый массаж--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Классический--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Детский массаж--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Массаж спины--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Массаж ног--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Лимфодренажный--}}
-    {{--                        </a>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="header__panel_massage_list-right">--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Спортивный--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Мануальная терапия--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Массаж шейного отдела--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Остеопатия--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Антицеллюлитный--}}
-    {{--                        </a>--}}
-    {{--                        <a href="#" class="panel__link" aria-label="0">--}}
-    {{--                            Висцеральный массаж--}}
-    {{--                        </a>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--            <div class="header__panel_right">--}}
-    {{--                <a href="weight.php" class="header__panel_right_weight panel__title">--}}
-    {{--                    Программы с лишним весом--}}
-    {{--                </a>--}}
-    {{--                <a href="tests.php" class="header__panel_right_analys panel__title">--}}
-    {{--                    Процедурный кабинет с забором анализов--}}
-    {{--                </a>--}}
-    {{--            </div>--}}
-    {{--            <a href="services.php" class="panel__link_services mobile__link_services" aria-label="0">--}}
-    {{--                На страницу услуг--}}
-    {{--            </a>--}}
-    {{--            <div class="panel__buttons">--}}
-    {{--                <a href="services_prices.php" class="button__blue">--}}
-    {{--                    Услуги и цены--}}
-    {{--                </a>--}}
-    {{--                <a href="call.php" class="button__transparent">--}}
-    {{--                    Вызвать врача на дом--}}
-    {{--                </a>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-    {{--</nav>--}}
+    </nav>
 </header>
